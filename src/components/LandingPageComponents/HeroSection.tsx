@@ -1,5 +1,5 @@
-import { useEffect, useRef, useState, useMemo } from 'react';
-import { motion, useAnimation } from 'framer-motion';
+import { useEffect, useRef, useState } from 'react';
+import { motion } from 'framer-motion';
 import { Rocket } from 'lucide-react';
 
 interface ParticleProps {
@@ -10,57 +10,75 @@ interface ParticleProps {
 }
 
 const Particle = ({ x, y, mouseX, mouseY }: ParticleProps) => {
-  const controls = useAnimation();
+  const particleRef = useRef(null);
   
-  useEffect(() => {
-    if (mouseX === null || mouseY === null) return;
-    
-    const distance = Math.sqrt(Math.pow(mouseX - x, 2) + Math.pow(mouseY - y, 2));
+  const getDistance = (x1: number, y1: number, x2: number | null, y2: number | null) => {
+    return Math.sqrt(Math.pow((x2 ?? x1) - x1, 2) + Math.pow((y2 ?? y1) - y1, 2));
+  };
+
+  const getColor = (distance: number) => {
     const maxDistance = 200;
     const intensity = Math.max(0, 1 - distance / maxDistance);
-    const attraction = Math.min(100, Math.max(0, 100 - distance));
-    
-    controls.start({
-      x: x + (mouseX - x) / (10 + distance * 0.1),
-      y: y + (mouseY - y) / (10 + distance * 0.1),
-      scale: 1 + attraction * 0.01,
-      backgroundColor: `rgba(96, 165, 250, ${intensity * 0.5})`,
-    });
-  }, [mouseX, mouseY, x, y]);
+    return `rgba(96, 165, 250, ${intensity * 0.5})`;
+  };
 
+  const distance = getDistance(x, y, mouseX, mouseY);
+  const attraction = Math.min(100, Math.max(0, 100 - distance));
+  
   return (
     <motion.div
-      className="absolute w-2 h-2 rounded-full"
-      initial={{ x, y }}
-      animate={controls}
+      ref={particleRef}
+      className="absolute w-2 h-2 rounded-full backdrop-blur-sm"
+      style={{
+        x,
+        y,
+        backgroundColor: getColor(distance),
+      }}
+      animate={{
+        x: mouseX ? x + (mouseX - x) / (10 + distance * 0.1) : x,
+        y: mouseY ? y + (mouseY - y) / (10 + distance * 0.1) : y,
+        scale: 1 + attraction * 0.01,
+      }}
       transition={{
         type: "spring",
-        stiffness: 50,
-        damping: 20,
-        mass: 0.5,
+        stiffness: 100,
+        damping: 30,
+        mass: 1,
       }}
     />
   );
 };
 
 const InteractiveBackground = ({ mouseX, mouseY }: { mouseX: number; mouseY: number }) => {
-  const particles = useMemo(() => {
-    const newParticles = [];
-    // Reduced particle density by increasing the gap
-    const gap = 80; // Increased from 50
-    const rows = Math.floor(window.innerHeight / gap);
-    const cols = Math.floor(window.innerWidth / gap);
-    
-    for (let i = 0; i < rows; i++) {
-      for (let j = 0; j < cols; j++) {
-        newParticles.push({
-          id: `${i}-${j}`,
-          x: j * gap + Math.random() * 20,
-          y: i * gap + Math.random() * 20,
-        });
+  interface Particle {
+    id: string;
+    x: number;
+    y: number;
+  }
+  
+  const [particles, setParticles] = useState<Particle[]>([]);
+  
+  useEffect(() => {
+    const generateParticles = () => {
+      const newParticles = [];
+      const rows = Math.floor(window.innerHeight / 50);
+      const cols = Math.floor(window.innerWidth / 50);
+      
+      for (let i = 0; i < rows; i++) {
+        for (let j = 0; j < cols; j++) {
+          newParticles.push({
+            id: `${i}-${j}`,
+            x: j * 50 + Math.random() * 20,
+            y: i * 50 + Math.random() * 20,
+          });
+        }
       }
-    }
-    return newParticles;
+      setParticles(newParticles);
+    };
+
+    generateParticles();
+    window.addEventListener('resize', generateParticles);
+    return () => window.removeEventListener('resize', generateParticles);
   }, []);
 
   return (
@@ -82,29 +100,20 @@ const InteractiveBackground = ({ mouseX, mouseY }: { mouseX: number; mouseY: num
 const HeroSection = () => {
   const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
   const sectionRef = useRef<HTMLElement | null>(null);
-  const throttleRef = useRef<number | null>(null);
 
   useEffect(() => {
-    const handleMouseMove = (e: { clientX: number; clientY: number }) => {
-      if (throttleRef.current) return;
-
-      throttleRef.current = window.setTimeout(() => {
-        if (sectionRef.current) {
-          const rect = sectionRef.current.getBoundingClientRect();
-          setMousePos({
-            x: e.clientX - rect.left,
-            y: e.clientY - rect.top,
-          });
-        }
-        throttleRef.current = null;
-      }, 16); // Approximately 60fps
+    const handleMouseMove = (e: { clientX: number; clientY: number; }) => {
+      if (sectionRef.current) {
+        const rect = sectionRef.current.getBoundingClientRect();
+        setMousePos({
+          x: e.clientX - rect.left,
+          y: e.clientY - rect.top,
+        });
+      }
     };
 
     window.addEventListener('mousemove', handleMouseMove);
-    return () => {
-      window.removeEventListener('mousemove', handleMouseMove);
-      if (throttleRef.current) clearTimeout(throttleRef.current);
-    };
+    return () => window.removeEventListener('mousemove', handleMouseMove);
   }, []);
 
   return (
@@ -119,7 +128,7 @@ const HeroSection = () => {
           className="max-w-5xl mx-auto text-center"
         >
           <motion.div
-            className="absolute w-64 h-64 rounded-full pointer-events-none"
+            className="absolute w-64 h-64 rounded-full"
             style={{
               background: "radial-gradient(circle, rgba(96, 165, 250, 0.2) 0%, transparent 70%)",
               x: mousePos.x - 128,
