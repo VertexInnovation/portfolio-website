@@ -1,4 +1,4 @@
-
+// Code for the footer component
 import { motion } from 'framer-motion';
 import { 
   Twitter, 
@@ -143,7 +143,7 @@ const Footer = () => {
 
 const SOCIAL_LINKS = [
   { name: 'Twitter', icon: Twitter, href: '#' },
-  { name: 'Instagram', icon: Instagram, href: '#' },
+  { name: 'Instagram', icon: Instagram, href: 'https://www.instagram.com/vertex_rise/' },
   { name: 'LinkedIn', icon: Linkedin, href: '#' },
   { name: 'GitHub', icon: Github, href: '#' },
 ];
