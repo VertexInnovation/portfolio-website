@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Menu, X, ChevronDown } from 'lucide-react';
-import SignUp from './auth/SignUp';
+import { Link } from 'react-router-dom';
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
@@ -142,25 +142,25 @@ const Navbar = () => {
 };
 
 const MENU_ITEMS = [
-  { label: 'Home', href: '#' },
-  {
-    label: 'Events',
-    submenu: [
-      { label: 'Hackathons', href: '#hackathons' },
-      { label: 'Workshops', href: '#workshops' },
-      { label: 'Tech Fests', href: '#techfests' },
-    ],
-  },
-  {
-    label: 'Learn',
-    submenu: [
-      { label: 'Courses', href: '#courses' },
-      { label: 'Projects', href: '#projects' },
-      { label: 'Resources', href: '#resources' },
-    ],
-  },
-  { label: 'Community', href: '#community' },
-  { label: 'About', href: '#about' },
+    { label: 'Home', href: '/' },
+    {
+        label: 'Events',
+        submenu: [
+            { label: 'Hackathons', href: '/events/hackathons' },
+            { label: 'Workshops', href: '/events/workshops' },
+            { label: 'Tech Fests', href: '/events/techfests' },
+        ],
+    },
+    {
+        label: 'Learn',
+        submenu: [
+            { label: 'Courses', href: '/learn/courses' },
+            { label: 'Projects', href: '/learn/projects' },
+            { label: 'Resources', href: '/learn/resources' },
+        ],
+    },
+    { label: 'Community', href: '/community' },
+    { label: 'About', href: '/about' },
 ];
 
 export default Navbar;

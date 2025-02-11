@@ -61,15 +61,17 @@ const InteractiveBackground = ({ mouseX, mouseY }: { mouseX: number; mouseY: num
   useEffect(() => {
     const generateParticles = () => {
       const newParticles = [];
-      const rows = Math.floor(window.innerHeight / 50);
-      const cols = Math.floor(window.innerWidth / 50);
+      const spacing = 100; // Increased spacing between particles
+      const rows = Math.floor(window.innerHeight / spacing);
+      const cols = Math.floor(window.innerWidth / spacing);
+      const maxParticles = 50; // Limit total number of particles
       
-      for (let i = 0; i < rows; i++) {
-        for (let j = 0; j < cols; j++) {
+      for (let i = 0; i < Math.min(rows, Math.sqrt(maxParticles)); i++) {
+        for (let j = 0; j < Math.min(cols, Math.sqrt(maxParticles)); j++) {
           newParticles.push({
             id: `${i}-${j}`,
-            x: j * 50 + Math.random() * 20,
-            y: i * 50 + Math.random() * 20,
+            x: j * spacing + Math.random() * 20,
+            y: i * spacing + Math.random() * 20,
           });
         }
       }
