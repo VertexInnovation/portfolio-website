@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Menu, X, ChevronDown } from 'lucide-react';
-
+import SignUp from './auth/SignUp';
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
@@ -73,9 +73,9 @@ const Navbar = () => {
             <button className="px-4 py-2 text-gray-700 transition-colors hover:text-blue-600">
               Login
             </button>
-            <button className="px-6 py-2 text-white transition-opacity bg-gradient-to-r from-blue-600 to-purple-600 rounded-xl hover:opacity-90">
+            <Link to="/signup" className="px-6 py-2 text-white transition-opacity bg-gradient-to-r from-blue-600 to-purple-600 rounded-xl hover:opacity-90">
               Sign Up
-            </button>
+            </Link>
           </div>
 
           {/* Mobile Menu Button */}
