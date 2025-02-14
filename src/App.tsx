@@ -5,7 +5,7 @@ import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import SignUp from './components/Sign/SignUp';
 import VertexInnovateHack from './pages/VertexInnovateHack';
-
+import ForgotPassword from './components/Sign/ForgotPassword';
 function App() {
   return (
     <Router>
@@ -17,6 +17,7 @@ function App() {
           <Routes>
             <Route path="/" element={<LandingPage />} />
             <Route path="/signup" element={<SignUp />} />
+            <Route path="/forgot-password" element={<ForgotPassword />} />
             <Route path="*" element={<h1>404 Not Found</h1>} />
             <Route path="/vertexinnovate" element={<VertexInnovateHack />} />
           </Routes>
