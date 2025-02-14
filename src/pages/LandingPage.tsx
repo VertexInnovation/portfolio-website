@@ -14,6 +14,7 @@ const LandingPage = () => {
       <FAQsSection />
       <AboutSection />
     </div>
+    
   );
 };
 
