@@ -144,13 +144,7 @@ const Navbar = () => {
 const MENU_ITEMS = [
     { label: 'Home', href: '/' },
     {
-        label: 'Events',
-        submenu: [
-            { label: 'Hackathons', href: '/events/hackathons' },
-            { label: 'Workshops', href: '/events/workshops' },
-            { label: 'Tech Fests', href: '/events/techfests' },
-        ],
-    },
+        label: 'Events', href: '/events',},
     {
         label: 'Learn',
         submenu: [
@@ -160,7 +154,7 @@ const MENU_ITEMS = [
         ],
     },
     { label: 'Community', href: '/community' },
-    { label: 'About', href: '/about' },
+    { label: 'Team', href: '/team' },
 ];
 
 export default Navbar;
