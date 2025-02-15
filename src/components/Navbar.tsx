@@ -210,13 +210,15 @@ const Navbar = () => {
         </li>
       </ul>
 
-      {/* Mobile Menu Button */}
-      <button
-        onClick={() => setIsOpen(!isOpen)}
-        className="p-2 text-gray-700 rounded-lg hover:bg-gray-100 lg:hidden"
-      >
-        {isOpen ? <X size={24} /> : <Menu size={24} />}
-      </button>
+          <button
+            className="p-2 text-gray-700 transition-colors lg:hidden hover:text-blue-600"
+            onClick={() => setIsOpen(!isOpen)}
+            aria-expanded={isOpen}
+            aria-label="Toggle navigation menu"
+          >
+            {isOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+          </button>
+        </div>
       </div>
 
       {/* Mobile Menu Dropdown */}

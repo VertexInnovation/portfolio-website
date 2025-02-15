@@ -1,51 +1,85 @@
-import { Link } from 'react-router-dom';
-import { Calendar, Clock, MapPin, ArrowRight, Users } from 'lucide-react';
-import verteximg from '../assets/vertexhacks.jpeg';
-const EventsPage = () => {
-  const events = [
-    {
-      id: 1,
-      title: 'Vertex Innovate 2025 - Global Hackathon',
-      date: '2025-02-15',
-      time: '48 hours starting Feb 15',
-      location: 'Online (Hosted on Unstop)',
-      image: verteximg,
-      category: 'Hackathon',
-      attendees: 362,
-      shortDescription: 'A 48-hour global hackathon featuring AI/ML, Cybersecurity, Sustainability, EdTech, FinTech & Open Innovation tracks. Open to all students!',
-      status: 'upcoming'
-    }
-  ];
+import { Link } from "react-router-dom";
+import { Calendar, Clock, MapPin, ArrowRight, Users } from "lucide-react";
+import verteximg from "../assets/vertexhacks.jpeg";
+import { collection, getDocs, getFirestore } from "firebase/firestore";
+import { initializeApp } from "firebase/app";
+import { firebaseConfig } from "../api/firebase/route.js";
+import { useState, useEffect } from "react";
 
-  interface Event {
-    id: number;
-    title: string;
-    date: string;
-    time: string;
-    location: string;
-    image: string;
-    category: string;
-    attendees: number;
-    shortDescription: string;
-    status: 'upcoming' | 'past';
+const app = initializeApp(firebaseConfig);
+const firestore = getFirestore(app);
+
+interface FirebaseTimestamp {
+  seconds: number;
+  nanoseconds: number;
+  toDate: () => Date;
+}
+
+interface ScheduleItem {
+  time: FirebaseTimestamp | string;
+  title: string;
+  description: string;
+}
+
+interface Speaker {
+  name: string;
+  role: string;
+  company: string;
+  image: string;
+}
+
+interface Event {
+  id: string;
+  title: string;
+  date: string;
+  time: string;
+  location: string;
+  img_src: string;
+  category: string;
+  attendees: number;
+  description: string;
+  status: "upcoming" | "past";
+  Schedule: ScheduleItem[];
+  speakers: Speaker[];
+}
+
+const EventsPage = () => {
+  const [eventsDetail, setEventsDetail] = useState<Event[]>([]);
+
+  useEffect(() => {
+    const fetchEvents = async () => {
+      try {
+        const querySnapshot = await getDocs(collection(firestore, "events"));
+        const events = querySnapshot.docs.map((doc) => ({
+          id: doc.id,
+          ...doc.data(),
+        })) as Event[]; // Type assertion for TypeScript
+        setEventsDetail(events);
+      } catch (error) {
+        console.error("Error fetching events:", error);
+      }
+    };
+
+    fetchEvents();
+  }, []);
+
+  function convertTimestampToDate(seconds: number, nanoseconds: number): Date {
+    const milliseconds = seconds * 1000 + nanoseconds / 1000000;
+    return new Date(milliseconds);
   }
-  
+
   const EventCard = ({ event }: { event: Event }) => {
-    const isPast = event.status === 'past';
-    
     return (
-      <div className={`group relative overflow-hidden bg-white/5 backdrop-blur-md rounded-2xl transition-all duration-300 hover:shadow-2xl ${isPast ? 'opacity-90' : ''}`}>
+      <div className="group relative overflow-hidden bg-white/5 backdrop-blur-md rounded-2xl transition-all duration-300 hover:shadow-2xl">
         <div className="absolute z-10 top-4 right-4">
-          <span className={`px-4 py-1 text-sm font-medium rounded-full ${
-            isPast ? 'bg-gray-600 text-gray-300' : 'bg-blue-600 text-white'
-          }`}>
-            {event.category}
+          <span className="px-4 py-1 text-sm font-medium bg-blue-600 text-white rounded-full">
+            {event?.category}
           </span>
         </div>
-        
+
         <div className="relative aspect-[16/9] overflow-hidden">
           <img
-            src={event.image}
+            src={event.img_src}
             alt={event.title}
             className="object-cover w-full h-full transition-transform duration-500 group-hover:scale-110"
           />
@@ -54,24 +88,31 @@ const EventsPage = () => {
 
         <div className="p-6">
           <h3 className="mb-3 text-2xl font-bold text-white">{event.title}</h3>
-          <p className="mb-4 text-gray-300">{event.shortDescription}</p>
-          
+          <p className="mb-4 text-gray-300">{event.description}</p>
+
           <div className="space-y-2">
             <div className="flex items-center text-gray-300">
               <Calendar size={18} className="mr-2" />
-              <span>{new Date(event.date).toLocaleDateString('en-US', { 
-                weekday: 'long',
-                year: 'numeric',
-                month: 'long',
-                day: 'numeric'
-              })}</span>
+              <span>{event.date}</span>
             </div>
-            
+
             <div className="flex items-center text-gray-300">
               <Clock size={18} className="mr-2" />
-              <span>{event.time}</span>
+              <span>
+                {new Date(
+                  convertTimestampToDate(
+                    event?.time?.seconds,
+                    event?.time?.nanoseconds
+                  )
+                ).toLocaleDateString("en-US", {
+                  weekday: "long",
+                  year: "numeric",
+                  month: "long",
+                  day: "numeric",
+                })}
+              </span>
             </div>
-            
+
             <div className="flex items-center text-gray-300">
               <MapPin size={18} className="mr-2" />
               <span>{event.location}</span>
@@ -83,7 +124,7 @@ const EventsPage = () => {
             </div>
           </div>
 
-          <Link 
+          <Link
             to={`/events/${event.id}`}
             className="inline-flex items-center w-full px-6 py-3 mt-6 font-medium text-center text-white transition-all duration-300 bg-blue-600 rounded-lg hover:bg-blue-700"
           >
@@ -98,7 +139,6 @@ const EventsPage = () => {
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-900 via-blue-900 to-blue-800">
       <div className="container px-4 py-16 mx-auto">
-        {/* Header */}
         <div className="max-w-3xl mx-auto mb-16 text-center">
           <h1 className="mb-4 text-4xl font-bold text-white md:text-5xl">
             Upcoming Events
@@ -108,27 +148,14 @@ const EventsPage = () => {
           </p>
         </div>
 
-        {/* Event Filters */}
-        <div className="flex flex-wrap items-center justify-center gap-4 mb-12">
-          <button className="px-6 py-2 text-white transition-all duration-300 bg-blue-600 rounded-full hover:bg-blue-700">
-            All Events
-          </button>
-          <button className="px-6 py-2 text-gray-300 transition-all duration-300 rounded-full hover:bg-white/10">
-            Conferences
-          </button>
-          <button className="px-6 py-2 text-gray-300 transition-all duration-300 rounded-full hover:bg-white/10">
-            Workshops
-          </button>
-          <button className="px-6 py-2 text-gray-300 transition-all duration-300 rounded-full hover:bg-white/10">
-            Networking
-          </button>
-        </div>
-
-        {/* Events Grid */}
         <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
-          {events.map((event) => (
-            <EventCard key={event.id} event={event} />
-          ))}
+          {eventsDetail.length > 0 ? (
+            eventsDetail.map((event) => (
+              <EventCard key={event.id} event={event} />
+            ))
+          ) : (
+            <p className="text-center text-gray-300">No events found.</p>
+          )}
         </div>
       </div>
     </div>
