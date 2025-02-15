@@ -9,28 +9,39 @@ import EventDetail from './pages/EventDetail';
 import SignUp from './components/Sign/SignUp';
 import VertexInnovateHack from './pages/VertexInnovateHack';
 import ForgotPassword from './components/Sign/ForgotPassword';
+import Profile from './components/Sign/Profile';
+import ErrorBoundary from './components/ErrorBoundary.tsx';
+import { GoogleOAuthProvider } from '@react-oauth/google'; // Import GoogleOAuthProvider
+
 function App() {
+  const clientId = 'YOUR_GOOGLE_CLIENT_ID'; // Replace with your actual client ID
+
   return (
-    <Router>
-      <div className="flex flex-col min-h-screen">
-        <header className="sticky top-0 z-50">
-          <Navbar />
-        </header>
-        <main className="flex-grow">
-          <Routes>
-            <Route path="/" element={<LandingPage />} />
-            <Route path="/team" element={<TeamPage />} />
-            <Route path="/events" element={<EventsPage />} />
-            <Route path="/events/:id" element={<EventDetail />} />
-            <Route path="/signup" element={<SignUp />} />
-            <Route path="/forgot-password" element={<ForgotPassword />} />
-            <Route path="*" element={<h1>404 Not Found</h1>} />
-            <Route path="/vertexinnovate" element={<VertexInnovateHack />} />
-          </Routes>
-        </main>
-        <Footer />
-      </div>
-    </Router>
+    <GoogleOAuthProvider clientId={clientId}> {/* Wrap with GoogleOAuthProvider */}
+      <Router>
+        <div className="flex flex-col min-h-screen">
+          <header className="sticky top-0 z-50">
+            <ErrorBoundary>
+              <Navbar />
+            </ErrorBoundary>
+          </header>
+          <main className="flex-grow">
+            <Routes>
+              <Route path="/" element={<LandingPage />} />
+              <Route path="/team" element={<TeamPage />} />
+              <Route path="/events" element={<EventsPage />} />
+              <Route path="/events/:id" element={<EventDetail />} />
+              <Route path="/signup" element={<SignUp />} />
+              <Route path="/profile" element={<Profile />} />
+              <Route path="/forgot-password" element={<ForgotPassword />} />
+              <Route path="*" element={<h1>404 Not Found</h1>} />
+              <Route path="/vertexinnovate" element={<VertexInnovateHack />} />
+            </Routes>
+          </main>
+          <Footer />
+        </div>
+      </Router>
+    </GoogleOAuthProvider>
   );
 }
 

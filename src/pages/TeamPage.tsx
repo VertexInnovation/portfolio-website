@@ -1,39 +1,78 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { Linkedin, Instagram, Mail, X } from 'lucide-react';
-
+import vishnu from '../assets/team/Vishnu.jpg';
+import giri from '../assets/team/giridharan.jpg';
+import Swayam from '../assets/team/Swayam.jpg';
+import Aashik from '../assets/team/MohammedAashik.jpeg';
 const TeamPage = () => {
-  const [selectedMember, setSelectedMember] = useState(null);
+  const [selectedMember, setSelectedMember] = useState<typeof teamMembers[0] | null>(null);
 
   const teamMembers = [
     {
-      name: 'John Smith',
-      designation: 'CEO & Founder',
+      name: 'Vishnu Swaroop G',
+      designation: 'Founder',
+      image: vishnu,
+      bio: 'As the visionary founder of Vertex Tech, Vishnu leads our company with innovative strategies and a passion for technological advancement. His leadership drives our mission to deliver cutting-edge solutions.',
+      linkedin: 'https://www.linkedin.com/in/vishnu-swaroop-g-820b8928b',
+      instagram: 'https://www.instagram.com/vishnu.gvs',
+      email: 'director@vertextech.org'
+    },
+    {
+      name: 'Giridharan R E',
+      designation: 'Co-Founder',
+      image: giri,
+      bio: 'Giridharan brings strong leadership expertise to Vertex Tech, overseeing our operations and ensuring excellence in project delivery. His strategic vision helps drive our company forward.',
+      linkedin: 'https://www.linkedin.com/in/giridharan-r-e',
+      instagram: 'https://www.instagram.com/giridharan_re',
+      email: 'executive@vertextech.org'
+    },
+    {
+      name: 'Swayam Krishnan',
+      designation: 'Chief Financial Officer',
+      image: Swayam,
+      bio: 'As the Chief Financial Officer, Swayam manages our financial strategies and operations. His expertise in financial planning ensures sustainable growth and sound fiscal management.',
+      linkedin: 'https://www.linkedin.com/in/swayamkrishnan',
+      instagram: 'https://www.instagram.com/swayam_krishnan0905',
+      email: 'finance@vertextech.org'
+    },
+    {
+      name: 'Mohammed Aashik F',
+      designation: 'Technical Lead',
+      image: Aashik,
+      bio: 'Aashik leads our technical initiatives with expertise in modern web technologies. His innovative approach and technical knowledge drive our development projects to success.',
+      linkedin: 'https://www.linkedin.com/in/mohammed-aashik-f-690418263/',
+      instagram: 'https://www.instagram.com/_ashik_1701_/',
+      email: 'technical@vertextech.org'
+    },
+    {
+      name: 'Smitha Gladius',
+      designation: 'Management Lead',
       image: '/api/placeholder/400/400',
-      bio: 'John brings over 15 years of experience in technology innovation and leadership. He founded Vertex Innovation with the vision of transforming how businesses approach digital solutions.',
-      linkedin: 'https://linkedin.com/in/johnsmith',
-      instagram: 'https://instagram.com/johnsmith',
-      email: 'john@vertexinnovation.com'
+      bio: 'Smitha excels in project management and team coordination. Her leadership ensures smooth operations and successful delivery of our client projects.',
+      linkedin: 'https://www.linkedin.com/in/smitha-gladius',
+      instagram: 'https://www.instagram.com/smitha.gladius',
+      email: 'management@vertextech.org'
+    },
+    {
+      name: 'John Smith',
+      designation: 'Marketing Director',
+      image: '/api/placeholder/400/400',
+      bio: 'John brings over a decade of marketing experience, specializing in digital strategies and brand development. His innovative approach helps drive our market presence.',
+      linkedin: 'https://www.linkedin.com/in/john-smith',
+      instagram: 'https://www.instagram.com/johnsmith',
+      email: 'marketing@vertextech.org'
     },
     {
       name: 'Sarah Johnson',
-      designation: 'Chief Technology Officer',
+      designation: 'UX Design Lead',
       image: '/api/placeholder/400/400',
-      bio: 'With a Ph.D. in Computer Science and extensive experience in AI, Sarah leads our technical initiatives and ensures we stay at the cutting edge of innovation.',
-      linkedin: 'https://linkedin.com/in/sarahjohnson',
-      instagram: 'https://instagram.com/sarahjohnson',
-      email: 'sarah@vertexinnovation.com'
+      bio: 'Sarah leads our UX design team with expertise in creating intuitive and engaging user experiences. Her creative vision helps shape our product design strategy.',
+      linkedin: 'https://www.linkedin.com/in/sarah-johnson',
+      instagram: 'https://www.instagram.com/sarahj.design',
+      email: 'design@vertextech.org'
     },
-    {
-      name: 'Michael Chen',
-      designation: 'Lead Developer',
-      image: '/api/placeholder/400/400',
-      bio: 'Michael specializes in full-stack development and has led numerous successful projects for Fortune 500 companies.',
-      linkedin: 'https://linkedin.com/in/michaelchen',
-      instagram: 'https://instagram.com/michaelchen',
-      email: 'michael@vertexinnovation.com'
-    }
   ];
-
+  
   const MemberModal = ({ member, onClose }: { member: typeof teamMembers[0], onClose: () => void }) => (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/70">
       <div className="relative w-full max-w-2xl max-h-[90vh] overflow-auto bg-gradient-to-b from-gray-900 to-gray-800 rounded-2xl shadow-2xl">
@@ -88,7 +127,7 @@ const TeamPage = () => {
     </div>
   );
 
-  const TeamMemberCard = ({ member }) => (
+  const TeamMemberCard = ({ member }: { member: typeof teamMembers[0] }) => (
     <div 
       onClick={() => setSelectedMember(member)}
       className="relative cursor-pointer group"

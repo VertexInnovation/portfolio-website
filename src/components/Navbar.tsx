@@ -1,5 +1,7 @@
+// Navbar.tsx
 import { useState, useEffect } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
+import { AnimatePresence } from "framer-motion";
 import { Menu, X, ChevronDown } from "lucide-react";
 import { Link, useNavigate } from "react-router-dom";
 import { useGoogleLogin } from "@react-oauth/google";
@@ -23,7 +25,6 @@ const getStoredAuth = (): AuthState => {
   const stored = localStorage.getItem(STORAGE_KEY);
   if (!stored)
     return { isLogged: false, userProfile: null, token: null, expiresAt: null };
-
   const auth = JSON.parse(stored);
   if (auth.expiresAt && auth.expiresAt < Date.now()) {
     localStorage.removeItem(STORAGE_KEY);
@@ -51,7 +52,7 @@ const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const navigate = useNavigate();
-  const [authState, setAuthState] = useState<AuthState>(getStoredAuth());
+  const [authState, setAuthState] = useState(getStoredAuth());
 
   const login = useGoogleLogin({
     onSuccess: async (tokenResponse) => {
@@ -109,9 +110,9 @@ const Navbar = () => {
         logOut();
       }
     };
-
     const interval = setInterval(checkExpiry, 60000);
     return () => clearInterval(interval);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
@@ -132,215 +133,165 @@ const Navbar = () => {
     return () => window.removeEventListener("resize", handleResize);
   }, [isOpen]);
 
-  const MenuItem = ({
-    item,
-  }: {
-    item: {
-      label: string;
-      href?: string;
-      submenu?: { label: string; href: string }[];
-    };
-  }) => (
-    <div className="relative group">
-      {item.submenu ? (
-        <div className="flex items-center gap-1 cursor-pointer">
-          <button
-            className="flex items-center gap-1 text-gray-700 transition-colors hover:text-blue-600"
-            aria-expanded={isOpen}
-            aria-haspopup="true"
+  return (
+    <nav
+      className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ${
+      isScrolled ? "bg-white shadow-md" : "bg-transparent"
+      }`}
+    >
+      <div className="container flex items-center justify-between px-4 py-4 mx-auto max-w-7xl">
+      {/* Logo */}
+      <Link to="/" className="text-xl font-bold text-blue-600">
+        
+      </Link>
+
+      {/* Desktop Menu */}
+      <ul className="items-center hidden space-x-8 lg:flex">
+        {MENU_ITEMS.map((item, index) => (
+        <li key={index} className="relative">
+          {item.submenu ? (
+          <div className="relative group">
+            <span className="flex items-center py-2 cursor-pointer">
+            {item.label} <ChevronDown size={16} className="ml-1.5" />
+            </span>
+            <ul className="absolute left-0 hidden mt-1 min-w-[200px] bg-white rounded-lg shadow-lg top-full group-hover:block">
+            {item.submenu.map((subItem, idx) => (
+              <li key={idx}>
+              <Link
+                to={subItem.href}
+                className="block px-6 py-3 text-gray-700 hover:bg-gray-50 whitespace-nowrap"
+              >
+                {subItem.label}
+              </Link>
+              </li>
+            ))}
+            </ul>
+          </div>
+          ) : (
+          <Link
+            to={item.href}
+            className="py-2 text-gray-700 hover:text-blue-600"
           >
-            <span>{item.label}</span>
-            <ChevronDown className="w-4 h-4 text-gray-500 transition-colors group-hover:text-blue-600" />
+            {item.label}
+          </Link>
+          )}
+        </li>
+        ))}
+
+        {/* Profile Section */}
+        <li className="flex items-center pl-8 ml-8 space-x-6 border-l">
+        {authState.isLogged && authState.userProfile ? (
+          <div className="list-none">
+          <Link
+            to="/profile"
+            className="flex items-center space-x-3 text-gray-700 hover:text-blue-600"
+          >
+            <img
+            src={authState.userProfile.picture || "https://via.placeholder.com/30"}
+            alt="User Avatar"
+            className="object-cover w-8 h-8 rounded-full"
+            />
+            <span className="font-medium">{authState.userProfile.name}</span>
+          </Link>
+          </div>
+        ) : (
+          <>
+          <button
+            onClick={() => login()}
+            className="px-4 py-2 font-medium text-gray-700 hover:text-blue-600"
+          >
+            Login
           </button>
-          <div className="absolute left-0 hidden pt-2 group-hover:block top-full">
-            <div
-              className="bg-white rounded-xl shadow-lg p-2 min-w-[200px]"
-              role="menu"
-            >
-              {item.submenu.map((subItem: { label: string; href: string }) => (
+          <button className="px-4 py-2 font-medium text-white transition-colors bg-blue-600 rounded-lg hover:bg-blue-700">
+            Sign Up
+          </button>
+          </>
+        )}
+        </li>
+      </ul>
+
+      {/* Mobile Menu Button */}
+      <button
+        onClick={() => setIsOpen(!isOpen)}
+        className="p-2 text-gray-700 rounded-lg hover:bg-gray-100 lg:hidden"
+      >
+        {isOpen ? <X size={24} /> : <Menu size={24} />}
+      </button>
+      </div>
+
+      {/* Mobile Menu Dropdown */}
+      <AnimatePresence>
+      {isOpen && (
+        <motion.div
+        initial={{ opacity: 0, y: -20 }}
+        animate={{ opacity: 1, y: 0 }}
+        exit={{ opacity: 0, y: -20 }}
+        className="mt-2 bg-white shadow-lg lg:hidden"
+        >
+        <ul className="flex flex-col p-6 space-y-4">
+          {MENU_ITEMS.map((item, index) => (
+          <li key={index}>
+            {item.submenu ? (
+            <div className="space-y-3">
+              <span className="flex items-center font-medium">
+              {item.label} <ChevronDown size={16} className="ml-2" />
+              </span>
+              <ul className="pl-4 space-y-2">
+              {item.submenu.map((subItem, idx) => (
+                <li key={idx}>
                 <Link
-                  key={subItem.label}
                   to={subItem.href}
-                  className="block px-4 py-2 text-sm text-gray-700 transition-colors rounded-lg hover:bg-blue-50"
-                  role="menuitem"
+                  className="block py-2 text-gray-600 hover:text-blue-600"
                 >
                   {subItem.label}
                 </Link>
+                </li>
               ))}
+              </ul>
             </div>
-          </div>
-        </div>
-      ) : (
-        <Link
-          to={item.href || "#"}
-          className="text-gray-700 transition-colors hover:text-blue-600"
-        >
-          {item.label}
-        </Link>
-      )}
-    </div>
-  );
-
-  return (
-    <motion.nav
-      initial={{ opacity: 0, y: -20 }}
-      animate={{ opacity: 1, y: 0 }}
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        isScrolled ? "bg-white/80 backdrop-blur-lg shadow-lg" : "bg-transparent"
-      }`}
-      role="navigation"
-    >
-      <div className="container px-4 mx-auto">
-        <div className="flex items-center justify-between h-20">
-          <Link to="/">
-            <motion.div
-              whileHover={{ scale: 1.05 }}
-              className="text-2xl font-bold text-transparent bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text"
-            >
-              Vertex
-            </motion.div>
-          </Link>
-
-          <div className="items-center hidden space-x-8 lg:flex">
-            {MENU_ITEMS.map((item) => (
-              <MenuItem key={item.label} item={item} />
-            ))}
-          </div>
-
-          {/*Desktop*/}
-          <div className="items-center hidden space-x-4 lg:flex">
-            {authState.isLogged && authState.userProfile ? (
-              <div className="relative flex items-center space-x-4 cursor-pointer group">
-                <img
-                  src={authState.userProfile.picture || "/default-avatar.png"}
-                  alt="Profile"
-                  className="w-10 h-10 rounded-full"
-                />
-                <span className="text-gray-700">
-                  {authState.userProfile.name}
-                </span>
-                <div className="absolute -bottom-10 right-0 hidden mt-2 bg-white border rounded-lg shadow-lg group-hover:block">
-                  <button
-                    className="block px-4 py-2 text-gray-700 hover:bg-gray-100"
-                    onClick={() => logOut()}
-                  >
-                    Logout
-                  </button>
-                </div>
-              </div>
             ) : (
-              <>
-                <button
-                  className="px-4 py-2 text-gray-700 transition-colors hover:text-blue-600"
-                  onClick={() => login()}
-                >
-                  Login
-                </button>
-                <Link
-                  to="/signup"
-                  className="px-6 py-2 text-white transition-opacity bg-gradient-to-r from-blue-600 to-purple-600 rounded-xl hover:opacity-90"
-                >
-                  Sign Up
-                </Link>
-              </>
+            <Link
+              to={item.href}
+              className="block py-2 font-medium text-gray-700 hover:text-blue-600"
+            >
+              {item.label}
+            </Link>
             )}
-          </div>
+          </li>
+          ))}
 
-          <button
-            className="p-2 text-gray-700 transition-colors lg:hidden hover:text-blue-600"
-            onClick={() => setIsOpen(!isOpen)}
-            aria-expanded={isOpen}
-            aria-label="Toggle navigation menu"
-          >
-            {isOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
-          </button>
-        </div>
-      </div>
-
-      <AnimatePresence>
-        {isOpen && (
-          <motion.div
-            initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: "auto" }}
-            exit={{ opacity: 0, height: 0 }}
-            className="bg-white border-t lg:hidden"
-          >
-            <div className="container px-4 py-4 mx-auto">
-              {MENU_ITEMS.map((item) => (
-                <div key={item.label} className="py-2">
-                  {item.submenu ? (
-                    <div className="space-y-2">
-                      <div className="font-medium text-gray-700">
-                        {item.label}
-                      </div>
-                      <div className="pl-4 space-y-2">
-                        {item.submenu.map((subItem) => (
-                          <Link
-                            key={subItem.label}
-                            to={subItem.href}
-                            className="block text-sm text-gray-600 transition-colors hover:text-blue-600"
-                          >
-                            {subItem.label}
-                          </Link>
-                        ))}
-                      </div>
-                    </div>
-                  ) : (
-                    <Link
-                      to={item.href}
-                      className="block text-gray-700 transition-colors hover:text-blue-600"
-                    >
-                      {item.label}
-                    </Link>
-                  )}
-                </div>
-              ))}
-
-              {/*Mobile*/}
-              <div className="flex flex-col pt-4 space-y-2 border-t">
-                {authState.isLogged && authState.userProfile ? (
-                  <div className="relative flex items-center space-x-4 cursor-pointer">
-                    <img
-                      src={
-                        authState.userProfile.picture || "/default-avatar.png"
-                      }
-                      alt="Profile"
-                      className="w-10 h-10 rounded-full"
-                    />
-                    <span className="text-gray-700">
-                      {authState.userProfile.name}
-                    </span>
-                    <div className="bg-white border rounded-lg">
-                      <button
-                        className="block px-4 py-2 text-gray-700 hover:bg-gray-100"
-                        onClick={() => logOut()}
-                      >
-                        Logout
-                      </button>
-                    </div>
-                  </div>
-                ) : (
-                  <>
-                    <button
-                      className="px-4 py-2 text-gray-700 transition-colors hover:text-blue-600"
-                      onClick={() => login()}
-                    >
-                      Login
-                    </button>
-                    <Link
-                      to="/signup"
-                      className="px-6 py-2 text-white transition-opacity bg-gradient-to-r from-blue-600 to-purple-600 rounded-xl hover:opacity-90"
-                    >
-                      Sign Up
-                    </Link>
-                  </>
-                )}
-              </div>
+          <div className="pt-4 mt-4 border-t">
+          {authState.isLogged && authState.userProfile ? (
+            <Link
+            to="/profile"
+            className="flex items-center space-x-3 text-gray-700 hover:text-blue-600"
+            >
+            <img
+              src={authState.userProfile.picture || "https://via.placeholder.com/30"}
+              alt="User Avatar"
+              className="object-cover w-8 h-8 rounded-full"
+            />
+            <span className="font-medium">{authState.userProfile.name}</span>
+            </Link>
+          ) : (
+            <div className="flex flex-col space-y-3">
+            <button
+              onClick={() => login()}
+              className="w-full py-2 font-medium text-center text-gray-700 hover:text-blue-600"
+            >
+              Login
+            </button>
+            <button className="w-full py-2 font-medium text-white transition-colors bg-blue-600 rounded-lg hover:bg-blue-700">
+              Sign Up
+            </button>
             </div>
-          </motion.div>
-        )}
+          )}
+          </div>
+        </ul>
+        </motion.div>
+      )}
       </AnimatePresence>
-    </motion.nav>
+    </nav>
   );
 };
 
