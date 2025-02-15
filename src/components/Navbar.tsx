@@ -252,7 +252,11 @@ const Navbar = () => {
             aria-expanded={isOpen}
             aria-label="Toggle navigation menu"
           >
-            {isOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+            {isOpen ? (
+              <X className="w-6 h-6" />
+            ) : (
+              <Menu color="rgb(98,120,255)" className="w-6 h-6" />
+            )}
           </button>
         </div>
       </div>
