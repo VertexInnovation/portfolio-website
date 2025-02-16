@@ -1,61 +1,79 @@
-import { useRef, useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import ashik from '../../assets/team/MohammedAashik.jpeg';
+
 const HeroSection = () => {
-  const containerRef = useRef<HTMLDivElement>(null);
-
-  // Sample member images - in production you would import these
-  const memberPhotos = [
-    ashik,
-    ashik,
-    ashik,
-    ashik,
-    ashik,
-    ashik,
-    ashik,
-    ashik,
-  ];
-
-  // Double the photos array to create seamless loop
-  const allPhotos = [...memberPhotos, ...memberPhotos];
+  const [rows, setRows] = useState([
+    { photos: [], key: 1 },
+    { photos: [], key: 2 }
+  ]);
 
   useEffect(() => {
-    const scrollContainer = containerRef.current;
-    if (!scrollContainer) return;
-
-    // Calculate total scroll width
-    const totalWidth = scrollContainer.scrollWidth;
-    let currentScroll = 0;
-
-    const scroll = () => {
-      currentScroll += 1;
-      
-      // Reset scroll position when reaching end
-      if (currentScroll >= totalWidth / 2) {
-        currentScroll = 0;
-      }
-      
-      scrollContainer.scrollLeft = currentScroll;
-    };
-
-    const intervalId = setInterval(scroll, 30);
-
-    return () => clearInterval(intervalId);
+    // Create an array with enough duplicates to fill the screen width
+    const basePhotos = Array(20).fill(ashik);
+    setRows([
+      { photos: [...basePhotos], key: 1 },
+      { photos: [...basePhotos], key: 2 }
+    ]);
   }, []);
 
   return (
     <div className="flex flex-col items-center w-full overflow-hidden bg-white">
-      {/* Photos Row 1 */}
-      <div className="w-full mb-4">
-        <div 
-          ref={containerRef}
-          className="flex gap-4 py-2 overflow-hidden"
-          style={{ width: '100%' }}
-        >
-          {allPhotos.map((photo, index) => (
-            <div
-              key={index}
-              className="flex-none"
-            >
+      <style>
+        {`
+          @keyframes slideLeft {
+            0% {
+              transform: translateX(0);
+            }
+            100% {
+              transform: translateX(-50%);
+            }
+          }
+
+          @keyframes slideRight {
+            0% {
+              transform: translateX(-50%);
+            }
+            100% {
+              transform: translateX(0);
+            }
+          }
+
+          .scroll-left {
+            animation: slideLeft 20s linear infinite;
+          }
+
+          .scroll-right {
+            animation: slideRight 20s linear infinite;
+          }
+
+          .photo-stream {
+            display: flex;
+            gap: 1rem;
+            padding: 0.5rem 0;
+          }
+
+          .photo-stream:hover {
+            animation-play-state: paused;
+          }
+        `}
+      </style>
+
+      {/* Top Row - Scrolling Left */}
+      <div className="w-full mb-4 overflow-hidden">
+        <div className="flex photo-stream scroll-left">
+          {rows[0].photos.map((photo, index) => (
+            <div key={`top-${index}`} className="flex-none">
+              <img
+                src={photo}
+                alt={`Community Member ${index + 1}`}
+                className="object-cover w-16 h-16 rounded-lg"
+                loading="lazy"
+              />
+            </div>
+          ))}
+          {/* Duplicate set for seamless loop */}
+          {rows[0].photos.map((photo, index) => (
+            <div key={`top-duplicate-${index}`} className="flex-none">
               <img
                 src={photo}
                 alt={`Community Member ${index + 1}`}
@@ -67,20 +85,22 @@ const HeroSection = () => {
         </div>
       </div>
 
-      {/* Photos Row 2 */}
-      <div className="w-full mb-4">
-        <div 
-          className="flex gap-4 py-2 overflow-hidden"
-          style={{ 
-            width: '100%',
-            animation: 'scroll 20s linear infinite reverse'
-          }}
-        >
-          {allPhotos.map((photo, index) => (
-            <div
-              key={index}
-              className="flex-none"
-            >
+      {/* Bottom Row - Scrolling Right */}
+      <div className="w-full mb-4 overflow-hidden">
+        <div className="flex photo-stream scroll-right">
+          {rows[1].photos.map((photo, index) => (
+            <div key={`bottom-${index}`} className="flex-none">
+              <img
+                src={photo}
+                alt={`Community Member ${index + 1}`}
+                className="object-cover w-16 h-16 rounded-lg"
+                loading="lazy"
+              />
+            </div>
+          ))}
+          {/* Duplicate set for seamless loop */}
+          {rows[1].photos.map((photo, index) => (
+            <div key={`bottom-duplicate-${index}`} className="flex-none">
               <img
                 src={photo}
                 alt={`Community Member ${index + 1}`}
@@ -100,7 +120,7 @@ const HeroSection = () => {
         <p className="mb-8 text-lg leading-relaxed text-gray-600">
           Join niche clubs, interact with experts, explore, network with high-profile and ambitious individuals, get internships, and join India's largest community all for free! What are you waiting for?
         </p>
-        <button className="inline-flex items-center px-6 py-3 text-lg font-medium text-white bg-[#5865F2] rounded-full hover:bg-[#4752C4] transition-colors">
+        <button className="inline-flex items-center px-6 py-3 text-lg font-medium text-white transition-colors bg-[#5865F2] rounded-full hover:bg-[#4752C4]">
           <svg 
             className="w-6 h-6 mr-2" 
             fill="currentColor" 

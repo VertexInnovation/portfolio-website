@@ -4,6 +4,10 @@ import vishnu from '../assets/team/Vishnu.jpg';
 import giri from '../assets/team/giridharan.jpg';
 import Swayam from '../assets/team/Swayam.jpg';
 import Aashik from '../assets/team/MohammedAashik.jpeg';
+import alwin from '../assets/team/Alwin.jpg';
+import karunya from '../assets/team/studentHeads/karunya.jpeg';
+
+import Smitha from '../assets/team/studentHeads/SmithaGladius.jpg';
 const TeamPage = () => {
   const [selectedMember, setSelectedMember] = useState<typeof teamMembers[0] | null>(null);
   const teamMembers = [
@@ -36,7 +40,7 @@ const TeamPage = () => {
     },
     {
       name: 'Mohammed Aashik F',
-      designation: 'Technical Lead',
+      designation: 'Cheif Technical Officer',
       image: Aashik,
       bio: 'Aashik leads our technical initiatives with expertise in modern web technologies. His innovative approach and technical knowledge drive our development projects to success.',
       linkedin: 'https://www.linkedin.com/in/mohammed-aashik-f-690418263/',
@@ -45,17 +49,17 @@ const TeamPage = () => {
     },
     {
       name: 'Smitha Gladius',
-      designation: 'Management Lead',
-      image: '/api/placeholder/400/400',
+      designation: 'Cheif Organizing Officer',
+      image: Smitha,
       bio: 'Smitha excels in project management and team coordination. Her leadership ensures smooth operations and successful delivery of our client projects.',
-      linkedin: 'https://www.linkedin.com/in/smitha-gladius',
-      instagram: 'https://www.instagram.com/smitha.gladius',
+      linkedin: 'https://www.linkedin.com/in/t-s-smitha-gladius-6824b4251/?originalSubdomain=in',
+      instagram: 'https://www.instagram.com/smitha_gladys',
       email: 'management@vertextech.org'
     },
     {
-      name: 'John Smith',
-      designation: 'Marketing Director',
-      image: '/api/placeholder/400/400',
+      name: 'Alwin',
+      designation: 'Cheif Vision Officer',
+      image: alwin,
       bio: 'John brings over a decade of marketing experience, specializing in digital strategies and brand development. His innovative approach helps drive our market presence.',
       linkedin: 'https://www.linkedin.com/in/john-smith',
       instagram: 'https://www.instagram.com/johnsmith',
@@ -63,13 +67,13 @@ const TeamPage = () => {
     },
     {
       name: 'Sarah Johnson',
-      designation: 'UX Design Lead',
-      image: '/api/placeholder/400/400',
+      designation: 'Student Coordinator',
+      image: karunya,
       bio: 'Sarah leads our UX design team with expertise in creating intuitive and engaging user experiences. Her creative vision helps shape our product design strategy.',
       linkedin: 'https://www.linkedin.com/in/sarah-johnson',
       instagram: 'https://www.instagram.com/sarahj.design',
       email: 'design@vertextech.org'
-    },
+    }
   ];
   
   const MemberModal = ({ member, onClose }: { member: typeof teamMembers[0], onClose: () => void }) => (
@@ -145,7 +149,7 @@ const TeamPage = () => {
           <h3 className="mb-1 text-lg font-semibold text-white transition-colors duration-300 group-hover:text-blue-400">
             {member.name}
           </h3>
-          <p className="text-gray-400 text-sm">{member.designation}</p>
+          <p className="text-sm text-gray-400">{member.designation}</p>
         </div>
       </div>
     </div>

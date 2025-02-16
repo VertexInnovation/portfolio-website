@@ -9,17 +9,40 @@ const VideoShowcase = () => {
           Watch our 4-year journey from a Telegram group to a thriving community.
         </p>
         <div className="relative w-full overflow-hidden rounded-lg shadow-lg aspect-video">
-          <iframe
-            className="w-full h-full"
-            src="https://www.youtube.com/embed/dQw4w9WgXcQ" // Replace with your video URL
-            title="Our Journey"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-            allowFullScreen
-          ></iframe>
+          <img src="https://source.unsplash.com/800x600/?img" alt="Video" className="object-cover w-full h-full" />
+          <button className="absolute inset-0 flex items-center justify-center w-full h-full bg-black bg-opacity-50 focus:outline-none">  
+            <svg xmlns="http://www.w3.org/2000/svg" className="w-16 h-16 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 14V10a1 1 0 011.5-.87l5 2a1 1 0 010 1.74l-5 2A1 1 0 0110 14z" />
+            </svg>
+          </button>
         </div>
       </div>
     </div>
   );
 };
+
+// const VideoShowcase = () => {
+//   return (
+//     <div className="py-12 bg-white">
+//       <div className="max-w-5xl mx-auto text-center">
+//         <h2 className="mb-4 text-3xl font-bold text-gray-800">Our Journey</h2>
+//         <p className="mb-8 text-gray-600">
+//           Watch our 4-year journey from a Telegram group to a thriving community.
+//         </p>
+//         <div className="relative w-full overflow-hidden rounded-lg shadow-lg aspect-video">
+//           <iframe
+//             className="w-full h-full"
+//             src="https://www.youtube.com/embed/dQw4w9WgXcQ" // Replace with your video URL
+//             title="Our Journey"
+//             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+//             allowFullScreen
+//           ></iframe>
+//         </div>
+//       </div>
+//     </div>
+//   );
+// };
+
 
 export default VideoShowcase;

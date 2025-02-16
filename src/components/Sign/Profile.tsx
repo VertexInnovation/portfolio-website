@@ -31,7 +31,7 @@ const Profile = () => {
   return (
     <div className="min-h-screen bg-gray-50">
       {/* Top Navigation Bar */}
-      <div className="fixed top-0 left-0 right-0 z-10 bg-white border-b shadow">
+      <div className="fixed top-0 left-0 right-0 bg-white border-b shadow">
         <div className="flex items-center justify-between h-16 px-6">
           <div className="text-xl font-semibold text-gray-900"></div>
           <button
@@ -44,7 +44,7 @@ const Profile = () => {
         </div>
       </div>
       {/* Main Content */}
-      <div className="pt-16">
+      <div className="">
         {/* Profile Header */}
         <div className="relative h-[280px] bg-gradient-to-br from-gray-900 to-gray-800">
           <div className="absolute inset-0 opacity-10 bg-[radial-gradient(circle_at_50%_120%,#ffffff_0%,rgba(255,255,255,0)_50%)]" />

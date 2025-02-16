@@ -2,7 +2,7 @@
 
 const events = [
   {
-    title: "Product Design 101",
+    title: "IBM Design Thinking Workshop",
     speaker: "Ajinkya Bhagwat",
     date: "Nov 11, 2021",
     time: "8:30 PM",
@@ -26,9 +26,9 @@ const events = [
 
 const EventCarousel = () => {
   return (
-    <div className="py-12 bg-gray-100">
+    <div className="py-12">
       <div className="mx-auto max-w-7xl">
-        <h2 className="mb-8 text-3xl font-bold text-center text-gray-800">
+        <h2 className="mb-8 text-3xl font-bold text-center text-gray-100">
           Upcoming Events
         </h2>
         <div className="flex space-x-6 overflow-x-scroll scrollbar-hide">

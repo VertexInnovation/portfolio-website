@@ -4,6 +4,7 @@ import { collection, getDocs, getFirestore } from "firebase/firestore";
 import { initializeApp } from "firebase/app";
 import { firebaseConfig } from "../api/firebase/route";
 import { useState, useEffect } from "react";
+import EventCarousel from "../components/CommunityComponents/EventCarousel";
 import "../App.tsx";
 const app = initializeApp(firebaseConfig);
 const firestore = getFirestore(app);
@@ -115,7 +116,7 @@ const EventsPage = () => {
       <div className="container px-4 py-16 mx-auto">
         <div className="max-w-3xl mx-auto mb-16 text-center">
           <h1 className="mb-4 text-4xl font-bold text-white md:text-5xl">
-            Upcoming Events
+            Events
           </h1>
           <p className="text-xl text-gray-300">
             Join us for exciting events that shape the future of technology
@@ -131,6 +132,7 @@ const EventsPage = () => {
           )}
         </div>
       </div>
+      <EventCarousel />
     </div>
   );
 };
