@@ -18,44 +18,43 @@ interface FirebaseTimestamp {
   toDate: () => Date; // Method to convert Firestore Timestamp to JavaScript Date object
 }
 
-// Interface for Schedule items
-interface ScheduleItem {
-  time: FirebaseTimestamp | string; // Firestore Timestamp or string date
-  title: string;
-  description: string;
-}
 
-// Interface for Event speakers
-interface Speaker {
-  name: string;
-  role: string;
-  company: string;
-  image: string;
-}
 
 // Main Event interface
 interface Event {
   id: string;
   title: string;
-  date: string; // Firestore Timestamp or string format
+  date: string;
   time: string;
   location: string;
   image: string;
+  img_src: string;
   category: string;
   attendees: number;
   description: string;
   status: "upcoming" | "past";
-  Schedule: ScheduleItem[];
-  speakers: Speaker[];
+  Schedule: {
+    Deadline: { date: FirebaseTimestamp; title: string; detail: string };
+    start: { date: FirebaseTimestamp; title: string; detail: string };
+    end: { date: FirebaseTimestamp; title: string; detail: string };
+  };
+  speakers: { name: string; role: string; designation: string }[];
 }
+
+const app = initializeApp(firebaseConfig);
+const firestore = getFirestore(app);
 
 const EventDetail = () => {
   const [eventDetail, setEventDetail] = useState<Event | null>(null);
+
   const eventid = useParams<{ id: string }>().id;
   const navigate = useNavigate();
 
   const app = initializeApp(firebaseConfig);
   const firestore = getFirestore(app);
+
+  const { id: eventid } = useParams<{ id: string }>();
+
 
   function convertTimestampToDate(seconds: number, nanoseconds: number): Date {
     const milliseconds = seconds * 1000 + nanoseconds / 1000000;
@@ -63,14 +62,22 @@ const EventDetail = () => {
   }
 
   useEffect(() => {
+    if (!eventid) return;
+    
     const e = onSnapshot(doc(firestore, "events", eventid), (docsSnapshot) => {
-      setEventDetail(docsSnapshot.data());
-      const date = eventDetail.Schedule.end.date;
-      console.log(eventDetail);
+      const data = docsSnapshot.data();
+      if (data) {
+        setEventDetail(data as Event);
+      } else {
+        setEventDetail(null);
+      }
+      if (data?.Schedule?.end?.date) {// Check if end date exists
+      }
+      console.log(data);
     });
 
     return () => e();
-  }, []);
+  }, [eventid]);
 
   const event = {
     id: eventid,
@@ -84,50 +91,50 @@ const EventDetail = () => {
     description: eventDetail?.description,
     Schedule: [
       {
-        time: convertTimestampToDate(
-          eventDetail?.Schedule?.Deadline?.date?.seconds,
-          eventDetail?.Schedule?.Deadline?.date?.nanoseconds
+        time: eventDetail?.Schedule?.Deadline?.date ? convertTimestampToDate(
+          eventDetail.Schedule.Deadline.date.seconds ?? 0,
+          eventDetail.Schedule.Deadline.date.nanoseconds ?? 0
         ).toLocaleDateString("en-US", {
           year: "numeric",
           month: "short",
           day: "numeric",
-        }),
+        }) : '',
         title: eventDetail?.Schedule?.Deadline?.title,
         description: eventDetail?.Schedule?.Deadline?.detail,
       },
       {
-        time: convertTimestampToDate(
-          eventDetail?.Schedule?.start?.date?.seconds,
-          eventDetail?.Schedule?.start?.date?.nanoseconds
+        time: eventDetail?.Schedule?.start?.date ? convertTimestampToDate(
+          eventDetail.Schedule.start.date.seconds ?? 0,
+          eventDetail.Schedule.start.date.nanoseconds ?? 0
         ).toLocaleDateString("en-US", {
           year: "numeric",
           month: "short",
           day: "numeric",
-        }),
+        }) : '',
         title: eventDetail?.Schedule?.start?.title,
         description: eventDetail?.Schedule?.start?.detail,
       },
       {
-        time: convertTimestampToDate(
-          eventDetail?.Schedule?.end?.date?.seconds,
-          eventDetail?.Schedule?.end?.date?.nanoseconds
+        time: eventDetail?.Schedule?.end?.date ? convertTimestampToDate(
+          eventDetail.Schedule.end.date.seconds ?? 0,
+          eventDetail.Schedule.end.date.nanoseconds ?? 0
         ).toLocaleDateString("en-US", {
           year: "numeric",
           month: "short",
           day: "numeric",
-        }),
+        }) : '',
         title: eventDetail?.Schedule?.end?.title,
         description: eventDetail?.Schedule?.end?.detail,
       },
     ],
-    speakers: [
+    speakers: eventDetail?.speakers ? [
       {
-        name: eventDetail?.speaker?.name,
-        role: eventDetail?.speaker?.role,
-        company: eventDetail?.speaker?.designation,
+        name: eventDetail.speakers[0]?.name,
+        role: eventDetail.speakers[0]?.role,
+        company: eventDetail.speakers[0]?.designation,
         image: srinivasan,
-      },
-    ],
+      }
+    ] : []
   };
 
   interface Speaker {
@@ -184,7 +191,7 @@ const EventDetail = () => {
             <div className="grid gap-4 md:grid-cols-4">
               <div className="flex items-center text-gray-300">
                 <Calendar size={20} className="mr-2" />
-                <span>{new Date(event.date).toLocaleDateString()}</span>
+                <span>{event.date ? new Date(event.date).toLocaleDateString() : 'Date not available'}</span>
               </div>
 
               <div className="flex items-center text-gray-300">

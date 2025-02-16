@@ -1,6 +1,5 @@
 import { Link } from "react-router-dom";
 import { Calendar, Clock, MapPin, ArrowRight, Users } from "lucide-react";
-import verteximg from "../assets/vertexhacks.jpeg";
 import { collection, getDocs, getFirestore } from "firebase/firestore";
 import { initializeApp } from "firebase/app";
 import { firebaseConfig } from "../api/firebase/route";
@@ -55,15 +54,11 @@ const EventsPage = () => {
     };
     fetchEvents();
   }, []);
-  function convertTimestampToDate(seconds: number, nanoseconds: number): Date {
-    const milliseconds = seconds * 1000 + nanoseconds / 1000000;
-    return new Date(milliseconds);
-  }
   const EventCard = ({ event }: { event: Event }) => {
     return (
-      <div className="group relative overflow-hidden bg-white/5 backdrop-blur-md rounded-2xl transition-all duration-300 hover:shadow-2xl">
+      <div className="relative overflow-hidden transition-all duration-300 group bg-white/5 backdrop-blur-md rounded-2xl hover:shadow-2xl">
         <div className="absolute z-10 top-4 right-4">
-          <span className="px-4 py-1 text-sm font-medium bg-blue-600 text-white rounded-full">
+          <span className="px-4 py-1 text-sm font-medium text-white bg-blue-600 rounded-full">
             {event?.category}
           </span>
         </div>
