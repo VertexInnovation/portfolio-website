@@ -3,7 +3,7 @@ import FeaturesSection from '../components/LandingPageComponents/FeaturesSection
 import StatsSection from '../components/LandingPageComponents/StatsSection';
 import FAQsSection from '../components/LandingPageComponents/FAQsSection';
 import AboutSection from '../components/LandingPageComponents/AboutSection';
-
+import University from '../components/LandingPageComponents/University';
 import NewsletterSection from '../components/LandingPageComponents/NewsletterSection';
 const LandingPage = () => {
   return (
@@ -11,7 +11,7 @@ const LandingPage = () => {
       <HeroSection />
       <FeaturesSection />
       <StatsSection />
-
+      <University />
       <FAQsSection />
       <AboutSection />
       <NewsletterSection />
