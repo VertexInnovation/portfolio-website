@@ -6,7 +6,6 @@ import Swayam from '../assets/team/Swayam.jpg';
 import Aashik from '../assets/team/MohammedAashik.jpeg';
 const TeamPage = () => {
   const [selectedMember, setSelectedMember] = useState<typeof teamMembers[0] | null>(null);
-
   const teamMembers = [
     {
       name: 'Vishnu Swaroop G',
@@ -126,64 +125,32 @@ const TeamPage = () => {
       </div>
     </div>
   );
-
   const TeamMemberCard = ({ member }: { member: typeof teamMembers[0] }) => (
     <div 
       onClick={() => setSelectedMember(member)}
       className="relative cursor-pointer group"
     >
       <div className="overflow-hidden bg-gradient-to-b from-gray-800 to-gray-900 rounded-2xl">
-        {/* Desktop Image Container */}
+        {/* Image with Zoom Effect */}
         <div className="relative aspect-[4/5]">
           <img
             src={member.image}
             alt={member.name}
             className="object-cover w-full h-full transition-transform duration-500 group-hover:scale-110"
           />
-          {/* Desktop Hover Overlay */}
-          <div className="absolute inset-0 flex flex-col items-center justify-center transition-opacity duration-300 opacity-0 bg-black/70 group-hover:opacity-100">
-            <div className="flex gap-4 mb-4 transition-transform duration-300 translate-y-4 group-hover:translate-y-0">
-              <a 
-                href={member.linkedin} 
-                onClick={(e) => e.stopPropagation()}
-                target="_blank" 
-                rel="noopener noreferrer"
-                className="p-2 text-white transition-all duration-300 rounded-full bg-blue-600/20 hover:bg-blue-600"
-              >
-                <Linkedin size={20} />
-              </a>
-              <a 
-                href={member.instagram}
-                onClick={(e) => e.stopPropagation()}
-                target="_blank" 
-                rel="noopener noreferrer"
-                className="p-2 text-white transition-all duration-300 rounded-full bg-pink-600/20 hover:bg-pink-600"
-              >
-                <Instagram size={20} />
-              </a>
-              <a 
-                href={`mailto:${member.email}`}
-                onClick={(e) => e.stopPropagation()}
-                className="p-2 text-white transition-all duration-300 rounded-full bg-red-600/20 hover:bg-red-600"
-              >
-                <Mail size={20} />
-              </a>
-            </div>
-            <p className="px-6 text-sm text-center text-gray-300">Click to view profile</p>
-          </div>
         </div>
         
         {/* Member Info */}
-        <div className="p-6 text-center">
-          <h3 className="mb-1 text-xl font-semibold text-white transition-colors duration-300 group-hover:text-blue-400">
+        <div className="p-4 text-center">
+          <h3 className="mb-1 text-lg font-semibold text-white transition-colors duration-300 group-hover:text-blue-400">
             {member.name}
           </h3>
-          <p className="text-gray-400">{member.designation}</p>
+          <p className="text-gray-400 text-sm">{member.designation}</p>
         </div>
       </div>
     </div>
   );
-
+  
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-900 via-blue-900 to-blue-800">
       <div className="container px-4 py-16 mx-auto">
@@ -196,14 +163,12 @@ const TeamPage = () => {
             The brilliant minds behind Vertex Innovation, working together to shape the future of technology.
           </p>
         </div>
-
         {/* Team Grid */}
-        <div className="grid gap-6 sm:gap-8 md:grid-cols-2 lg:grid-cols-3">
+        <div className="grid gap-4 sm:gap-6 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
           {teamMembers.map((member, index) => (
-            <TeamMemberCard key={index} member={member} />
-          ))}
+          <TeamMemberCard key={index} member={member} />
+        ))}
         </div>
-
         {/* Join Team Section */}
         <div className="relative mt-20 overflow-hidden bg-white/10 backdrop-blur-md rounded-2xl">
           <div className="absolute inset-0 bg-gradient-to-r from-blue-600/20 to-purple-600/20"></div>
@@ -224,7 +189,6 @@ const TeamPage = () => {
           </div>
         </div>
       </div>
-
       {/* Modal */}
       {selectedMember && (
         <MemberModal 
@@ -235,5 +199,5 @@ const TeamPage = () => {
     </div>
   );
 };
-
 export default TeamPage;
+

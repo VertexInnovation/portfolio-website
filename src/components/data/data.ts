@@ -3,17 +3,17 @@ import { Zap, Users, Target } from 'lucide-react';
 export const FEATURES = [
   {
     icon: Zap,
-    title: '⚡ Compete in Hackathons & Events',
+    title: 'Compete in Hackathons & Events',
     description: 'Show off your skills, team up with students from top colleges, and solve real-world problems in high-energy hackathons!',
   },
   {
     icon: Users,
-    title: '🔥 Network, Collaborate & Grow',
+    title: 'Network, Collaborate & Grow',
     description: 'Connect with students from IITs, NITs, and top universities across the country with AI-powered matchmaking.',
   },
   {
     icon: Target,
-    title: '🎯 Experience Hands-On Learning',
+    title: 'Experience Hands-On Learning',
     description: 'Build real-world projects from Day 1 with hardware kits, premium tools, and expert guidance.',
   },
 ];
@@ -40,7 +40,7 @@ export const FAQS = [
   },
   {
     question: '❓ What can I gain from Vertex?',
-    answer: 'Youapos#39l get hands-on experience, inter-college collaborations, industry exposure, and even job opportunities—all while having fun!'
+    answer: 'Get hands-on experience, inter-college collaborations, industry exposure, and even job opportunities—all while having fun!'
   },
 ];
 

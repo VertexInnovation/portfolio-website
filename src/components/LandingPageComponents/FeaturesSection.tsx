@@ -5,7 +5,7 @@ const FeaturesSection = () => {
   return (
     <section className="container px-4 py-20 mx-auto">
       <h2 className="mb-12 text-4xl font-bold text-center text-gray-900">
-        Things You Can Do in Vertex
+      Endless Possibilities Await in Vertex
       </h2>
       <div className="grid gap-8 mx-auto md:grid-cols-3 max-w-7xl">
         {FEATURES.map((feature, index) => (

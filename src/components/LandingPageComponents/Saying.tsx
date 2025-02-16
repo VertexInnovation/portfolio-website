@@ -1,117 +1,119 @@
-import { useEffect, useState } from 'react';
-import { motion } from 'framer-motion';
-import { Quote } from 'lucide-react';
+import { useEffect, useState } from "react";
+import { Variants, motion } from "framer-motion";
+import { Quote } from "lucide-react";
 
 const testimonials = [
   {
     id: 1,
-    content: "We got our first lead through bluelearn! Right after my pitch in the bluelearn pitch tank competition, I got my first lead. Thanks a lot for this crazy community you guys have built.",
-    author: "Mehul Kapadia",
-    role: "Startup Founder",
-    avatarUrl: "/api/placeholder/100/100"
+    content:
+      "Vertex has been a game-changer for our club activities. Through the platform, we organized a hackathon with industry experts, and the response was overwhelming. The collaboration opportunities here are endless!",
+    author: "Neha Sharma",
+    role: "President, CSED Club",
+    avatarUrl: "/api/placeholder/100/100",
   },
   {
     id: 2,
-    content: "Bluelearn Quiz Club is the perfect place to nurture quizzing and improve your analytical skills. Helped me a lot to improve myself in quizzing and increased my urge to gather information.",
-    author: "Faizan Najeeb",
-    role: "Quiz Champion",
-    avatarUrl: "/api/placeholder/100/100"
+    content:
+      "Being a part of the Vertex community allowed us to connect with innovators across the globe. We successfully collaborated with a tech startup for our AI project. It’s the perfect blend of learning and networking!",
+    author: "Monish",
+    role: "Core Member, Blackbox AI Ambassadors",
+    avatarUrl: "/api/placeholder/100/100",
   },
   {
     id: 3,
-    content: "At bluelearn I learnt how to be consistent and how to interact with others. I also learnt everything related to freelancing.",
-    author: "Purnima Borana",
-    role: "Freelancer",
-    avatarUrl: "/api/placeholder/100/100"
+    content:
+      "Vertex transformed the way we approach student engagement. The interactive learning sessions and networking events helped our club members connect with industry leaders and like-minded peers.",
+    author: "Ramana Sree",
+    role: "Vice President, IBMz Club",
+    avatarUrl: "/api/placeholder/100/100",
   },
   {
     id: 4,
-    content: "I met CTO for my startup in this community. He's still working with us. Couldn't ask for a better person. Network on the BL Community, if done right, you can find a motivated team there.",
-    author: "Ayush Mittal",
-    role: "Entrepreneur",
-    avatarUrl: "/api/placeholder/100/100"
+    content:
+      "I found my first internship opportunity through a Vertex-hosted event. The platform bridges the gap between students and companies like no other. Highly recommend it to anyone serious about career growth!",
+    author: "Ankit Gupta",
+    role: "Student Ambassador, Vertex",
+    avatarUrl: "/api/placeholder/100/100",
   },
   {
     id: 5,
-    content: "We got our first lead through bluelearn! Right after my pitch in the bluelearn pitch tank competition, I got my first lead. Thanks a lot for this crazy community you guys have built.",
-    author: "Mehul Kapadia",
-    role: "Startup Founder",
-    avatarUrl: "/api/placeholder/100/100"
+    content:
+      "Thanks to Vertex, we got the chance to collaborate with an EdTech startup for one of our social entrepreneurship programs. The network we built here is still helping us make an impact!",
+    author: "Imran",
+    role: "Core Member, CSED Club",
+    avatarUrl: "/api/placeholder/100/100",
   },
   {
     id: 6,
-    content: "Bluelearn Quiz Club is the perfect place to nurture quizzing and improve your analytical skills. Helped me a lot to improve myself in quizzing and increased my urge to gather information.",
-    author: "Faizan Najeeb",
-    role: "Quiz Champion",
-    avatarUrl: "/api/placeholder/100/100"
+    content:
+      "Vertex-inspired hackathons literally elevated our IBMz Club’s visibility. We partnered with industry mentors who guided us in building projects that later won accolades. Such a unique platform!",
+    author: "Karan Mehta",
+    role: "Secretary, IBMz Club",
+    avatarUrl: "/api/placeholder/100/100",
   },
   {
     id: 7,
-    content: "At bluelearn I learnt how to be consistent and how to interact with others. I also learnt everything related to freelancing.",
-    author: "Purnima Borana",
-    role: "Freelancer",
-    avatarUrl: "/api/placeholder/100/100"
+    content:
+      "I joined Vertex as a Student Ambassador and can’t believe how many talented individuals I’ve met. The platform is a goldmine for building a dream project team!",
+    author: "Ritika Singh",
+    role: "Student Ambassador, Vertex",
+    avatarUrl: "/api/placeholder/100/100",
   },
   {
-    id:8,
-    content: "I met CTO for my startup in this community. He's still working with us. Couldn't ask for a better person. Network on the BL Community, if done right, you can find a motivated team there.",
-    author: "Ayush Mittal",
-    role: "Entrepreneur",
-    avatarUrl: "/api/placeholder/100/100"
-  }
+    id: 8,
+    content:
+      "The Blackbox AI Ambassadors team used Vertex to host workshops on machine learning, and it was a huge success! The platform made it easy to connect with students who share our passion for AI innovation.",
+    author: "Arjun Patel",
+    role: "Lead, Blackbox AI Ambassadors",
+    avatarUrl: "/api/placeholder/100/100",
+  },
 ];
 
+
+const scrollVariants: Variants = {
+  animate: {
+    x: ["0%", "-100%"],
+    transition: {
+      repeat: Infinity,
+      repeatType: "loop" as const, // Ensure proper type
+      duration: 10,
+      ease: "linear",
+    },
+  },
+};
+
+
 const Saying = () => {
-    const [currentIndex, setCurrentIndex] = useState(0);
-
-    useEffect(() => {
-        const interval = setInterval(() => {
-            setCurrentIndex((prevIndex) => 
-                prevIndex === testimonials.length - 1 ? 0 : prevIndex + 1
-            );
-        }, 8000);
-
-    return () => clearInterval(interval);
-  }, []);
-
   return (
     <div className="w-full px-4 py-16 bg-gradient-to-b from-purple-50 to-white">
       <div className="max-w-6xl mx-auto">
         <h2 className="mb-4 text-3xl font-bold text-center md:text-4xl">
-          Don't take our word for it
+          Don’t Rely on Our Claims Alone
         </h2>
         <p className="mb-12 text-center text-gray-600">
-          See what our community is saying
+          Explore Feedback from Our Valued Community
         </p>
 
-        <div className="relative overflow-hidden">
-          <div className="absolute inset-0 z-10" />
-          
+        {/* Testimonials Carousel */}
+        <div className="relative w-full overflow-hidden">
           <motion.div
-            className="flex gap-6 py-8"
-            animate={{
-              x: [`0%`, `-${(currentIndex + 1) * 100}%`]
-            }}
-            transition={{
-              duration: 22,
-              ease: "linear"
-            }}
+            className="flex gap-6"
+            variants={scrollVariants}
+            animate="animate"
           >
             {[...testimonials, ...testimonials].map((testimonial, idx) => (
               <motion.div
                 key={`${testimonial.id}-${idx}`}
                 className="min-w-[350px] md:min-w-[400px] bg-white rounded-2xl p-6 shadow-lg hover:shadow-xl transition-shadow"
                 whileHover={{ scale: 1.02 }}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: idx * 0.1 }}
               >
+                {/* Avatar + Name */}
                 <div className="flex items-start gap-4 mb-4">
                   <div className="relative">
-                    <img 
-                        src={testimonial.avatarUrl} 
-                        alt={testimonial.author}
-                        className="object-cover w-12 h-12 rounded-full"
+                    <img
+                      src={testimonial.avatarUrl}
+                      alt={testimonial.author}
+                      className="object-cover w-12 h-12 rounded-full"
                     />
                     <div className="absolute p-1 bg-purple-500 rounded-full -bottom-2 -right-2">
                       <Quote className="w-3 h-3 text-white" />
@@ -123,6 +125,7 @@ const Saying = () => {
                   </div>
                 </div>
 
+                {/* Testimonial Content */}
                 <div className="relative">
                   <Quote className="absolute w-8 h-8 text-purple-100 -top-2 -left-2" />
                   <p className="relative z-10 pl-4 text-gray-700">
@@ -130,6 +133,7 @@ const Saying = () => {
                   </p>
                 </div>
 
+                {/* Decorative Gradient Icons */}
                 <div className="flex justify-end mt-4">
                   <div className="flex -space-x-2">
                     {[...Array(3)].map((_, i) => (
@@ -143,20 +147,6 @@ const Saying = () => {
               </motion.div>
             ))}
           </motion.div>
-
-          <div className="absolute flex gap-2 transform -translate-x-1/2 bottom-4 left-1/2">
-            {testimonials.map((_, idx) => (
-              <button
-                key={idx}
-                onClick={() => setCurrentIndex(idx)}
-                className={`w-2 h-2 rounded-full transition-all ${
-                  currentIndex === idx 
-                    ? 'bg-purple-500 w-4' 
-                    : 'bg-purple-200'
-                }`}
-              />
-            ))}
-          </div>
         </div>
       </div>
     </div>
