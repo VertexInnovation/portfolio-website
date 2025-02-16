@@ -41,19 +41,15 @@ interface Event {
   speakers: { name: string; role: string; designation: string }[];
 }
 
-const app = initializeApp(firebaseConfig);
-const firestore = getFirestore(app);
 
 const EventDetail = () => {
   const [eventDetail, setEventDetail] = useState<Event | null>(null);
 
-  const eventid = useParams<{ id: string }>().id;
+  const { id: eventid } = useParams<{ id: string }>();
   const navigate = useNavigate();
 
   const app = initializeApp(firebaseConfig);
   const firestore = getFirestore(app);
-
-  const { id: eventid } = useParams<{ id: string }>();
 
 
   function convertTimestampToDate(seconds: number, nanoseconds: number): Date {
