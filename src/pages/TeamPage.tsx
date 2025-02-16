@@ -4,7 +4,7 @@ import vishnu from '../assets/team/Vishnu.jpg';
 import giri from '../assets/team/giridharan.jpg';
 import Swayam from '../assets/team/Swayam.jpg';
 import Aashik from '../assets/team/MohammedAashik.jpeg';
-import alwin from '../assets/team/Alwin.jpg';
+import alwin from '../assets/team/alwin.jpg';
 import karunya from '../assets/team/studentHeads/karunya.jpeg';
 
 import Smitha from '../assets/team/studentHeads/SmithaGladius.jpg';

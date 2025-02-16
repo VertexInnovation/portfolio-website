@@ -27,7 +27,7 @@ const University = () => {
   ];
 
   return (
-    <div className="w-full px-4 py-8 mx-auto max-w-7xl">
+    <div className="w-full px-2 py-16 mx-auto max-w-7xl">
       <h2 className="mb-8 text-2xl font-semibold text-center text-gray-800">
         OUR COMMUNITY MEMBERS COME FROM
       </h2>
