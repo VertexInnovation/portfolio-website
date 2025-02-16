@@ -6,17 +6,14 @@ import {
   Briefcase, Users, Calendar, LineChart
 } from "lucide-react";
 import { Card, CardContent } from "../../app/components/ui/card";
-
 interface UserProfile {
   picture?: string;
   name?: string;
   email?: string;
 }
-
 const Profile = () => {
   const navigate = useNavigate();
   const [userProfile, setUserProfile] = useState<UserProfile | null>(null);
-
   useEffect(() => {
     const storedAuth = localStorage.getItem("vertex_auth");
     if (storedAuth) {
@@ -26,34 +23,30 @@ const Profile = () => {
       }
     }
   }, []);
-
   const handleLogout = () => {
     localStorage.removeItem("vertex_auth");
     navigate("/");
   };
-
   const stats = [
     { icon: Briefcase, label: "Projects", value: "12", color: "bg-blue-500" },
     { icon: Users, label: "Teams", value: "5", color: "bg-purple-500" },
     { icon: Calendar, label: "Tasks", value: "148", color: "bg-pink-500" }
   ];
-
   return (
     <div className="min-h-screen bg-gray-50">
       {/* Top Navigation Bar */}
       <div className="fixed top-0 left-0 right-0 z-10 bg-white border-b shadow">
         <div className="flex items-center justify-between h-16 px-6">
-          <div className="text-xl font-semibold text-gray-900">Vertex</div>
+          <div className="text-xl font-semibold text-gray-900"></div>
           <button
             onClick={handleLogout}
-            className="flex items-center px-4 py-2 text-sm text-gray-600 transition bg-gray-100 rounded-lg hover:bg-gray-200"
+            className="flex items-center px-3 py-2 text-sm text-gray-600 transition bg-gray-100 rounded-lg hover:bg-gray-200"
           >
-            <LogOut size={16} className="mr-2" />
+            <LogOut size={14} className="mr-2" />
             Sign Out
           </button>
         </div>
       </div>
-
       {/* Main Content */}
       <div className="pt-16">
         {/* Profile Header */}
@@ -94,7 +87,6 @@ const Profile = () => {
             </div>
           </div>
         </div>
-
         {/* Content Grid */}
         <div className="max-w-6xl px-6 mx-auto mt-24">
           {/* Stats Cards */}
@@ -121,7 +113,6 @@ const Profile = () => {
               </Card>
             ))}
           </div>
-
           {/* Main Grid */}
           <div className="grid grid-cols-1 gap-8 mb-8 lg:grid-cols-3">
             {/* Left Column */}
@@ -146,7 +137,6 @@ const Profile = () => {
                 </CardContent>
               </Card>
             </div>
-
             {/* Right Column */}
             <div className="space-y-6 lg:col-span-2">
               <Card>
@@ -185,5 +175,4 @@ const Profile = () => {
     </div>
   );
 };
-
 export default Profile;

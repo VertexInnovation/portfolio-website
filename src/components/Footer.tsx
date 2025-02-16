@@ -166,8 +166,8 @@ const EVENTS = [
 
 const CONTACT_INFO = [
   { icon: MapPin, label: 'Chennai, Tamil Nadu, India' },
-  { icon: Phone, label: '+91 (123) 456-7890' },
-  { icon: Mail, label: 'hello@vertex.edu' },
+  { icon: Phone, label: '+91 93458 88323' },
+  { icon: Mail, label: 'support@vertextech.org' },
 ];
 
 const LEGAL_LINKS = [

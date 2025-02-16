@@ -11,14 +11,12 @@ interface ParticleProps {
 
 const Particle = ({ x, y, mouseX, mouseY }: ParticleProps) => {
   const controls = useAnimation();
-  
-  // Memoize the distance calculation
+
   const distance = useMemo(() => {
     if (mouseX === null || mouseY === null) return 0;
     return Math.sqrt(Math.pow(mouseX - x, 2) + Math.pow(mouseY - y, 2));
   }, [x, y, mouseX, mouseY]);
 
-  // Memoize color calculation
   const color = useMemo(() => {
     const maxDistance = 200;
     const intensity = Math.max(0, 1 - distance / maxDistance);
@@ -27,7 +25,7 @@ const Particle = ({ x, y, mouseX, mouseY }: ParticleProps) => {
 
   useEffect(() => {
     if (mouseX === null || mouseY === null) return;
-    
+
     const attraction = Math.min(100, Math.max(0, 100 - distance));
     const targetX = x + (mouseX - x) / (10 + distance * 0.1);
     const targetY = y + (mouseY - y) / (10 + distance * 0.1);
@@ -37,11 +35,11 @@ const Particle = ({ x, y, mouseX, mouseY }: ParticleProps) => {
       y: targetY,
       scale: 1 + attraction * 0.01,
       transition: {
-        type: "spring",
+        type: 'spring',
         stiffness: 100,
         damping: 30,
         mass: 1,
-      }
+      },
     });
   }, [mouseX, mouseY, distance, x, y, controls]);
 
@@ -58,15 +56,20 @@ const Particle = ({ x, y, mouseX, mouseY }: ParticleProps) => {
   );
 };
 
-const InteractiveBackground = ({ mouseX, mouseY }: { mouseX: number | null, mouseY: number | null }) => {
-  // Memoize particle generation
+const InteractiveBackground = ({
+  mouseX,
+  mouseY,
+}: {
+  mouseX: number | null;
+  mouseY: number | null;
+}) => {
   const particles = useMemo(() => {
-    const spacing = 120; // Increased spacing for better performance
+    const spacing = 120;
     const rows = Math.floor(window.innerHeight / spacing);
     const cols = Math.floor(window.innerWidth / spacing);
-    const maxParticles = 40; // Reduced for better performance
+    const maxParticles = 40;
     const newParticles = [];
-    
+
     for (let i = 0; i < Math.min(rows, Math.sqrt(maxParticles)); i++) {
       for (let j = 0; j < Math.min(cols, Math.sqrt(maxParticles)); j++) {
         newParticles.push({
@@ -82,7 +85,6 @@ const InteractiveBackground = ({ mouseX, mouseY }: { mouseX: number | null, mous
   return (
     <div className="absolute inset-0">
       <div className="absolute inset-0 bg-gradient-to-br from-blue-50 via-purple-50 to-blue-50">
-        {/* Enhanced gradient overlay */}
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(99,102,241,0.1),rgba(99,102,241,0)_50%)]" />
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_80%_20%,rgba(192,132,252,0.1),rgba(192,132,252,0)_50%)]" />
       </div>
@@ -104,14 +106,13 @@ const HeroSection = () => {
     x: number | null;
     y: number | null;
   }
-  
+
   const [mousePos, setMousePos] = useState<MousePosition>({ x: null, y: null });
   const sectionRef = useRef<HTMLDivElement>(null);
-  
-  // Throttle mouse move updates
+
   const handleMouseMove = useCallback((e: MouseEvent) => {
     if (!sectionRef.current) return;
-    
+
     const rect = sectionRef.current.getBoundingClientRect();
     setMousePos({
       x: e.clientX - rect.left,
@@ -120,15 +121,15 @@ const HeroSection = () => {
   }, []);
 
   useEffect(() => {
-    let timeoutId: number | null | undefined;
-    
+    let timeoutId: ReturnType<typeof setTimeout> | null = null;
+
     const throttledMouseMove = (e: MouseEvent) => {
       if (timeoutId) return;
-      
+
       timeoutId = setTimeout(() => {
         handleMouseMove(e);
         timeoutId = null;
-      }, 16); // ~60fps
+      }, 16);
     };
 
     window.addEventListener('mousemove', throttledMouseMove);
@@ -141,7 +142,7 @@ const HeroSection = () => {
   return (
     <section ref={sectionRef} className="relative overflow-hidden">
       <InteractiveBackground mouseX={mousePos.x} mouseY={mousePos.y} />
-      
+
       <div className="container relative flex items-center justify-center min-h-screen px-4 mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -152,14 +153,15 @@ const HeroSection = () => {
           <motion.div
             className="absolute w-64 h-64 rounded-full"
             style={{
-              background: "radial-gradient(circle, rgba(96, 165, 250, 0.2) 0%, transparent 70%)",
+              background:
+                'radial-gradient(circle, rgba(96, 165, 250, 0.2) 0%, transparent 70%)',
               x: mousePos.x ? mousePos.x - 128 : 0,
               y: mousePos.y ? mousePos.y - 128 : 0,
             }}
-            transition={{ type: "spring", damping: 30 }}
+            transition={{ type: 'spring', damping: 30 }}
           />
-          
-          <motion.h1 
+
+          <motion.h1
             initial={{ scale: 0.9 }}
             animate={{ scale: 1 }}
             transition={{ duration: 0.5 }}
@@ -167,11 +169,12 @@ const HeroSection = () => {
           >
             Where Tech Meets
             <span className="text-transparent transition-all duration-500 ease-in-out bg-gradient-to-r from-blue-600 via-purple-600 to-blue-600 bg-clip-text hover:from-purple-600 hover:via-blue-600 hover:to-purple-600">
-              {' '}Entertainment
+              {' '}
+              Entertainment
             </span>
           </motion.h1>
-          
-          <motion.p 
+
+          <motion.p
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.2, duration: 0.8 }}
@@ -179,8 +182,8 @@ const HeroSection = () => {
           >
             Connect with students across colleges, participate in hackathons, and unlock exciting opportunities - all while having fun!
           </motion.p>
-          
-          <motion.div 
+
+          <motion.div
             initial={{ y: 20, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             transition={{ delay: 0.4, duration: 0.8 }}

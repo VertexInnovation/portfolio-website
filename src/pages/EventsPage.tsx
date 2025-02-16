@@ -3,31 +3,27 @@ import { Calendar, Clock, MapPin, ArrowRight, Users } from "lucide-react";
 import verteximg from "../assets/vertexhacks.jpeg";
 import { collection, getDocs, getFirestore } from "firebase/firestore";
 import { initializeApp } from "firebase/app";
-import { firebaseConfig } from "../api/firebase/route.js";
+import { firebaseConfig } from "../api/firebase/route";
 import { useState, useEffect } from "react";
-
+import "../App.tsx";
 const app = initializeApp(firebaseConfig);
 const firestore = getFirestore(app);
-
 interface FirebaseTimestamp {
   seconds: number;
   nanoseconds: number;
   toDate: () => Date;
 }
-
 interface ScheduleItem {
   time: FirebaseTimestamp | string;
   title: string;
   description: string;
 }
-
 interface Speaker {
   name: string;
   role: string;
   company: string;
   image: string;
 }
-
 interface Event {
   id: string;
   title: string;
@@ -42,10 +38,8 @@ interface Event {
   Schedule: ScheduleItem[];
   speakers: Speaker[];
 }
-
 const EventsPage = () => {
   const [eventsDetail, setEventsDetail] = useState<Event[]>([]);
-
   useEffect(() => {
     const fetchEvents = async () => {
       try {
@@ -59,15 +53,12 @@ const EventsPage = () => {
         console.error("Error fetching events:", error);
       }
     };
-
     fetchEvents();
   }, []);
-
   function convertTimestampToDate(seconds: number, nanoseconds: number): Date {
     const milliseconds = seconds * 1000 + nanoseconds / 1000000;
     return new Date(milliseconds);
   }
-
   const EventCard = ({ event }: { event: Event }) => {
     return (
       <div className="group relative overflow-hidden bg-white/5 backdrop-blur-md rounded-2xl transition-all duration-300 hover:shadow-2xl">
@@ -76,7 +67,6 @@ const EventsPage = () => {
             {event?.category}
           </span>
         </div>
-
         <div className="relative aspect-[16/9] overflow-hidden">
           <img
             src={event.img_src}
@@ -85,45 +75,35 @@ const EventsPage = () => {
           />
           <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
         </div>
-
         <div className="p-6">
           <h3 className="mb-3 text-2xl font-bold text-white">{event.title}</h3>
           <p className="mb-4 text-gray-300">{event.description}</p>
-
           <div className="space-y-2">
             <div className="flex items-center text-gray-300">
               <Calendar size={18} className="mr-2" />
               <span>{event.date}</span>
             </div>
-
             <div className="flex items-center text-gray-300">
-              <Clock size={18} className="mr-2" />
-              <span>
-                {new Date(
-                  convertTimestampToDate(
-                    event?.time?.seconds,
-                    event?.time?.nanoseconds
-                  )
-                ).toLocaleDateString("en-US", {
-                  weekday: "long",
-                  year: "numeric",
-                  month: "long",
-                  day: "numeric",
-                })}
-              </span>
-            </div>
+  <Clock size={18} className="mr-2" />
+  <span>
+    {new Date(event.time).toLocaleDateString("en-US", {
+      weekday: "long",
+      year: "numeric",
+      month: "long",
+      day: "numeric",
+    })}
+  </span>
+</div>
 
             <div className="flex items-center text-gray-300">
               <MapPin size={18} className="mr-2" />
               <span>{event.location}</span>
             </div>
-
             <div className="flex items-center text-gray-300">
               <Users size={18} className="mr-2" />
               <span>{event.attendees} Attendees</span>
             </div>
           </div>
-
           <Link
             to={`/events/${event.id}`}
             className="inline-flex items-center w-full px-6 py-3 mt-6 font-medium text-center text-white transition-all duration-300 bg-blue-600 rounded-lg hover:bg-blue-700"
@@ -135,7 +115,6 @@ const EventsPage = () => {
       </div>
     );
   };
-
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-900 via-blue-900 to-blue-800">
       <div className="container px-4 py-16 mx-auto">
@@ -147,7 +126,6 @@ const EventsPage = () => {
             Join us for exciting events that shape the future of technology
           </p>
         </div>
-
         <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
           {eventsDetail.length > 0 ? (
             eventsDetail.map((event) => (
@@ -161,5 +139,4 @@ const EventsPage = () => {
     </div>
   );
 };
-
 export default EventsPage;

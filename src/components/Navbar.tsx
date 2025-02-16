@@ -140,10 +140,13 @@ const Navbar = () => {
       }`}
     >
       <div className="container flex items-center justify-between px-4 py-4 mx-auto max-w-7xl">
-      {/* Logo */}
-      <Link to="/" className="text-xl font-bold text-blue-600">
-        
-      </Link>
+      {/* Logo with "Vertex" Text */}
+<Link to="/" className="text-xl font-bold">
+  <span className="text-transparent transition-all duration-500 ease-in-out bg-gradient-to-r from-blue-600 via-purple-600 to-blue-600 bg-clip-text hover:from-purple-600 hover:via-blue-600 hover:to-purple-600">
+    {' '}Vertex
+  </span>
+</Link>
+
 
       {/* Desktop Menu */}
       <ul className="items-center hidden space-x-8 lg:flex">
@@ -282,7 +285,9 @@ const Navbar = () => {
             >
               Login
             </button>
-            <button className="w-full py-2 font-medium text-white transition-colors bg-blue-600 rounded-lg hover:bg-blue-700">
+            <button 
+            onClick={() => navigate("./signup")}
+            className="w-full py-2 font-medium text-white transition-colors bg-blue-600 rounded-lg hover:bg-blue-700">
               Sign Up
             </button>
             </div>
