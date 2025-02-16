@@ -1,5 +1,5 @@
 import { Calendar, Clock, MapPin, Users, ArrowLeft } from "lucide-react";
-import { Link , useNavigate} from "react-router-dom";
+import { Link } from "react-router-dom";
 // import verteximg from "../assets/vertexHack.jpg";
 import { useState, useEffect } from "react";
 import srinivasan from "../assets/srinivas.jpg";
@@ -46,15 +46,7 @@ const firestore = getFirestore(app);
 
 const EventDetail = () => {
   const [eventDetail, setEventDetail] = useState<Event | null>(null);
-
-  const eventid = useParams<{ id: string }>().id;
-  const navigate = useNavigate();
-
-  const app = initializeApp(firebaseConfig);
-  const firestore = getFirestore(app);
-
   const { id: eventid } = useParams<{ id: string }>();
-
 
   function convertTimestampToDate(seconds: number, nanoseconds: number): Date {
     const milliseconds = seconds * 1000 + nanoseconds / 1000000;
@@ -256,14 +248,14 @@ const EventDetail = () => {
                 </button>
               </a>
 
-              <div className="space-y-6">
-            <div className="p-6 bg-white/10 backdrop-blur-md rounded-2xl">
-              <button
-                onClick={() => navigate("/submissions")} // Changed to navigate to submissions
-                className="w-full px-6 py-3 font-medium text-white transition-all duration-300 border border-gray-600 rounded-lg hover:bg-white/5"
-              >
-                Submit Project
-              </button>
+              <div className="flex gap-4">
+                <button
+                  onClick={() => alert("Coming soon!")}
+                  className="flex items-center justify-center w-full px-4 py-2 text-gray-300 transition-all duration-300 border border-gray-600 rounded-lg hover:bg-white/5"
+                >
+                  Submit Project
+                </button>
+              </div>
             </div>
 
             {/* Speakers */}
@@ -277,9 +269,7 @@ const EventDetail = () => {
             </div>
           </div>
         </div>
-      </div>  
-    </div>
-    </div>
+      </div>
     </div>
   );
 };
