@@ -6,7 +6,7 @@ import Swayam from '../assets/team/Swayam.jpg';
 import Aashik from '../assets/team/MohammedAashik.jpeg';
 import alwin from '../assets/team/alwin.jpg';
 import karunya from '../assets/team/studentHeads/karunya.jpeg';
-
+import harini from '../assets/team/studentHeads/Harini.jpeg';
 import Smitha from '../assets/team/studentHeads/SmithaGladius.jpg';
 const TeamPage = () => {
   const [selectedMember, setSelectedMember] = useState<typeof teamMembers[0] | null>(null);
@@ -57,22 +57,31 @@ const TeamPage = () => {
       email: 'management@vertextech.org'
     },
     {
-      name: 'Alwin',
+      name: 'Alwin Nithish R',
       designation: 'Cheif Vision Officer',
       image: alwin,
-      bio: 'John brings over a decade of marketing experience, specializing in digital strategies and brand development. His innovative approach helps drive our market presence.',
-      linkedin: 'https://www.linkedin.com/in/john-smith',
-      instagram: 'https://www.instagram.com/johnsmith',
-      email: 'marketing@vertextech.org'
+      bio: 'Alwin brings innovative vision and strategic thinking to Vertex Tech. His creative approach helps shape our future direction and technological initiatives.',
+      linkedin: 'https://www.linkedin.com/in/alwin-nithish-r-a78046252',
+      instagram: 'https://www.instagram.com/ransyverse',
+      email: 'alwinnithishr@gmail.com'
     },
     {
-      name: 'Sarah Johnson',
+      name: 'Karunya',
       designation: 'Student Coordinator',
       image: karunya,
       bio: 'Sarah leads our UX design team with expertise in creating intuitive and engaging user experiences. Her creative vision helps shape our product design strategy.',
       linkedin: 'https://www.linkedin.com/in/sarah-johnson',
       instagram: 'https://www.instagram.com/sarahj.design',
       email: 'design@vertextech.org'
+    },
+    {
+      name: 'Harini Karthikeyan',
+      designation: 'Student Coordinator',
+      image: harini,
+      bio: 'Harini is a dedicated student coordinator who brings energy and fresh perspectives to our team. Her commitment to excellence helps foster collaboration and growth.',
+      linkedin: 'https://www.linkedin.com/in/harini-karthikeyan-841b8928b/',
+      instagram: 'https://www.instagram.com/conte.de.fees_14',
+      email: 'harinikk.863@gmail.com'
     }
   ];
   

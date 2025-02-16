@@ -1,6 +1,15 @@
 import { useEffect, useState } from 'react';
-import ashik from '../../assets/team/MohammedAashik.jpeg';
-
+import vishnu from '../../assets/team/Vishnu.jpg';
+import giri from '../../assets/team/giridharan.jpg';
+import Swayam from '../../assets/team/Swayam.jpg';
+import Aashik from '../../assets/team/MohammedAashik.jpeg';
+import alwin from '../../assets/team/alwin.jpg';
+import karunya from '../../assets/team/studentHeads/karunya.jpeg';
+import harini from '../../assets/team/studentHeads/Harini.jpeg';
+import Smitha from '../../assets/team/studentHeads/SmithaGladius.jpg';
+import Ramana from '../../assets/team/studentHeads/ramana.jpg';
+import Monish from '../../assets/team/studentHeads/monish.jpg';
+import Abinav from '../../assets/team/studentHeads/Abhinavanagarajan.jpg';
 const HeroSection = () => {
   const [rows, setRows] = useState([
     { photos: [], key: 1 },
@@ -8,11 +17,26 @@ const HeroSection = () => {
   ]);
 
   useEffect(() => {
-    // Create an array with enough duplicates to fill the screen width
-    const basePhotos = Array(20).fill(ashik);
+    const allPhotos = [vishnu, giri, Swayam, Aashik, alwin, karunya, harini, Smitha, Ramana, Monish, Abinav];
+    
+    // Function to shuffle array
+    const shuffleArray = (array: string[]) => {
+      const shuffled = [...array];
+      for (let i = shuffled.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+      }
+      return shuffled;
+    };
+
+    // Create arrays with repeated shuffled photos to fill the screen width
+    const repeatedPhotos = Array(3).fill(allPhotos).flat();
+    const shuffledPhotos1 = shuffleArray([...repeatedPhotos]);
+    const shuffledPhotos2 = shuffleArray([...repeatedPhotos]);
+
     setRows([
-      { photos: [...basePhotos], key: 1 },
-      { photos: [...basePhotos], key: 2 }
+      { photos: shuffledPhotos1, key: 1 },
+      { photos: shuffledPhotos2, key: 2 }
     ]);
   }, []);
 
