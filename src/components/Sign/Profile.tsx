@@ -1,10 +1,6 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { 
-  LogOut, Mail, MapPin, 
-  Camera, Activity, Settings, ChevronRight,
-  Briefcase, Users, Calendar, LineChart
-} from "lucide-react";
+import { LogOut, Mail, MapPin, Camera, Activity, Settings, ChevronRight, Briefcase, Users, Calendar, LineChart } from "lucide-react";
 import { Card, CardContent } from "../../app/components/ui/card";
 interface UserProfile {
   picture?: string;

@@ -1,4 +1,3 @@
-import { useEffect, useState } from "react";
 import { Variants, motion } from "framer-motion";
 import { Quote } from "lucide-react";
 

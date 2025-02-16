@@ -4,6 +4,7 @@ import StatsSection from '../components/LandingPageComponents/StatsSection';
 import FAQsSection from '../components/LandingPageComponents/FAQsSection';
 import AboutSection from '../components/LandingPageComponents/AboutSection';
 import Saying from '../components/LandingPageComponents/Saying';
+import NewsletterSection from '../components/LandingPageComponents/NewsletterSection';
 const LandingPage = () => {
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 to-purple-50">
@@ -13,6 +14,7 @@ const LandingPage = () => {
       <Saying />
       <FAQsSection />
       <AboutSection />
+      <NewsletterSection />
     </div>
     
   );
