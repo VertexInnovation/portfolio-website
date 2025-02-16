@@ -12,6 +12,7 @@ import VertexInnovateHack from './pages/VertexInnovateHack';
 import ForgotPassword from './components/Sign/ForgotPassword';
 import Profile from './components/Sign/Profile';
 import ErrorBoundary from './components/ErrorBoundary.tsx';
+import Submissions from "./pages/Submissions";
 import { GoogleOAuthProvider } from '@react-oauth/google'; // Import GoogleOAuthProvider
 
 function App() {
@@ -37,7 +38,11 @@ function App() {
               <Route path="/forgot-password" element={<ForgotPassword />} />
               <Route path="*" element={<h1>404 Not Found</h1>} />
               <Route path="/vertexinnovate" element={<VertexInnovateHack />} />
+
+              <Route path="/submissions" element={<Submissions />} />
+
               <Route path= "/community" element={<Community />} />
+
             </Routes>
           </main>
           <Footer />
