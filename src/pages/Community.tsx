@@ -8,7 +8,7 @@ import TeamGrid from "../components/CommunityComponents/TeamGrid";
 import Saying from "../components/CommunityComponents/Saying";
 const Community = () => {
   return (
-    <div className="bg-gray-50">
+    <div className="bg-gradient-to-br from-gray-900 via-blue-900 to-blue-800">
       <HeroSection />
       <FeatureCards />
       {/* <VideoShowcase /> */}

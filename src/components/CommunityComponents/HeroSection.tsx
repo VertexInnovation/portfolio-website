@@ -12,6 +12,8 @@ import Smitha from '../../assets/team/studentHeads/SmithaGladius.jpg';
 import Ramana from '../../assets/team/studentHeads/ramana.jpg';
 import Monish from '../../assets/team/studentHeads/monish.jpg';
 import Abinav from '../../assets/team/studentHeads/Abhinavanagarajan.jpg';
+import Andrew from '../../assets/team/studentHeads/Andrew.png';
+import Subadevan from '../../assets/team/studentHeads/subadevan.jpg';
 const HeroSection = () => {
   const [rows, setRows] = useState([
     { photos: [], key: 1 },
@@ -19,7 +21,7 @@ const HeroSection = () => {
   ]);
 
   useEffect(() => {
-    const allPhotos = [vishnu, giri, Swayam, Aashik, alwin, karunya, harini, Smitha, Ramana, Monish, Abinav];
+    const allPhotos = [vishnu, giri, Swayam, Aashik, alwin, karunya, harini, Smitha, Ramana, Monish, Abinav, Andrew, Subadevan];
     
     const shuffleArray = (array: string[]) => {
       const shuffled = [...array];
@@ -55,12 +57,11 @@ const HeroSection = () => {
       { photos: shuffledPhotos2, key: 2 }
     ]);
   }, []);
-
   return (
     <motion.div 
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
-      className="relative flex flex-col items-center w-full min-h-screen overflow-hidden bg-gradient-to-b from-white to-gray-50"
+      className="relative flex flex-col items-center w-full min-h-screen overflow-hidden "
     >
       <div className="absolute inset-0 bg-grid-pattern opacity-5" />
       
@@ -112,21 +113,21 @@ const HeroSection = () => {
         transition={{ delay: 0.2 }}
         className="relative max-w-4xl px-6 py-16 mx-auto text-center"
       >
-        <div className="absolute bg-blue-200 rounded-full w-72 h-72 blur-3xl opacity-20 -top-20 -left-20" />
-        <div className="absolute bg-purple-200 rounded-full w-72 h-72 blur-3xl opacity-20 -bottom-20 -right-20" />
+        <div className="absolute rounded-full bg-blue-600/20 w-72 h-72 blur-3xl opacity-20 -top-20 -left-20" />
+        <div className="absolute rounded-full bg-purple-600/20 w-72 h-72 blur-3xl opacity-20 -bottom-20 -right-20" />
         
-        <h1 className="mb-6 text-4xl font-extrabold tracking-tight text-gray-900 md:text-6xl">
+        <h1 className="mb-6 text-4xl font-extrabold tracking-tight text-white md:text-6xl">
           Join India's
           <span className="relative">
-            <span className="relative z-10 px-2 text-transparent bg-gradient-to-r from-blue-600 via-purple-600 to-blue-600 bg-clip-text">
+            <span className="relative z-10 px-2 text-transparent bg-gradient-to-r from-blue-400 via-purple-400 to-blue-400 bg-clip-text">
               smartest
             </span>
-            <div className="absolute bottom-0 left-0 w-full h-3 bg-blue-200 opacity-30 -rotate-2" />
+            <div className="absolute bottom-0 left-0 w-full h-3 bg-blue-600/20 opacity-30 -rotate-2" />
           </span>
           student community
         </h1>
         
-        <p className="max-w-2xl mx-auto mb-8 text-lg leading-relaxed text-gray-600 md:text-xl">
+        <p className="max-w-2xl mx-auto mb-8 text-lg leading-relaxed text-gray-300 md:text-xl">
           Join niche clubs, interact with experts, explore, network with high-profile and ambitious individuals, get internships, and join India's largest community all for free!
         </p>
 
@@ -172,8 +173,8 @@ const HeroSection = () => {
         }
 
         .bg-grid-pattern {
-          background-image: linear-gradient(to right, #e5e7eb 1px, transparent 1px),
-                          linear-gradient(to bottom, #e5e7eb 1px, transparent 1px);
+          background-image: linear-gradient(to right, rgba(255,255,255,0.1) 1px, transparent 1px),
+                          linear-gradient(to bottom, rgba(255,255,255,0.1) 1px, transparent 1px);
           background-size: 24px 24px;
         }
       `}</style>

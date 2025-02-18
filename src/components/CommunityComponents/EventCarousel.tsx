@@ -118,7 +118,7 @@ const EventCarousel = () => {
             onClick={prevSlide}
             whileHover={{ scale: 1.1 }}
             whileTap={{ scale: 0.9 }}
-            className="absolute left-0 p-2 transition-all duration-300 -translate-y-1/2 bg-white rounded-full shadow-lg top-1/2 -left-4 lg:-left-8 hover:shadow-xl hover:bg-gray-50"
+            className="absolute p-2 transition-all duration-300 -translate-y-1/2 bg-white rounded-full shadow-lg top-1/2 -left-4 lg:-left-8 hover:shadow-xl hover:bg-gray-50"
           >
             <ChevronLeft className="w-6 h-6 text-gray-800" />
           </motion.button>
@@ -127,7 +127,7 @@ const EventCarousel = () => {
             onClick={nextSlide}
             whileHover={{ scale: 1.1 }}
             whileTap={{ scale: 0.9 }}
-            className="absolute right-0 p-2 transition-all duration-300 -translate-y-1/2 bg-white rounded-full shadow-lg top-1/2 -right-4 lg:-right-8 hover:shadow-xl hover:bg-gray-50"
+            className="absolute p-2 transition-all duration-300 -translate-y-1/2 bg-white rounded-full shadow-lg top-1/2 -right-4 lg:-right-8 hover:shadow-xl hover:bg-gray-50"
           >
             <ChevronRight className="w-6 h-6 text-gray-800" />
           </motion.button>

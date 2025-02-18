@@ -36,16 +36,16 @@ const FeatureCards = () => {
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: index * 0.1 }}
             whileHover={{ y: -5, scale: 1.02 }}
-            className="p-6 transition-all duration-300 bg-white border border-gray-100 shadow-lg group rounded-2xl hover:shadow-xl hover:border-blue-100"
+            className="p-6 transition-all duration-300 bg-blue-800 border border-blue-600 shadow-lg group rounded-2xl hover:shadow-xl hover:shadow-blue-400/20"
           >
             <motion.div 
-              className="mb-4 text-4xl text-blue-500 transition-colors duration-300 group-hover:text-blue-600"
+              className="mb-4 text-4xl text-blue-300 transition-colors duration-300 group-hover:text-blue-200"
               whileHover={{ scale: 1.1, rotate: 5 }}
             >
               {feature.icon}
             </motion.div>
-            <h3 className="text-lg font-semibold text-gray-900">{feature.title}</h3>
-            <p className="mt-2 leading-relaxed text-gray-600">{feature.description}</p>
+            <h3 className="text-lg font-semibold text-blue-100">{feature.title}</h3>
+            <p className="mt-2 leading-relaxed text-blue-200">{feature.description}</p>
           </motion.div>
         ))}
       </div>

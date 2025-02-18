@@ -66,7 +66,7 @@ const TeamPage = () => {
       email: 'alwinnithishr@gmail.com'
     },
     {
-      name: 'Karunya',
+      name: 'LN Karunya',
       designation: 'Student Coordinator',
       image: karunya,
       bio: 'Sarah leads our UX design team with expertise in creating intuitive and engaging user experiences. Her creative vision helps shape our product design strategy.',
