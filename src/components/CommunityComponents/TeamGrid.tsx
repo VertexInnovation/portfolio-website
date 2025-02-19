@@ -1,9 +1,11 @@
 import { motion } from "framer-motion";
 import shifan from "../../assets/team/studentHeads/Shifan.jpg";
+import jothi from "../../assets/team/studentHeads/jothi.jpg";
+import subadevan from "../../assets/team/studentHeads/subadevan.jpg";
 const team = [
-  { name: "Shifan", role: "Community Manager", image: shifan },
-  { name: "Rohit K.", role: "Tech Lead", image: "/images/team/rohit.jpg" },
-  { name: "Sneha R.", role: "Event Coordinator", image: "/images/team/sneha.jpg" },
+  { name: "Shifan", role: "Ambassador", image: shifan },
+  { name: "Jothi", role: "Ambassador", image: jothi },
+  { name: "Subadevan", role: "Ambassador", image: subadevan },
 ];
 const TeamGrid = () => {
   return (
