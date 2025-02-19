@@ -39,6 +39,7 @@ const TeamGrid = () => {
         <motion.button 
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
+          onClick={() => window.open('https://forms.gle/5VW1KfU4UbKuHubJA', '_blank')}
           className="px-8 py-4 mt-8 text-lg font-semibold text-white transition-all duration-300 bg-gradient-to-r from-blue-600 to-purple-600 rounded-xl hover:shadow-xl hover:shadow-blue-500/20"
         >
           Apply as an Ambassador
