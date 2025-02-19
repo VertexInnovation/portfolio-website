@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
-
+import shifan from "../../assets/team/studentHeads/Shifan.jpg";
 const team = [
-  { name: "Ananya S.", role: "Community Manager", image: "/images/team/ananya.jpg" },
+  { name: "Shifan", role: "Community Manager", image: shifan },
   { name: "Rohit K.", role: "Tech Lead", image: "/images/team/rohit.jpg" },
   { name: "Sneha R.", role: "Event Coordinator", image: "/images/team/sneha.jpg" },
 ];
@@ -14,7 +14,7 @@ const TeamGrid = () => {
         <div className="absolute rounded-full bg-purple-600/20 w-72 h-72 blur-3xl opacity-20 -bottom-20 -right-20" />
 
         <h2 className="mb-6 text-4xl font-bold tracking-tight text-white">
-          Meet the Team
+          Meet the Ambassador
         </h2>
         <div className="grid grid-cols-1 gap-8 md:grid-cols-3">
           {team.map((member, index) => (

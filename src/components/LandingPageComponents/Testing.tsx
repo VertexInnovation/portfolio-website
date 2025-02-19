@@ -8,6 +8,7 @@ import {
   motion,
   animate,
 } from "framer-motion";
+import { Cover } from "../../components/ui/cover.tsx";
 
 const COLORS_TOP = ["#13FFAA", "#1E67C6", "#CE84CF", "#DD335C"];
 
@@ -35,11 +36,11 @@ export const Testing = () => {
       className="relative grid min-h-screen px-4 py-24 overflow-hidden text-gray-200 place-content-center bg-gray-950"
     >
       <div className="relative z-10 flex flex-col items-center">
-        <h1 className="max-w-3xl text-3xl font-medium leading-tight text-center text-transparent bg-gradient-to-br from-white to-gray-400 bg-clip-text sm:text-5xl sm:leading-tight md:text-7xl md:leading-tight">
-          Where Tech Meets<span className="text-transparent transition-all duration-500 ease-in-out bg-gradient-to-r from-blue-600 via-purple-600 to-blue-600 bg-clip-text hover:from-purple-600 hover:via-blue-600 hover:to-purple-600">
-              {' '}
-              Entertainment
-            </span>
+        <h1 className="max-w-3xl text-3xl font-medium leading-tight text-center text-transparent bg-gradient-to-br bg-clip-text sm:text-5xl sm:leading-tight md:text-7xl md:leading-tight">
+          <>Where Tech Meets
+            {' '}
+            <Cover>Entertainment</Cover>
+          </>
           
         </h1>
         <p className="max-w-xl my-6 text-base leading-relaxed text-center md:text-lg md:leading-relaxed">
