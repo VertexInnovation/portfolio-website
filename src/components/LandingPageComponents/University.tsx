@@ -1,14 +1,15 @@
 import AnnaUni from '../../assets/University/AnnaUni.jpg';
-import Amritanandamayi from '../../assets/University/Amritanandamayi.jpg';
+import Amritanandamayi from '../../assets/University/Amritanandamayi.png';
 import BitsPilani from '../../assets/University/BitsPilani.jpg';
 import ChristUni from '../../assets/University/ChristUni.jpg';
 import IITGuwahati from '../../assets/University/IITGuwahati.jpg';
 import IITIndore from '../../assets/University/IITIndore.jpg';
 import IITK from '../../assets/University/IITK.jpg';
-import IITMadras from '../../assets/University/IITMadras.jpg';
+import IITMadras from '../../assets/University/IITMadras.jpeg';
 import SathyabamaUni from '../../assets/University/SathyabamaUni.jpg';
-import SRM from '../../assets/University/SRM.jpg';
+import SRM from '../../assets/University/SRM.png';
 import VitUni from '../../assets/University/VitUni.jpg';
+
 
 
 const University = () => {
@@ -27,49 +28,51 @@ const University = () => {
   ];
 
   return (
-    <div className="w-full px-2 py-16 mx-auto max-w-7xl">
-      <h2 className="mb-8 text-2xl font-semibold text-center text-gray-800">
+    <section className="w-full px-4 py-24 text-gray-200 bg-gray-950">
+      <div className="mx-auto max-w-7xl">
+      <h2 className="mb-12 text-3xl font-medium text-center text-transparent bg-gradient-to-br from-white to-gray-400 bg-clip-text">
         OUR COMMUNITY MEMBERS COME FROM
       </h2>
       <div className="relative overflow-hidden">
         <div className="flex animate-scroll">
-          {/* First set of logos */}
-          <div className="flex mr-8 space-x-8">
-            {universities.map((university, index) => (
-              <div
-                key={index}
-                className="flex flex-col items-center justify-center flex-shrink-0"
-              >
-                <div className="flex items-center justify-center w-32 h-16 bg-white">
-                  <img
-                    src={university.logo}
-                    alt={university.alt}
-                    className="object-contain max-w-full max-h-full"
-                  />
-                </div>
-              </div>
-            ))}
+        {/* First set of logos */}
+        <div className="flex mr-8 space-x-10">
+          {universities.map((university, index) => (
+          <div
+            key={index}
+            className="flex flex-col items-center justify-center flex-shrink-0"
+          >
+            <div className="flex items-center justify-center w-40 h-20 bg-black border border-gray-800 rounded-lg ">
+            <img
+              src={university.logo}
+              alt={university.alt}
+              className="object-contain max-w-full max-h-full p-3"
+            />
+            </div>
           </div>
-          {/* Duplicate set of logos for seamless loop */}
-          <div className="flex space-x-8">
-            {universities.map((university, index) => (
-              <div
-                key={`duplicate-${index}`}
-                className="flex flex-col items-center justify-center flex-shrink-0"
-              >
-                <div className="flex items-center justify-center w-32 h-16 bg-white">
-                  <img
-                    src={university.logo}
-                    alt={university.alt}
-                    className="object-contain max-w-full max-h-full"
-                  />
-                </div>
-              </div>
-            ))}
+          ))}
+        </div>
+        {/* Duplicate set of logos for seamless loop */}
+        <div className="flex space-x-8">
+          {universities.map((university, index) => (
+          <div
+            key={`duplicate-${index}`}
+            className="flex flex-col items-center justify-center flex-shrink-0"
+          >
+            <div className="flex items-center justify-center w-32 h-16 border border-gray-800 rounded-lg bg-gray-950/50 backdrop-blur-sm">
+            <img
+              src={university.logo}
+              alt={university.alt}
+              className="object-contain max-w-full max-h-full p-2 filter brightness-200"
+            />
+            </div>
           </div>
+          ))}
+        </div>
         </div>
       </div>
-    </div>
+      </div>
+    </section>
   );
 };
 

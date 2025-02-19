@@ -6,16 +6,20 @@ import FeatureCards from "../components/CommunityComponents/FeatureCards";
 // import TestimonialCarousel from "../components/CommunityComponents/TestimonialCarousel";
 import TeamGrid from "../components/CommunityComponents/TeamGrid";
 import Saying from "../components/CommunityComponents/Saying";
+import { BackgroundBeams } from "../components/ui/background-beams.tsx";
 const Community = () => {
   return (
-    <div className="bg-gradient-to-br from-gray-900 via-blue-900 to-blue-800">
-      <HeroSection />
-      <FeatureCards />
-      {/* <VideoShowcase /> */}
-      {/* <EventCarousel /> */}
-      <Saying />
-      {/* <TestimonialCarousel /> */}
-      <TeamGrid />
+    <div className="relative bg-gradient-to-br from-gray-900 via-blue-900 to-blue-800">
+      <div className="relative z-10">
+        <HeroSection />
+        <FeatureCards />
+        {/* <VideoShowcase /> */}
+        {/* <EventCarousel /> */}
+        <Saying />
+        {/* <TestimonialCarousel /> */}
+        <TeamGrid />
+      </div>
+      <BackgroundBeams />
     </div>
   );
 };

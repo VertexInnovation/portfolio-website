@@ -14,6 +14,7 @@ import Monish from '../../assets/team/studentHeads/monish.jpg';
 import Abinav from '../../assets/team/studentHeads/Abhinavanagarajan.jpg';
 import Andrew from '../../assets/team/studentHeads/Andrew.png';
 import Subadevan from '../../assets/team/studentHeads/subadevan.jpg';
+import sanchali from '../../assets/team/studentHeads/sanchali.jpg';
 const HeroSection = () => {
   const [rows, setRows] = useState([
     { photos: [], key: 1 },
@@ -21,7 +22,7 @@ const HeroSection = () => {
   ]);
 
   useEffect(() => {
-    const allPhotos = [vishnu, giri, Swayam, Aashik, alwin, karunya, harini, Smitha, Ramana, Monish, Abinav, Andrew, Subadevan];
+    const allPhotos = [vishnu, giri, Swayam, Aashik, alwin, karunya, harini, Smitha, Ramana, Monish, Abinav, Andrew, Subadevan, sanchali];
     
     const shuffleArray = (array: string[]) => {
       const shuffled = [...array];

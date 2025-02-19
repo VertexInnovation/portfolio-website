@@ -148,8 +148,7 @@ const HeroSection = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
-          className="max-w-5xl mx-auto text-center"
-        >
+          className="max-w-5xl mx-auto text-center">
           <motion.div
             className="absolute w-64 h-64 rounded-full"
             style={{
@@ -201,3 +200,5 @@ const HeroSection = () => {
 };
 
 export default HeroSection;
+
+
