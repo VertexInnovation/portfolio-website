@@ -10,7 +10,7 @@ import harini from '../assets/team/studentHeads/Harini.jpeg';
 import Smitha from '../assets/team/studentHeads/SmithaGladius.jpg';
 import sanchali from '../assets/team/studentHeads/sanchali.jpg';
 import Andrew from '../assets/team/studentHeads/Andrew.png';
-import sakthi from '../assets/team/studentHeads/sakthi.jpg';
+// import sakthi from '../assets/team/studentHeads/Sakthi.jpg';
 import rahul from '../assets/team/studentHeads/rahul.jpg';
 import vishnupandian from '../assets/team/studentHeads/Vishnupaandian.jpg';
 import abhinavanagarajan from '../assets/team/studentHeads/Abhinavanagarajan.jpg';
@@ -136,15 +136,15 @@ const TeamPage = () => {
       email: 'harinikk.863@gmail.com'
     },
     
-    {
-      name: 'Shakthi R',
-      designation: 'Student Director',
-      image: sakthi,
-      bio: 'I am Shakthi, the Student Director and a passionate learner who thrives on leadership and collaboration. I enjoy connecting with people across different sectors, bringing fresh ideas, and contributing to impactful projects that bridge the gap between academia and industry.',
-      linkedin: 'https://www.linkedin.com/in/shakthi-r-94847a2a6?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app',
-      instagram: 'https://www.instagram.com/19_shakthi?igsh=MzRwejh6ZHFta2t2',
-      email: 'shakthirm05@gmail.com'
-    },
+    // {
+    //   name: 'Shakthi R',
+    //   designation: 'Student Director',
+    //   image: sakthi,
+    //   bio: 'I am Shakthi, the Student Director and a passionate learner who thrives on leadership and collaboration. I enjoy connecting with people across different sectors, bringing fresh ideas, and contributing to impactful projects that bridge the gap between academia and industry.',
+    //   linkedin: 'https://www.linkedin.com/in/shakthi-r-94847a2a6?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app',
+    //   instagram: 'https://www.instagram.com/19_shakthi?igsh=MzRwejh6ZHFta2t2',
+    //   email: 'shakthirm05@gmail.com'
+    // },
     {
       name: 'Andrew Sundaradhas',
       designation: 'Student Director', 

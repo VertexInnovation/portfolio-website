@@ -22,6 +22,7 @@ function App() {
   const clientId = '727346499975-g4j5a4h9chc0o0f48ir1fbhd6b4thu75.apps.googleusercontent.com'; 
 
   return (
+    
     <GoogleOAuthProvider clientId={clientId}> {/* Wrap with GoogleOAuthProvider */}
       <Router>
         <div className="flex flex-col min-h-screen">
@@ -53,6 +54,7 @@ function App() {
           <Footer />
         </div>
       </Router>
+      
     </GoogleOAuthProvider>
   );
 }
