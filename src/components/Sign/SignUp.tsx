@@ -1,7 +1,9 @@
 import { useState, ChangeEvent, FormEvent } from 'react';
 import { Link } from 'react-router-dom';
-import { Mail, Lock, User, Github, } from 'lucide-react';
-import { AiFillGoogleCircle } from 'react-icons/ai';
+import { Mail, Lock, User, Github } from 'lucide-react';
+import { GoogleLogin } from '@react-oauth/google';
+import { jwtDecode } from 'jwt-decode';
+
 
 const SignUp = () => {
   const [isSignUp, setIsSignUp] = useState(true);
@@ -25,14 +27,14 @@ const SignUp = () => {
     console.log('Form submitted:', formData);
   };
 
-  const SocialButton = ({ icon: Icon, label }: { icon: React.ElementType; label: string }) => (
-    <button 
-      className="flex items-center justify-center w-full gap-2 px-4 py-2 mb-3 text-gray-700 transition-all duration-300 bg-white rounded-lg hover:bg-gray-50 hover:shadow-md"
-    >
-      <Icon size={20} />
-      <span>Continue with {label}</span>
-    </button>
-  );
+  const handleGoogleSuccess = (credentialResponse: any) => {
+    const decoded = jwtDecode(credentialResponse.credential);
+    console.log("Google User:", decoded);
+  };
+
+  const handleGoogleFailure = () => {
+    console.error('Google Sign-In Failed');
+  };
 
   return (
     <div className="flex items-center justify-center min-h-screen bg-gradient-to-br from-purple-900 via-blue-900 to-blue-800">
@@ -47,8 +49,10 @@ const SignUp = () => {
         </div>
 
         <div className="space-y-4">
-        <SocialButton icon={AiFillGoogleCircle} label="Google" />
-          <SocialButton icon={Github} label="Github" />
+          <GoogleLogin 
+            onSuccess={handleGoogleSuccess}
+            onError={handleGoogleFailure}
+          />
         </div>
 
         <div className="flex items-center gap-4">
