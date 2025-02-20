@@ -66,13 +66,13 @@ const TeamPage = () => {
       email: 'alwinnithishr@gmail.com'
     },
     {
-      name: 'LN Karunya',
+      name: 'LN Karunyaa',
       designation: 'Student Coordinator',
       image: karunya,
-      bio: 'Sarah leads our UX design team with expertise in creating intuitive and engaging user experiences. Her creative vision helps shape our product design strategy.',
-      linkedin: 'https://www.linkedin.com/in/sarah-johnson',
-      instagram: 'https://www.instagram.com/sarahj.design',
-      email: 'design@vertextech.org'
+      bio: 'LN Karunyaa is a dedicated student coordinator who fosters collaboration and enhances student engagement. Their enthusiasm and leadership create a positive impact on the community.',
+      linkedin: 'https://www.linkedin.com/in/karunyaa-ln-b5786a28b',
+      instagram: 'https://www.instagram.com/karunyaaln',
+      email: 'lnkarunyaa@gmail.com'
     },
     {
       name: 'Harini Karthikeyan',
@@ -80,7 +80,7 @@ const TeamPage = () => {
       image: harini,
       bio: 'Harini is a dedicated student coordinator who brings energy and fresh perspectives to our team. Her commitment to excellence helps foster collaboration and growth.',
       linkedin: 'https://www.linkedin.com/in/harini-karthikeyan-841b8928b/',
-      instagram: 'https://www.instagram.com/conte.de.fees_14',
+      instagram: 'https://www.instagram.com/vertex_innovate/',
       email: 'harinikk.863@gmail.com'
     }
   ];
