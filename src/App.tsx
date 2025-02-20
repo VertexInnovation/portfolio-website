@@ -13,6 +13,9 @@ import ForgotPassword from './components/Sign/ForgotPassword';
 import Profile from './components/Sign/Profile';
 import ErrorBoundary from './components/ErrorBoundary.tsx';
 import Submissions from "./pages/Submissions";
+import Courses from "./pages/LearnPages/Courses";
+import Projects from "./pages/LearnPages/Projects";
+import Resources from "./pages/LearnPages/Resources";
 import { GoogleOAuthProvider } from '@react-oauth/google'; // Import GoogleOAuthProvider
 
 function App() {
@@ -42,7 +45,9 @@ function App() {
               <Route path="/submissions" element={<Submissions />} />
 
               <Route path= "/community" element={<Community />} />
-
+              <Route path="/learn/courses" element={<Courses />} />
+              <Route path="/learn/projects" element={<Projects />} />
+              <Route path="/learn/resources" element={<Resources />} />
             </Routes>
           </main>
           <Footer />
