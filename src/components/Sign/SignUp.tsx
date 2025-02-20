@@ -1,6 +1,7 @@
 import { useState, ChangeEvent, FormEvent } from 'react';
 import { Link } from 'react-router-dom';
-import { Mail, Lock, User, Facebook, Linkedin, Github } from 'lucide-react';
+import { Mail, Lock, User, Facebook, Linkedin, Github, } from 'lucide-react';
+import { AiFillGoogleCircle } from 'react-icons/ai';
 
 const SignUp = () => {
   const [isSignUp, setIsSignUp] = useState(true);
@@ -46,9 +47,8 @@ const SignUp = () => {
         </div>
 
         <div className="space-y-4">
-          <SocialButton icon={Github} label="Google" />
-          <SocialButton icon={Facebook} label="Facebook" />
-          <SocialButton icon={Linkedin} label="LinkedIn" />
+        <SocialButton icon={AiFillGoogleCircle} label="Google" />
+          <SocialButton icon={Github} label="Github" />
         </div>
 
         <div className="flex items-center gap-4">

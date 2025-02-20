@@ -328,14 +328,11 @@ const Navbar = () => {
           ) : (
         <div className="flex flex-col space-y-3">
           <button
-            onClick={() => {
-          login();
-          setIsOpen(false);
-            }}
-            className="w-full py-2 font-medium text-center text-gray-700 transition-colors rounded-lg hover:text-blue-600 hover:bg-gray-50"
-          >
-            Login
-          </button>
+              onClick={() => login()}
+              className="w-full py-2 font-medium text-center text-gray-700 hover:text-blue-600"
+            >
+              Login
+            </button>
           <button 
             onClick={() => {
           navigate("/signup");
