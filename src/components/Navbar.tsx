@@ -251,9 +251,13 @@ function Navbar() {
                 >
                   Login
                 </button>
-                <button className="px-4 py-2 font-medium text-white transition-colors bg-blue-600 rounded-lg hover:bg-blue-700">
-                  Sign Up
-                </button>
+                <button 
+  onClick={() => navigate("/signup")}
+  className="px-4 py-2 font-medium text-white transition-colors bg-blue-600 rounded-lg hover:bg-blue-700"
+>
+  Sign Up
+</button>
+
               </>
             )}
           </li>

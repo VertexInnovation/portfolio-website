@@ -8,6 +8,7 @@ import { firebaseConfig } from "../api/firebase/route";
 import { useState, useEffect } from "react";
 import EventCarousel from "../components/CommunityComponents/EventCarousel";
 import "../App.tsx";
+import Poster from "../assets/University/poster.jpg"
 import { ArrowRight } from "lucide-react";
 const app = initializeApp(firebaseConfig);
 const firestore = getFirestore(app);
@@ -68,7 +69,7 @@ const EventsPage = () => {
         </div>
         <div className="relative aspect-[16/9] overflow-hidden">
           <img
-            src={event.img_src}
+            src={Poster}
             alt={event.title}
             className="object-cover w-full h-full transition-transform duration-500 group-hover:scale-110"
           />

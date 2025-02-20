@@ -9,6 +9,7 @@ import { doc, onSnapshot } from "firebase/firestore";
 import { initializeApp } from "firebase/app";
 import { getFirestore } from "firebase/firestore";
 import { useParams } from "react-router-dom";
+import Poster from "../assets/University/poster.jpg"
 // import { Timestamp } from "firebase/firestore";
 
 // Firestore Timestamp interface
@@ -170,7 +171,7 @@ const EventDetail = () => {
         {/* Hero Section */}
         <div className="relative overflow-hidden rounded-2xl">
           <img
-            src={event.image}
+            src={Poster}
             alt={event.title}
             className="object-cover w-full h-64 md:h-96"
           />
