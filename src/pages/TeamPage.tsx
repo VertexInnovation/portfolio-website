@@ -11,7 +11,7 @@ import Smitha from '../assets/team/studentHeads/SmithaGladius.jpg';
 import sanchali from '../assets/team/studentHeads/sanchali.jpg';
 import Andrew from '../assets/team/studentHeads/Andrew.png';
 // import sakthi from '../assets/team/studentHeads/Sakthi.jpg';
-import rahul from '../assets/team/studentHeads/rahul.jpg';
+import rahul from '../assets/team/studentHeads/Rahul.jpg';
 import vishnupandian from '../assets/team/studentHeads/Vishnupaandian.jpg';
 import abhinavanagarajan from '../assets/team/studentHeads/Abhinavanagarajan.jpg';
 import viswa from '../assets/team/studentHeads/viswa.jpeg';
