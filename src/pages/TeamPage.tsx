@@ -8,6 +8,13 @@ import alwin from '../assets/team/alwin.jpg';
 import karunya from '../assets/team/studentHeads/karunya.jpeg';
 import harini from '../assets/team/studentHeads/Harini.jpeg';
 import Smitha from '../assets/team/studentHeads/SmithaGladius.jpg';
+import sanchali from '../assets/team/studentHeads/sanchali.jpg';
+import Andrew from '../assets/team/studentHeads/Andrew.png';
+import sakthi from '../assets/team/studentHeads/sakthi.jpg';
+import rahul from '../assets/team/studentHeads/rahul.jpg';
+import vishnupandian from '../assets/team/studentHeads/Vishnupaandian.jpg';
+import abhinavanagarajan from '../assets/team/studentHeads/Abhinavanagarajan.jpg';
+import viswa from '../assets/team/studentHeads/viswa.jpeg';
 const TeamPage = () => {
   const [selectedMember, setSelectedMember] = useState<typeof teamMembers[0] | null>(null);
   const teamMembers = [
@@ -30,13 +37,13 @@ const TeamPage = () => {
       email: 'executive@vertextech.org'
     },
     {
-      name: 'Swayam Krishnan',
-      designation: 'Chief Financial Officer',
-      image: Swayam,
-      bio: 'As the Chief Financial Officer, Swayam manages our financial strategies and operations. His expertise in financial planning ensures sustainable growth and sound fiscal management.',
-      linkedin: 'https://www.linkedin.com/in/swayamkrishnan',
-      instagram: 'https://www.instagram.com/swayam_krishnan0905',
-      email: 'finance@vertextech.org'
+      name: 'Viswa',
+      designation: 'Chief Executive Officer',
+      image: viswa,
+      bio: 'As the Chief Executive Officer, Viswa leads our strategic initiatives and oversees our overall operations. His leadership ensures that our company is aligned with our vision and mission.',
+      linkedin: 'https://www.linkedin.com/in/viswa-url/',
+      instagram: 'https://www.instagram.com/daboiwitanime_12',
+      email: 'ceo@vertextech.org '
     },
     {
       name: 'Mohammed Aashik F',
@@ -57,6 +64,15 @@ const TeamPage = () => {
       email: 'management@vertextech.org'
     },
     {
+      name: 'Swayam Krishnan',
+      designation: 'Chief Marketing Officer',
+      image: Swayam,
+      bio: 'As the Chief Financial Officer, Swayam manages our financial strategies and operations. His expertise in financial planning ensures sustainable growth and sound fiscal management.',
+      linkedin: 'https://www.linkedin.com/in/swayamkrishnan',
+      instagram: 'https://www.instagram.com/swayam_krishnan0905',
+      email: 'finance@vertextech.org'
+    },
+    {
       name: 'Alwin Nithish R',
       designation: 'Cheif Vision Officer',
       image: alwin,
@@ -64,6 +80,42 @@ const TeamPage = () => {
       linkedin: 'https://www.linkedin.com/in/alwin-nithish-r-a78046252',
       instagram: 'https://www.instagram.com/ransyverse',
       email: 'alwinnithishr@gmail.com'
+    },
+    {
+      name: 'Abhinavanagarajan A',
+      designation: 'Chief Financial Officer',
+      image: abhinavanagarajan,
+      bio: 'As the Chief Financial Officer, Abhinav manages our financial strategies and operations. His expertise in financial planning ensures sustainable growth and sound fiscal management.',
+      linkedin: 'https://www.linkedin.com/in/abhinavanagarajan-a-47798128a',
+      instagram: 'https://www.instagram.com/abhinavanagarajan',
+      email: 'abhinavanagarajan@gmail.com'
+    },
+    {
+      name: 'Sanchali',
+      designation: 'Social media lead',
+      image: sanchali,
+      bio: 'Sanchali is a creative and innovative social media lead who brings fresh ideas and strategies to our team. Her expertise in digital marketing helps drive our online presence.',
+      linkedin: 'https://www.linkedin.com/in/sanchali-shastri-661b5334b?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app',
+      instagram: 'https://www.instagram.com/sanc',
+      email: 'sanchalishastri13@gmail.com'
+    },
+    {
+      name: 'Rahul K',
+      designation: 'Creative Designer',
+      image: rahul,
+      bio: 'I am Rahul, a creative designer with a passion for visual storytelling and innovation. I thrive on bringing ideas to life through design, blending creativity with functionality to craft impactful visuals. With a keen eye for detail and a collaborative mindset, I enjoy working across different teams to create designs that inspire and engage.',
+      linkedin: 'https://www.linkedin.com/in/rahul-k-7982a8293?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app',
+      instagram: 'https://www.instagram.com/kutty_rahul_07?igsh=OG9idjB2Y2hpcmdx',
+      email: 'rahul211307@gmail.com'
+    },
+    {
+      name: 'Vishnu Paandian',
+      designation: 'R&D Lead',
+      image: vishnupandian, 
+      bio: 'I am Vishnu, the R&D Lead and a passionate engineer who thrives on innovation and collaboration. I enjoy exploring new technologies and driving impactful projects that bridge the gap between academia and industry. With a keen interest in research and development, I am committed to creating solutions that make a difference.',
+      linkedin: 'https://www.linkedin.com/in/vishnu-pandian-8b9a5924b?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app',
+      instagram: 'https://www.instagram.com/vishnu_pandian_?igshid=1f3j9x3z1j1x5',
+      email: 'vishnupaandian@gmail.com'
     },
     {
       name: 'LN Karunyaa',
@@ -82,6 +134,25 @@ const TeamPage = () => {
       linkedin: 'https://www.linkedin.com/in/harini-karthikeyan-841b8928b/',
       instagram: 'https://www.instagram.com/vertex_innovate/',
       email: 'harinikk.863@gmail.com'
+    },
+    
+    {
+      name: 'Shakthi R',
+      designation: 'Student Director',
+      image: sakthi,
+      bio: 'I am Shakthi, the Student Director and a passionate learner who thrives on leadership and collaboration. I enjoy connecting with people across different sectors, bringing fresh ideas, and contributing to impactful projects that bridge the gap between academia and industry.',
+      linkedin: 'https://www.linkedin.com/in/shakthi-r-94847a2a6?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app',
+      instagram: 'https://www.instagram.com/19_shakthi?igsh=MzRwejh6ZHFta2t2',
+      email: 'shakthirm05@gmail.com'
+    },
+    {
+      name: 'Andrew Sundaradhas',
+      designation: 'Student Director', 
+      image: Andrew,
+      bio: 'I am Andrew Sundaradhas, the Student Director and an enthusiastic engineer who enjoys engaging with people and building connections across sectors. Passionate about innovation and collaboration, I thrive in dynamic environments, fostering partnerships and driving impactful projects.',
+      linkedin: 'https://www.linkedin.com/public-profile/settings?lipi=urn%3Ali%3Apage%3Ad_flagship3_profile_self_edit_contact-info%3B9Tyvuv52RMmkNr%2BjGU0iZQ%3D%3D',
+      instagram: 'https://www.instagram.com/mj_thriller?igsh=MWxyeWsyaXFtbHoweg==',
+      email: 'Andrewsundaradhas56@gmail.com'
     }
   ];
   

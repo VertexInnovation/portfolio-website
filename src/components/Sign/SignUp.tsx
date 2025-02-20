@@ -1,6 +1,6 @@
 import { useState, ChangeEvent, FormEvent } from 'react';
 import { Link } from 'react-router-dom';
-import { Mail, Lock, User, Facebook, Linkedin, Github, } from 'lucide-react';
+import { Mail, Lock, User, Github, } from 'lucide-react';
 import { AiFillGoogleCircle } from 'react-icons/ai';
 
 const SignUp = () => {

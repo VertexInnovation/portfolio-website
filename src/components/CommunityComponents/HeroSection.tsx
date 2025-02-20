@@ -16,7 +16,12 @@ import Andrew from '../../assets/team/studentHeads/Andrew.png';
 import Subadevan from '../../assets/team/studentHeads/subadevan.jpg';
 import sanchali from '../../assets/team/studentHeads/sanchali.jpg';
 const HeroSection = () => {
-  const [rows, setRows] = useState([
+  interface Row {
+    photos: string[];
+    key: number;
+  }
+
+  const [rows, setRows] = useState<Row[]>([
     { photos: [], key: 1 },
     { photos: [], key: 2 }
   ]);
