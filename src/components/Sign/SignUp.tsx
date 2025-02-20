@@ -1,6 +1,6 @@
 import { useState, ChangeEvent, FormEvent } from 'react';
 import { Link } from 'react-router-dom';
-import { Mail, Lock, User, Github } from 'lucide-react';
+import { Mail, Lock, User } from 'lucide-react';
 import { GoogleLogin } from '@react-oauth/google';
 import { jwtDecode } from 'jwt-decode';
 
@@ -27,6 +27,7 @@ const SignUp = () => {
     console.log('Form submitted:', formData);
   };
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const handleGoogleSuccess = (credentialResponse: any) => {
     const decoded = jwtDecode(credentialResponse.credential);
     console.log("Google User:", decoded);

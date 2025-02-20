@@ -74,7 +74,7 @@ const EventDetail = () => {
     });
 
     return () => e();
-  }, [eventid]);
+  }, [eventid, firestore]);
 
   const event = {
     id: eventid,
