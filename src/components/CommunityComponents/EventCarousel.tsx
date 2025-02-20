@@ -1,29 +1,15 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Calendar, Clock, User, ChevronLeft, ChevronRight } from 'lucide-react';
-
+import comingsoon from '../../assets/team/ComingSoon.jpg';
 const events = [
   {
-    title: "IBM Design Thinking Workshop",
-    speaker: "Ajinkya Bhagwat",
-    date: "Nov 11, 2021",
-    time: "8:30 PM",
-    image: "/images/events/product-design.jpg",
-  },
-  {
-    title: "Validating Your Startup Idea",
-    speaker: "Vatsal Kanakiya",
-    date: "Nov 12, 2021",
-    time: "7:00 PM",
-    image: "/images/events/startup-idea.jpg",
-  },
-  {
-    title: "Lifecycle of a Product",
-    speaker: "Anchit Shukla",
-    date: "Nov 13, 2021",
-    time: "8:30 PM",
-    image: "/images/events/product-lifecycle.jpg",
-  },
+    title: "Coming Soon",
+    speaker: "Coming Soon",
+    date: "Coming Soon",
+    time: "Coming Soon",
+    image: comingsoon,
+  }
 ];
 
 // Event Carousel Component
