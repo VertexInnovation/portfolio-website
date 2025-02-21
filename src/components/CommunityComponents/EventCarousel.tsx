@@ -9,6 +9,27 @@ const events = [
     date: "Coming Soon",
     time: "Coming Soon",
     image: comingsoon,
+  },
+  {
+    title: "Coming Soon",
+    speaker: "Coming Soon",
+    date: "Coming Soon",
+    time: "Coming Soon",
+    image: comingsoon,
+  },
+  {
+    title: "Coming Soon",
+    speaker: "Coming Soon",
+    date: "Coming Soon",
+    time: "Coming Soon",
+    image: comingsoon,
+  },
+  {
+    title: "Coming Soon",
+    speaker: "Coming Soon",
+    date: "Coming Soon",
+    time: "Coming Soon",
+    image: comingsoon,
   }
 ];
 
