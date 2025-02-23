@@ -1,231 +1,216 @@
-import { useState, useEffect, useRef } from "react";
-import { useNavigate } from "react-router-dom";
-import { LogOut, Mail, MapPin, Camera, Activity, Settings, ChevronRight, Briefcase, Users, Calendar, LineChart } from "lucide-react";
-import { Card, CardContent } from "../../app/components/ui/card";
+import { useEffect } from 'react';
+import { motion, useMotionTemplate, useMotionValue, animate } from 'framer-motion';
+import { Canvas } from "@react-three/fiber";
+import { Stars } from "@react-three/drei";
+import { FiGithub, FiLinkedin, FiTwitter, FiMail, FiAward, FiCode, FiUsers } from 'react-icons/fi';
+import { IconType } from 'react-icons';
 
-interface UserProfile {
-  picture?: string;
-  name?: string;
-  email?: string;
+const SocialLink = ({ icon: Icon, href, label }: { icon: IconType, href: string, label: string }) => (
+  <motion.a
+    href={href}
+    whileHover={{ scale: 1.1 }}
+    whileTap={{ scale: 0.95 }}
+    className="p-2 transition-colors rounded-full bg-white/5 hover:bg-white/10"
+    aria-label={label}
+  >
+    <Icon className="w-5 h-5" />
+  </motion.a>
+);
+
+const SkillBadge = ({ children }: { children: React.ReactNode }) => (
+  <motion.span
+    whileHover={{ scale: 1.05 }}
+    className="px-3 py-1 text-sm transition-colors rounded-full bg-white/5 hover:bg-white/10"
+  >
+    {children}
+  </motion.span>
+);
+
+const StatCard = ({ icon: Icon, value, label }: { icon: IconType, value: string | number, label: string }) => (
+  <motion.div
+    whileHover={{ scale: 1.02 }}
+    className="flex flex-col items-center p-4 rounded-xl bg-white/5 backdrop-blur-sm"
+  >
+    <Icon className="w-6 h-6 mb-2" />
+    <span className="text-2xl font-bold">{value}</span>
+    <span className="text-sm text-gray-400">{label}</span>
+  </motion.div>
+);
+
+interface ProjectCardProps {
+  title: string;
+  description: string;
+  tags: string[];
 }
 
+const ProjectCard = ({ title, description, tags }: ProjectCardProps) => (
+  <motion.div
+    whileHover={{ scale: 1.02 }}
+    className="p-4 rounded-xl bg-white/5 backdrop-blur-sm"
+  >
+    <h3 className="mb-2 text-lg font-semibold">{title}</h3>
+    <p className="mb-3 text-sm text-gray-400">{description}</p>
+    <div className="flex flex-wrap gap-2">
+      {tags.map((tag, index) => (
+        <span key={index} className="px-2 py-1 text-xs rounded-full bg-white/10">
+          {tag}
+        </span>
+      ))}
+    </div>
+  </motion.div>
+);
+
 const Profile = () => {
-  const navigate = useNavigate();
-  const [userProfile, setUserProfile] = useState<UserProfile | null>(null);
-  const [dropdownOpen, setDropdownOpen] = useState(false);
-  const dropdownRef = useRef<HTMLDivElement>(null);
+  const color = useMotionValue("#13FFAA");
 
   useEffect(() => {
-    // Handle clicks outside dropdown to close it
-    const handleClickOutside = (event: MouseEvent) => {
-      if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
-        setDropdownOpen(false);
-      }
-    };
+    animate(color, "#13FFAA", {
+      ease: "easeInOut",
+      duration: 10,
+      repeat: Infinity,
+      repeatType: "mirror",
+    });
+  }, [color]);
 
-    // Fetch user profile from localStorage
-    const storedAuth = localStorage.getItem("vertex_auth");
-    if (storedAuth) {
-      try {
-        const auth = JSON.parse(storedAuth);
-        if (auth.userProfile) {
-          setUserProfile(auth.userProfile);
-        }
-      } catch (error) {
-        console.error("Error parsing auth data:", error);
-      }
-    }
-
-    document.addEventListener("mousedown", handleClickOutside);
-    return () => document.removeEventListener("mousedown", handleClickOutside);
-  }, []);
-
-  const handleLogout = async () => {
-    try {
-      // Clear all stored data
-      localStorage.removeItem("vertex_auth");
-      sessionStorage.clear();
-      
-      // Optional: Add any API logout calls here
-      // await logoutAPI();
-      
-      // Navigate to home and prevent back navigation
-      navigate("/", { replace: true });
-    } catch (error) {
-      console.error("Logout failed:", error);
-      // Ensure navigation happens even if cleanup fails
-      navigate("/", { replace: true });
-    }
-  };
-
-  const stats = [
-    { icon: Briefcase, label: "Projects", value: "12", color: "bg-blue-500" },
-    { icon: Users, label: "Teams", value: "5", color: "bg-purple-500" },
-    { icon: Calendar, label: "Tasks", value: "148", color: "bg-pink-500" }
-  ];
+  const backgroundImage = useMotionTemplate`radial-gradient(125% 125% at 50% 0%, #020617 50%, ${color})`;
+  const glowShadow = useMotionTemplate`0 0 20px ${color}`;
 
   return (
-    <div className="min-h-screen bg-gray-50">
-      {/* Top Navigation Bar */}
-      <div className="fixed top-0 left-0 right-0 z-10 bg-white border-b shadow">
-        <div className="flex items-center justify-between h-16 px-6">
-          <div className="text-xl font-semibold text-gray-900"></div>
-          
-        </div>
+    <motion.div
+      style={{ backgroundImage }}
+      className="relative min-h-screen overflow-hidden text-gray-100"
+    >
+      {/* Background Stars */}
+      <div className="absolute inset-0 z-0">
+        <Canvas>
+          <Stars radius={50} count={2500} factor={4} fade speed={2} />
+        </Canvas>
       </div>
 
       {/* Main Content */}
-      <div className="pt-16">
-        {/* Profile Header */}
-        <div className="relative h-[280px] bg-gradient-to-br from-gray-900 to-gray-800">
-          <div className="absolute inset-0 opacity-10 bg-[radial-gradient(circle_at_50%_120%,#ffffff_0%,rgba(255,255,255,0)_50%)]" />
-          <div className="absolute bottom-0 left-0 right-0">
-            <div className="max-w-6xl px-6 mx-auto">
-              <div className="flex items-end pb-6 space-x-6">
-                <div className="relative group" ref={dropdownRef}>
-                  <div className="relative w-32 h-32 transform translate-y-16">
-                    <div className="relative inline-block text-left">
-                      <img
-                        src={userProfile?.picture || "/api/placeholder/120/120"}
-                        alt="Profile"
-                        className="object-cover w-full h-full transition-transform border-4 border-white shadow-lg cursor-pointer rounded-xl group-hover:scale-105"
-                        onClick={() => setDropdownOpen(!dropdownOpen)}
-                      />
-                      {dropdownOpen && (
-                        <div className="absolute right-0 z-20 w-48 mt-2 origin-top-right bg-white rounded-md shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
-                          <div className="py-1">
-                            <button
-                              onClick={() => {
-                                navigate('/profile');
-                                setDropdownOpen(false);
-                              }}
-                              className="flex items-center w-full px-4 py-2 text-sm text-gray-700 transition-colors duration-150 hover:bg-gray-100 focus:bg-gray-100 focus:outline-none"
-                            >
-                              <Settings size={16} className="mr-2" />
-                              Profile Settings
-                            </button>
-                            <button
-                              onClick={handleLogout}
-                              className="flex items-center w-full px-4 py-2 text-sm text-red-600 transition-colors duration-150 hover:bg-red-50 hover:text-red-700 focus:bg-red-50 focus:outline-none"
-                            >
-                              <LogOut size={16} className="mr-2" />
-                              Logout
-                            </button>
-                          </div>
-                        </div>
-                      )}
-                    </div>
-                    <button className="absolute p-2 transition-all duration-200 rounded-lg shadow-lg opacity-0 bottom-2 right-2 bg-white/90 backdrop-blur-sm group-hover:opacity-100 focus:outline-none focus:ring-2 focus:ring-gray-300">
-                      <Camera size={16} className="text-gray-700" />
-                    </button>
-                  </div>
-                </div>
-                {/* Rest of the profile content remains the same */}
-                <div className="pb-4">
-                  <h1 className="text-3xl font-bold text-white">
-                    {userProfile?.name || "John Doe"}
-                  </h1>
-                  <div className="flex items-center mt-2 space-x-4 text-gray-300">
-                    <div className="flex items-center">
-                      <MapPin size={16} className="mr-1" />
-                      San Francisco, CA
-                    </div>
-                    <div className="flex items-center">
-                      <Mail size={16} className="mr-1" />
-                      {userProfile?.email || "john.doe@example.com"}
-                    </div>
-                  </div>
-                </div>
-              </div>
+      <div className="relative z-10 max-w-6xl px-4 py-16 mx-auto">
+        {/* Header Section */}
+        <div className="flex flex-col items-center gap-8 mb-16 md:flex-row">
+          <motion.div
+            className="relative w-48 h-48 overflow-hidden rounded-full"
+            style={{ boxShadow: glowShadow }}
+          >
+            <img
+              src="/api/placeholder/192/192"
+              alt="Profile"
+              className="object-cover w-full h-full"
+            />
+          </motion.div>
+
+          <div className="flex-1 text-center md:text-left">
+            <motion.h1 
+              className="mb-2 text-4xl font-bold"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+            >
+              Alex Chen
+            </motion.h1>
+            <p className="mb-4 text-xl text-gray-400">Full Stack Developer & AI Enthusiast</p>
+            
+            {/* Social Links */}
+            <div className="flex justify-center gap-4 mb-6 md:justify-start">
+              <SocialLink icon={FiGithub} href="#" label="GitHub" />
+              <SocialLink icon={FiLinkedin} href="#" label="LinkedIn" />
+              <SocialLink icon={FiTwitter} href="#" label="Twitter" />
+              <SocialLink icon={FiMail} href="#" label="Email" />
+            </div>
+
+            {/* Skills */}
+            <div className="flex flex-wrap justify-center gap-2 md:justify-start">
+              {['React', 'Node.js', 'Python', 'TensorFlow', 'AWS'].map((skill) => (
+                <SkillBadge key={skill}>{skill}</SkillBadge>
+              ))}
             </div>
           </div>
         </div>
 
-        <div className="max-w-6xl px-6 mx-auto mt-24">
-          {/* Stats Cards */}
-          <div className="grid grid-cols-1 gap-6 mb-8 sm:grid-cols-3">
-            {stats.map((stat) => (
-              <Card key={stat.label} className="overflow-hidden">
-                <CardContent className="p-0">
-                  <div className="flex items-center p-6 space-x-4">
-                    <div className={`p-3 rounded-xl ${stat.color}`}>
-                      <stat.icon size={24} className="text-white" />
-                    </div>
-                    <div>
-                      <div className="text-2xl font-bold text-gray-900">{stat.value}</div>
-                      <div className="text-sm text-gray-500">{stat.label}</div>
-                    </div>
-                  </div>
-                  <div className="px-6 py-4 border-t bg-gray-50">
-                    <div className="flex items-center text-sm text-gray-600">
-                      <LineChart size={16} className="mr-2" />
-                      <span>+12% from last month</span>
-                    </div>
-                  </div>
-                </CardContent>
-              </Card>
-            ))}
+        {/* Stats Grid */}
+        <div className="grid grid-cols-1 gap-6 mb-16 md:grid-cols-3">
+          <StatCard icon={FiAward} value="15+" label="Awards & Certifications" />
+          <StatCard icon={FiCode} value="50+" label="Projects Completed" />
+          <StatCard icon={FiUsers} value="1.2K+" label="Community Members" />
+        </div>
+
+        {/* About Section */}
+        <div className="mb-16">
+          <h2 className="mb-4 text-2xl font-bold">About Me</h2>
+          <p className="leading-relaxed text-gray-400">
+            Passionate about creating innovative solutions that bridge the gap between cutting-edge technology 
+            and real-world applications. With over 5 years of experience in full-stack development and machine 
+            learning, I specialize in building scalable applications that make a difference. Currently focused 
+            on exploring the intersection of AI and web technologies.
+          </p>
+        </div>
+
+        {/* Featured Projects */}
+        <div className="mb-16">
+          <h2 className="mb-6 text-2xl font-bold">Featured Projects</h2>
+          <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
+            <ProjectCard
+              title="AI-Powered Analytics Dashboard"
+              description="Real-time data visualization platform with predictive analytics capabilities."
+              tags={['React', 'Python', 'TensorFlow', 'AWS']}
+            />
+            <ProjectCard
+              title="Blockchain Voting System"
+              description="Secure and transparent voting platform built on Ethereum."
+              tags={['Solidity', 'Web3.js', 'Next.js']}
+            />
+            <ProjectCard
+              title="Smart Home Automation"
+              description="IoT platform for controlling and monitoring home devices."
+              tags={['Node.js', 'MQTT', 'React Native']}
+            />
+            <ProjectCard
+              title="Natural Language Processing API"
+              description="REST API for text analysis and sentiment prediction."
+              tags={['FastAPI', 'spaCy', 'Docker']}
+            />
           </div>
-          {/* Main Grid */}
-          <div className="grid grid-cols-1 gap-8 mb-8 lg:grid-cols-3">
-            {/* Left Column */}
-            <div className="space-y-6">
-              <Card>
-                <CardContent className="p-6">
-                  <h2 className="flex items-center justify-between mb-6 text-lg font-semibold">
-                    <span>Quick Actions</span>
-                    <Settings size={20} className="text-gray-400" />
-                  </h2>
-                  <div className="space-y-3">
-                    {["Create Project", "Invite Team Member", "Schedule Meeting"].map((action) => (
-                      <button
-                        key={action}
-                        className="flex items-center justify-between w-full p-3 text-left transition rounded-lg bg-gray-50 hover:bg-gray-100"
-                      >
-                        <span className="text-gray-700">{action}</span>
-                        <ChevronRight size={16} className="text-gray-400" />
-                      </button>
-                    ))}
-                  </div>
-                </CardContent>
-              </Card>
-            </div>
-            {/* Right Column */}
-            <div className="space-y-6 lg:col-span-2">
-              <Card>
-                <CardContent className="p-6">
-                  <h2 className="flex items-center justify-between mb-6 text-lg font-semibold">
-                    <span>Recent Activity</span>
-                    <Activity size={20} className="text-gray-400" />
-                  </h2>
-                  <div className="space-y-6">
-                    {[
-                      { title: "Project Milestone Completed", time: "2 hours ago", type: "success" },
-                      { title: "New Team Member Added", time: "5 hours ago", type: "info" },
-                      { title: "Client Meeting Scheduled", time: "1 day ago", type: "warning" }
-                    ].map((activity, i) => (
-                      <div
-                        key={i}
-                        className="flex items-start p-4 transition bg-gray-50 rounded-xl hover:bg-gray-100"
-                      >
-                        <div className={`w-2 h-2 mt-2 rounded-full ${
-                          activity.type === "success" ? "bg-green-500" :
-                          activity.type === "info" ? "bg-blue-500" : "bg-yellow-500"
-                        }`} />
-                        <div className="ml-4">
-                          <p className="font-medium text-gray-900">{activity.title}</p>
-                          <p className="mt-1 text-sm text-gray-500">{activity.time}</p>
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-                </CardContent>
-              </Card>
-            </div>
+        </div>
+
+        {/* Timeline/Experience */}
+        <div>
+          <h2 className="mb-6 text-2xl font-bold">Experience</h2>
+          <div className="space-y-8">
+            {[
+              {
+                year: '2023 - Present',
+                role: 'Senior Full Stack Developer',
+                company: 'Tech Innovations Inc.',
+                description: 'Leading development of AI-powered web applications'
+              },
+              {
+                year: '2021 - 2023',
+                role: 'Machine Learning Engineer',
+                company: 'Data Solutions Ltd.',
+                description: 'Developed and deployed ML models for production'
+              }
+            ].map((experience, index) => (
+              <motion.div
+                key={index}
+                className="flex gap-6"
+                initial={{ opacity: 0, x: -20 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ delay: index * 0.2 }}
+              >
+                <div className="flex-shrink-0 w-32 text-gray-400">{experience.year}</div>
+                <div>
+                  <h3 className="font-semibold">{experience.role}</h3>
+                  <div className="text-gray-400">{experience.company}</div>
+                  <p className="mt-1 text-sm text-gray-500">{experience.description}</p>
+                </div>
+              </motion.div>
+            ))}
           </div>
         </div>
       </div>
-    </div>
+    </motion.div>
   );
 };
 
