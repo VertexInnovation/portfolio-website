@@ -101,7 +101,7 @@ const TeamPage = () => {
       email: 'rahul211307@gmail.com'
     },
     {
-      name: 'Ananya Baalasubramani',
+      name: 'Ananya B',
       designation: 'HR Lead',
       image: ananya,
       bio: 'Ananya is a dedicated HR lead who fosters collaboration and enhances employee engagement. Her enthusiasm and leadership create a positive impact on the team.',
