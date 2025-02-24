@@ -14,6 +14,7 @@ import sakthi from '../assets/team/studentHeads/Sakthi.jpg';
 import rahul from '../assets/team/studentHeads/Rahul.jpg';
 import vishnupandian from '../assets/team/studentHeads/Vishnupaandian.jpg';
 import abhinavanagarajan from '../assets/team/studentHeads/Abhinavanagarajan.jpg';
+import ananya from '../assets/team/ananya.jpeg';
 // import viswa from '../assets/team/studentHeads/viswa.jpeg';
 const TeamPage = () => {
   const [selectedMember, setSelectedMember] = useState<typeof teamMembers[0] | null>(null);
@@ -36,15 +37,6 @@ const TeamPage = () => {
       instagram: 'https://www.instagram.com/giridharan_re',
       email: 'executive@vertextech.org'
     },
-    // {
-    //   name: 'Viswa',
-    //   designation: 'Chief Executive Officer',
-    //   image: viswa,
-    //   bio: 'As the Chief Executive Officer, Viswa leads our strategic initiatives and oversees our overall operations. His leadership ensures that our company is aligned with our vision and mission.',
-    //   linkedin: 'https://www.linkedin.com/in/viswa-url/',
-    //   instagram: 'https://www.instagram.com/daboiwitanime_12',
-    //   email: 'ceo@vertextech.org '
-    // },
     {
       name: 'Mohammed Aashik F',
       designation: 'Cheif Technical Officer',
@@ -107,6 +99,15 @@ const TeamPage = () => {
       linkedin: 'https://www.linkedin.com/in/rahul-k-7982a8293?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app',
       instagram: 'https://www.instagram.com/kutty_rahul_07?igsh=OG9idjB2Y2hpcmdx',
       email: 'rahul211307@gmail.com'
+    },
+    {
+      name: 'Ananya Baalasubramani',
+      designation: 'HR Lead',
+      image: ananya,
+      bio: 'Ananya is a dedicated HR lead who fosters collaboration and enhances employee engagement. Her enthusiasm and leadership create a positive impact on the team.',
+      linkedin: 'https://www.linkedin.com/in/ananya-baalasubramani-197ba2282',
+      instagram: 'https://www.instagram.com/Ananyaahh',
+      email: 'ananya.baalas@gmail.com',
     },
     {
       name: 'Vishnu Paandian',
