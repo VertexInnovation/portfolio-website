@@ -9,7 +9,7 @@ import Saying from "../components/CommunityComponents/Saying";
 import { BackgroundBeams } from "../components/ui/background-beams.tsx";
 const Community = () => {
   return (
-    <div className="relative bg-gradient-to-br from-gray-900 via-blue-900 to-blue-800">
+    <div className="relative py-24 bg-gradient-to-br from-gray-900 via-blue-900 to-blue-800">
       <div className="relative z-10">
         <HeroSection />
         <FeatureCards />

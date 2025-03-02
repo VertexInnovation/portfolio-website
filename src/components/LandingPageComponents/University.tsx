@@ -28,7 +28,7 @@ const University = () => {
   ];
 
   return (
-    <section className="w-full px-4 py-24 text-gray-200 bg-gray-950">
+    <section className="w-full px-4 text-gray-200 bg-gray-950">
       <div className="mx-auto max-w-7xl">
       <h2 className="mb-12 text-3xl font-medium text-center text-transparent bg-gradient-to-br from-white to-gray-400 bg-clip-text">
         OUR COMMUNITY MEMBERS COME FROM
