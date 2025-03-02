@@ -26,12 +26,12 @@ function App() {
     <GoogleOAuthProvider clientId={clientId}> {/* Wrap with GoogleOAuthProvider */}
       <Router>
         <div className="flex flex-col min-h-screen">
-          <header className="fixed top-0 z-50 w-full">
+          <header className="top-0 w-full">
             <ErrorBoundary>
               <Navbar />
             </ErrorBoundary>
           </header>
-          <main className="flex-grow pt-16">
+          <main className="flex-grow">
             <Routes>
               <Route path="/" element={<LandingPage />} />
               <Route path="/team" element={<TeamPage />} />

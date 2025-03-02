@@ -33,7 +33,7 @@ export const Testing = () => {
       style={{
         backgroundImage,
       }}
-      className="relative grid min-h-screen px-4 py-24 overflow-hidden text-gray-200 place-content-center bg-gray-950"
+      className="relative grid min-h-screen px-4 overflow-hidden text-gray-200 place-content-center bg-gray-950"
     >
       <div className="relative z-10 flex flex-col items-center">
         <h1 className="max-w-3xl text-3xl font-medium leading-tight text-center text-transparent bg-gradient-to-br bg-clip-text sm:text-5xl sm:leading-tight md:text-7xl md:leading-tight">

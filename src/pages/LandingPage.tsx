@@ -9,13 +9,13 @@ import { Testing } from '../components/LandingPageComponents/Testing';
 const LandingPage = () => {
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 to-purple-50">
-      <Testing />
       {/* <HeroSection /> */}
+      <Testing />
       <FeaturesSection />
       <University />
       <StatsSection />
-      <FAQsSection />
       <AboutSection />
+      <FAQsSection />
       <NewsletterSection />
     </div>
     

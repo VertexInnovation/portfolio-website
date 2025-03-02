@@ -113,6 +113,7 @@ function Navbar() {
     }
   };
 
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   const logOut = () => {
     updateAuthState({
       isLogged: false,
@@ -133,7 +134,7 @@ function Navbar() {
     };
     const interval = setInterval(checkExpiry, 60000);
     return () => clearInterval(interval);
-  }, []);
+  }, [logOut]);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -152,10 +153,9 @@ function Navbar() {
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
   }, [isOpen]);
-
   return (
     <nav
-      className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ${isScrolled ? "bg-white shadow-md" : "bg-transparent"}`}
+      className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ${isScrolled ? "bg-transparent shadow-md" : "bg-transparent"}`}
     >
       <div className="container flex items-center justify-between px-4 py-4 mx-auto max-w-7xl">
         {/* Logo with "Vertex" Text */}
@@ -171,15 +171,15 @@ function Navbar() {
             <li key={index} className="relative">
               {item.submenu ? (
                 <div className="relative group">
-                  <span className="flex items-center py-2 cursor-pointer">
+                  <span className="flex items-center py-2 text-white cursor-pointer">
                     {item.label} <ChevronDown size={16} className="ml-1.5" />
                   </span>
-                  <ul className="absolute left-0 hidden mt-1 min-w-[200px] bg-white rounded-lg shadow-lg top-full group-hover:block">
+                  <ul className="absolute left-0 hidden mt-1 min-w-[200px] bg-transparent backdrop-blur-md rounded-lg shadow-lg top-full group-hover:block">
                     {item.submenu.map((subItem, idx) => (
                       <li key={idx}>
                         <Link
                           to={subItem.href}
-                          className="block px-6 py-3 text-gray-700 hover:bg-gray-50 whitespace-nowrap"
+                          className="block px-6 py-3 text-white hover:bg-white/10 whitespace-nowrap"
                         >
                           {subItem.label}
                         </Link>
@@ -190,7 +190,7 @@ function Navbar() {
               ) : (
                 <Link
                   to={item.href || '/'}
-                  className="py-2 text-gray-700 hover:text-blue-600"
+                  className="py-2 text-white hover:text-blue-300"
                 >
                   {item.label}
                 </Link>
@@ -199,16 +199,16 @@ function Navbar() {
           ))}
 
           {/* Profile Section with Dropdown */}
-          <li className="flex items-center pl-8 ml-8 space-x-6 border-l">
+          <li className="flex items-center pl-8 ml-8 space-x-6 border-l border-white/20">
             {authState.isLogged && authState.userProfile ? (
               <div className="relative" ref={profileDropdownRef}>
                 <button
                   onClick={() => setProfileDropdownOpen(!profileDropdownOpen)}
-                  className="flex items-center space-x-3 text-gray-700 hover:text-blue-600"
+                  className="flex items-center space-x-3 text-white hover:text-blue-300"
                 >
                   <img
                     src={authState.userProfile.picture || "https://via.placeholder.com/30"}
-                    alt="User  Avatar"
+                    alt="User Avatar"
                     className="object-cover w-8 h-8 rounded-full"
                   />
                   <span className="font-medium">{authState.userProfile.name}</span>
@@ -222,19 +222,19 @@ function Navbar() {
 
                 {/* Profile Dropdown Menu */}
                 {profileDropdownOpen && (
-                  <div className="absolute right-0 w-48 mt-2 bg-white rounded-lg shadow-lg ring-1 ring-black ring-opacity-5">
+                  <div className="absolute right-0 w-48 mt-2 bg-transparent rounded-lg shadow-lg backdrop-blur-md ring-1 ring-white/10">
                     <div className="py-1">
                       <Link
                         to="/profile"
-                        className="flex items-center w-full px-4 py-2 text-sm text-gray-700 transition-colors hover:bg-gray-50"
+                        className="flex items-center w-full px-4 py-2 text-sm text-white transition-colors hover:bg-white/10"
                         onClick={() => setProfileDropdownOpen(false)}
                       >
-                        <User  size={16} className="mr-2" />
+                        <User size={16} className="mr-2" />
                         Profile
                       </Link>
                       <button
                         onClick={logOut}
-                        className="flex items-center w-full px-4 py-2 text-sm text-red-600 transition-colors hover:bg-red-50"
+                        className="flex items-center w-full px-4 py-2 text-sm text-red-300 transition-colors hover:bg-red-500/20"
                       >
                         <LogOut size={16} className="mr-2" />
                         Sign Out
@@ -247,17 +247,15 @@ function Navbar() {
               <>
                 <button
                   onClick={() => login()}
-                  className="px-4 py-2 font-medium text-gray-700 hover:text-blue-600"
+                  className="px-4 py-2 font-medium text-white hover:text-blue-300"
                 >
                   Login
                 </button>
                 <button 
-  onClick={() => navigate("/signup")}
-  className="px-4 py-2 font-medium text-white transition-colors bg-blue-600 rounded-lg hover:bg-blue-700"
->
-  Sign Up
-</button>
-
+                  onClick={() => navigate("/signup")}
+                  className="px-4 py-2 font-medium text-white transition-colors bg-blue-600 rounded-lg hover:bg-blue-700">
+                  Sign Up
+                </button>
               </>
             )}
           </li>
@@ -265,7 +263,7 @@ function Navbar() {
 
         {/* Mobile Menu Button */}
         <button
-          className="p-2 text-gray-700 transition-colors lg:hidden hover:text-blue-600"
+          className="p-2 text-white transition-colors lg:hidden hover:text-blue-300"
           onClick={() => setIsOpen(!isOpen)}
           aria-expanded={isOpen}
           aria-label="Toggle navigation menu"
@@ -282,7 +280,7 @@ function Navbar() {
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
             transition={{ duration: 0.3, ease: "easeInOut" }}
-            className="absolute left-0 right-0 w-full mt-2 overflow-hidden bg-white shadow-lg lg:hidden"
+            className="absolute left-0 right-0 w-full mt-2 overflow-hidden bg-transparent shadow-lg backdrop-blur-md lg:hidden"
           >
             <ul className="flex flex-col p-6 space-y-4">
               {MENU_ITEMS.map((item, index) => (
@@ -294,7 +292,7 @@ function Navbar() {
                       className="space-y-3"
                     >
                       <button
-                        className="flex items-center justify-between w-full py-2 font-medium text-gray-700 hover:text-blue-600"
+                        className="flex items-center justify-between w-full py-2 font-medium text-white hover:text-blue-300"
                         onClick={() => item.isOpen = !item.isOpen}
                       >
                         {item.label}
@@ -314,7 +312,7 @@ function Navbar() {
                           <li key={idx}>
                             <Link
                               to={subItem.href}
-                              className="block px-3 py-2 text-gray-600 transition-colors rounded-lg hover:text-blue-600 hover:bg-gray-50"
+                              className="block px-3 py-2 text-white transition-colors rounded-lg hover:text-blue-300 hover:bg-white/10"
                               onClick={() => setIsOpen(false)}
                             >
                               {subItem.label}
@@ -326,7 +324,7 @@ function Navbar() {
                   ) : (
                     <Link
                       to={item.href || '/'}
-                      className="block px-3 py-2 font-medium text-gray-700 transition-colors rounded-lg hover:text-blue-600 hover:bg-gray-50"
+                      className="block px-3 py-2 font-medium text-white transition-colors rounded-lg hover:text-blue-300 hover:bg-white/10"
                       onClick={() => setIsOpen(false)}
                     >
                       {item.label}
@@ -336,7 +334,7 @@ function Navbar() {
               ))}
 
               <motion.div
-                className="pt-4 mt-4 border-t"
+                className="pt-4 mt-4 border-t border-white/20"
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ delay: 0.2 }}
@@ -345,12 +343,12 @@ function Navbar() {
                   <div className="space-y-3">
                     <Link
                       to="/profile"
-                      className="flex items-center p-3 space-x-3 text-gray-700 rounded-lg hover:text-blue-600 hover:bg-gray-50"
+                      className="flex items-center p-3 space-x-3 text-white rounded-lg hover:text-blue-300 hover:bg-white/10"
                       onClick={() => setIsOpen(false)}
                     >
                       <img
                         src={authState.userProfile.picture || "https://via.placeholder.com/30"}
-                        alt="User  Avatar"
+                        alt="User Avatar"
                         className="object-cover w-8 h-8 rounded-full" />
                       <span className="font-medium">{authState.userProfile.name}</span>
                     </Link>
@@ -359,7 +357,7 @@ function Navbar() {
                         logOut();
                         setIsOpen(false);
                       }}
-                      className="w-full py-2 font-medium text-red-600 transition-colors rounded-lg hover:bg-red-50"
+                      className="w-full py-2 font-medium text-red-300 transition-colors rounded-lg hover:bg-red-500/20"
                     >
                       Logout
                     </button>
@@ -368,7 +366,7 @@ function Navbar() {
                   <div className="flex flex-col space-y-3">
                     <button
                       onClick={() => login()}
-                      className="w-full py-2 font-medium text-center text-gray-700 hover:text-blue-600"
+                      className="w-full py-2 font-medium text-center text-white hover:text-blue-300"
                     >
                       Login
                     </button>
