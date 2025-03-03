@@ -1,5 +1,6 @@
-import { useState } from 'react';
-import { Linkedin, Instagram, Mail, X } from 'lucide-react';
+import { useState, useEffect } from 'react';
+import { Linkedin, Instagram, Mail, X, ChevronRight, Users } from 'lucide-react';
+import { motion, AnimatePresence } from 'framer-motion';
 import vishnu from '../assets/team/Vishnu.jpg';
 import giri from '../assets/team/giridharan.jpg';
 import Swayam from '../assets/team/Swayam.jpg';
@@ -18,6 +19,12 @@ import ananya from '../assets/team/ananya.jpeg';
 // import viswa from '../assets/team/studentHeads/viswa.jpeg';
 const TeamPage = () => {
   const [selectedMember, setSelectedMember] = useState<typeof teamMembers[0] | null>(null);
+  const [isLoaded, setIsLoaded] = useState(false);
+  
+  useEffect(() => {
+    setIsLoaded(true);
+  }, []);
+
   const teamMembers = [
     {
       name: 'Vishnu Swaroop G',
@@ -157,122 +164,228 @@ const TeamPage = () => {
   ];
   
   const MemberModal = ({ member, onClose }: { member: typeof teamMembers[0], onClose: () => void }) => (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/70">
-      <div className="relative w-full max-w-2xl max-h-[90vh] overflow-auto bg-gradient-to-b from-gray-900 to-gray-800 rounded-2xl shadow-2xl">
-        <button 
-          onClick={onClose}
-          className="absolute p-2 text-gray-400 transition-colors rounded-full top-4 right-4 hover:text-white hover:bg-gray-700"
+    <AnimatePresence>
+      <motion.div 
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        exit={{ opacity: 0 }}
+        className="fixed inset-0 z-50 flex items-center justify-center p-4 backdrop-blur-md bg-black/60"
+      >
+        <motion.div 
+          initial={{ scale: 0.9, opacity: 0 }}
+          animate={{ scale: 1, opacity: 1 }}
+          exit={{ scale: 0.9, opacity: 0 }}
+          transition={{ type: "spring", damping: 25 }}
+          className="relative w-full max-w-3xl max-h-[90vh] overflow-auto rounded-3xl shadow-[0_20px_60px_-15px_rgba(0,0,0,0.5)]"
         >
-          <X size={20} />
-        </button>
-        
-        <div className="flex flex-col md:flex-row">
-          <div className="w-full md:w-1/2">
-            <img 
-              src={member.image} 
-              alt={member.name}
-              className="object-cover w-full h-64 md:h-full rounded-t-2xl md:rounded-l-2xl md:rounded-tr-none"
-            />
+          <div className="absolute inset-0 overflow-hidden rounded-3xl bg-gradient-to-br from-gray-900 via-blue-950 to-gray-900">
+            <div className="absolute inset-0 opacity-20 bg-[radial-gradient(circle_at_30%_30%,rgba(59,130,246,0.5)_0%,transparent_70%)]"></div>
           </div>
           
-          <div className="p-6 md:w-1/2">
-            <h3 className="mb-1 text-2xl font-bold text-white">{member.name}</h3>
-            <p className="mb-4 text-blue-400">{member.designation}</p>
-            <p className="mb-6 text-gray-300">{member.bio}</p>
+          <button 
+            onClick={onClose}
+            className="absolute z-10 p-2 text-white transition-all duration-300 rounded-full top-4 right-4 bg-white/10 hover:bg-white/20 hover:rotate-90"
+          >
+            <X size={20} />
+          </button>
+          
+          <div className="relative flex flex-col md:flex-row">
+            <div className="w-full md:w-2/5">
+              <div className="relative h-64 overflow-hidden md:h-full">
+                <div className="absolute inset-0 bg-gradient-to-t from-gray-900 via-transparent to-transparent md:bg-gradient-to-l"></div>
+                <img 
+                  src={member.image} 
+                  alt={member.name}
+                  className="object-cover w-full h-full"
+                />
+              </div>
+            </div>
             
-            <div className="flex gap-4">
-              <a 
-                href={member.linkedin} 
-                target="_blank" 
-                rel="noopener noreferrer"
-                className="p-2 text-white transition-all duration-300 rounded-full bg-blue-600/20 hover:bg-blue-600"
+            <div className="relative p-8 md:w-3/5">
+              <motion.div
+                initial={{ y: 20, opacity: 0 }}
+                animate={{ y: 0, opacity: 1 }}
+                transition={{ delay: 0.2 }}
               >
-                <Linkedin size={20} />
-              </a>
-              <a 
-                href={member.instagram} 
-                target="_blank" 
-                rel="noopener noreferrer"
-                className="p-2 text-white transition-all duration-300 rounded-full bg-pink-600/20 hover:bg-pink-600"
-              >
-                <Instagram size={20} />
-              </a>
-              <a 
-                href={`mailto:${member.email}`}
-                className="p-2 text-white transition-all duration-300 rounded-full bg-red-600/20 hover:bg-red-600"
-              >
-                <Mail size={20} />
-              </a>
+                <h3 className="mb-1 text-3xl font-bold text-transparent bg-gradient-to-r from-white to-blue-200 bg-clip-text">{member.name}</h3>
+                <p className="inline-block px-3 py-1 mb-6 text-sm font-medium text-blue-300 rounded-full bg-blue-900/40 backdrop-blur-sm">{member.designation}</p>
+                <p className="mb-8 text-lg leading-relaxed text-gray-300">{member.bio}</p>
+                
+                <div className="flex gap-4">
+                  <a 
+                    href={member.linkedin} 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="flex items-center justify-center w-10 h-10 transition-all duration-300 rounded-full bg-gradient-to-br from-blue-600 to-blue-800 hover:shadow-lg hover:shadow-blue-600/30 hover:-translate-y-1"
+                  >
+                    <Linkedin size={18} className="text-white" />
+                  </a>
+                  <a 
+                    href={member.instagram} 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="flex items-center justify-center w-10 h-10 transition-all duration-300 rounded-full bg-gradient-to-br from-pink-600 to-purple-600 hover:shadow-lg hover:shadow-pink-600/30 hover:-translate-y-1"
+                  >
+                    <Instagram size={18} className="text-white" />
+                  </a>
+                  <a 
+                    href={`mailto:${member.email}`}
+                    className="flex items-center justify-center w-10 h-10 transition-all duration-300 rounded-full bg-gradient-to-br from-red-500 to-red-700 hover:shadow-lg hover:shadow-red-500/30 hover:-translate-y-1"
+                  >
+                    <Mail size={18} className="text-white" />
+                  </a>
+                </div>
+              </motion.div>
             </div>
           </div>
-        </div>
-      </div>
-    </div>
+        </motion.div>
+      </motion.div>
+    </AnimatePresence>
   );
-  const TeamMemberCard = ({ member }: { member: typeof teamMembers[0] }) => (
-    <div 
+  
+  const TeamMemberCard = ({ member, index }: { member: typeof teamMembers[0], index: number }) => (
+    <motion.div 
+      initial={{ opacity: 0, y: 50 }}
+      animate={{ 
+        opacity: isLoaded ? 1 : 0, 
+        y: isLoaded ? 0 : 50 
+      }}
+      transition={{ duration: 0.5, delay: index * 0.1 }}
       onClick={() => setSelectedMember(member)}
-      className="relative cursor-pointer group"
+      className="cursor-pointer group"
     >
-      <div className="overflow-hidden bg-gradient-to-b from-gray-800 to-gray-900 rounded-2xl">
+      <div className="relative overflow-hidden transition-all duration-500 border shadow-xl bg-gradient-to-b from-gray-800/80 to-gray-900/80 backdrop-blur-sm rounded-2xl border-white/5 hover:shadow-blue-500/20 hover:border-blue-500/30">
+        {/* Glass effect overlay */}
+        <div className="absolute inset-0 transition-opacity duration-500 opacity-0 group-hover:opacity-100 bg-blue-500/10"></div>
+        
         {/* Image with Zoom Effect */}
-        <div className="relative aspect-[4/5]">
+        <div className="relative aspect-[3/4] overflow-hidden">
+          <div className="absolute inset-0 z-10 bg-gradient-to-t from-gray-900 via-transparent to-transparent"></div>
           <img
             src={member.image}
             alt={member.name}
-            className="object-cover w-full h-full transition-transform duration-500 group-hover:scale-110"
+            className="object-cover w-full h-full transition-transform duration-700 group-hover:scale-110"
           />
-        </div>
-        
-        {/* Member Info */}
-        <div className="p-4 text-center">
-          <h3 className="mb-1 text-lg font-semibold text-white transition-colors duration-300 group-hover:text-blue-400">
-            {member.name}
-          </h3>
-          <p className="text-sm text-gray-400">{member.designation}</p>
-        </div>
-      </div>
-    </div>
-  );
-  
-  return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-900 via-blue-900 to-blue-800">
-      <div className="container px-4 py-16 mx-auto">
-        {/* Header Section */}
-        <div className="max-w-3xl mx-auto mb-16 text-center">
-          <h1 className="mb-4 text-3xl font-bold text-white md:text-5xl lg:text-6xl">
-            Meet Our Team
-          </h1>
-          <p className="text-lg text-gray-300 md:text-xl">
-            The brilliant minds behind Vertex Innovation, working together to shape the future of technology.
-          </p>
-        </div>
-        {/* Team Grid */}
-        <div className="grid gap-4 sm:gap-6 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
-          {teamMembers.map((member, index) => (
-          <TeamMemberCard key={index} member={member} />
-        ))}
-        </div>
-        {/* Join Team Section */}
-        <div className="relative mt-20 overflow-hidden bg-white/10 backdrop-blur-md rounded-2xl">
-          <div className="absolute inset-0 bg-gradient-to-r from-blue-600/20 to-purple-600/20"></div>
-          <div className="relative px-6 py-12 text-center">
-            <h2 className="mb-4 text-2xl font-bold text-white md:text-3xl">
-              Join Our Team
-            </h2>
-            <p className="max-w-2xl mx-auto mb-8 text-gray-300">
-              We're always looking for talented individuals to join our innovative team. 
-              Check out our open positions and become part of something extraordinary.
-            </p>
+          
+          {/* Hover Social Links */}
+          <div className="absolute bottom-0 left-0 right-0 z-20 flex items-center justify-center gap-3 p-4 transition-all duration-500 translate-y-full opacity-0 group-hover:translate-y-0 group-hover:opacity-100">
             <a 
-              href="/careers" 
-              className="inline-flex items-center px-6 py-3 text-lg font-medium text-white transition-all duration-300 bg-blue-600 rounded-lg hover:bg-blue-700 hover:shadow-lg"
+              href={member.linkedin}
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={(e) => e.stopPropagation()}
+              className="flex items-center justify-center w-8 h-8 transition-all duration-300 bg-blue-600 rounded-full hover:scale-110"
             >
-              View Open Positions
+              <Linkedin size={14} className="text-white" />
+            </a>
+            <a 
+              href={member.instagram}
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={(e) => e.stopPropagation()}
+              className="flex items-center justify-center w-8 h-8 transition-all duration-300 rounded-full bg-gradient-to-br from-pink-500 to-purple-500 hover:scale-110"
+            >
+              <Instagram size={14} className="text-white" />
             </a>
           </div>
         </div>
+        
+        {/* Member Info */}
+        <div className="relative p-5 transition-all duration-300">
+          <h3 className="mb-1 text-lg font-semibold text-transparent bg-gradient-to-r from-white to-blue-200 bg-clip-text group-hover:from-blue-300 group-hover:to-blue-100">
+            {member.name}
+          </h3>
+          <p className="text-sm text-gray-400">{member.designation}</p>
+          
+          <div className="absolute top-0 right-0 w-10 h-10 transition-all duration-300 translate-x-full opacity-0 group-hover:translate-x-0 group-hover:opacity-100">
+            <ChevronRight className="w-5 h-5 text-blue-400" />
+          </div>
+        </div>
       </div>
+    </motion.div>
+  );
+  
+  return (
+    <div className="min-h-screen bg-[#050816]">
+      {/* Decorative Gradient */}
+      <div className="absolute inset-0 pointer-events-none">
+        <div className="absolute top-0 right-0 w-[500px] h-[500px] rounded-full opacity-30 bg-[radial-gradient(circle,rgba(59,130,246,0.3)_0%,transparent_70%)]"></div>
+        <div className="absolute bottom-0 left-0 w-[600px] h-[600px] rounded-full opacity-20 bg-[radial-gradient(circle,rgba(147,51,234,0.3)_0%,transparent_70%)]"></div>
+      </div>
+      
+      <div className="container relative z-10 px-4 py-24 mx-auto">
+        {/* Header Section */}
+        <motion.div 
+          initial={{ opacity: 0, y: -20 }}
+          animate={{ opacity: isLoaded ? 1 : 0, y: isLoaded ? 0 : -20 }}
+          className="max-w-3xl mx-auto mb-20 text-center"
+        >
+          <motion.div
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.5 }}
+            className="inline-flex items-center justify-center px-4 py-1.5 mb-6 space-x-2 text-sm font-medium text-blue-300 rounded-full bg-blue-900/20 border border-blue-800/30"
+          >
+            <Users size={16} />
+            <span>Our Leadership</span>
+          </motion.div>
+          
+          <h1 className="mb-6 text-3xl font-bold text-white md:text-5xl lg:text-6xl">
+            <span className="text-transparent bg-gradient-to-r from-white to-blue-300 bg-clip-text">
+              Meet The Minds Behind
+            </span>
+            <br />
+            <span className="text-transparent bg-gradient-to-r from-blue-400 to-purple-500 bg-clip-text">
+              Vertex Innovation
+            </span>
+          </h1>
+          
+          <p className="max-w-2xl mx-auto text-lg text-gray-400 md:text-xl">
+            Our team of visionaries and tech enthusiasts are pushing the boundaries of innovation to create a future driven by technology.
+          </p>
+        </motion.div>
+        
+        {/* Team Grid */}
+        <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5">
+          {teamMembers.map((member, index) => (
+            <TeamMemberCard key={index} member={member} index={index} />
+          ))}
+        </div>
+        
+        {/* Join Team Section */}
+        <motion.div 
+          initial={{ opacity: 0, y: 50 }}
+          animate={{ opacity: isLoaded ? 1 : 0, y: isLoaded ? 0 : 50 }}
+          transition={{ delay: 0.6 }}
+          className="relative mt-32 overflow-hidden rounded-3xl"
+        >
+          <div className="absolute inset-0 bg-gradient-to-br from-blue-900/30 via-indigo-900/30 to-purple-900/30 backdrop-blur-md"></div>
+          <div className="absolute inset-0 bg-[url('path/to/pattern.svg')] opacity-10"></div>
+          
+          <div className="relative px-8 py-16 text-center">
+            <div className="absolute top-0 right-0 w-[300px] h-[300px] -translate-y-1/2 translate-x-1/2 rounded-full opacity-20 bg-[radial-gradient(circle,rgba(59,130,246,0.3)_0%,transparent_70%)]"></div>
+            
+            <h2 className="mb-4 text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-white to-blue-200 md:text-3xl lg:text-4xl">
+              Join Our Innovative Team
+            </h2>
+            
+            <p className="max-w-2xl mx-auto mb-10 text-lg leading-relaxed text-gray-300">
+              We're constantly looking for passionate individuals who are ready to challenge the status quo and build the future of technology. Be part of our exciting journey.
+            </p>
+            
+            <motion.a 
+              href="/careers" 
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.98 }}
+              className="inline-flex items-center gap-2 px-8 py-4 text-lg font-medium text-white transition-all duration-300 rounded-full bg-gradient-to-r from-blue-600 to-indigo-600 hover:shadow-lg hover:shadow-blue-600/30"
+            >
+              View Open Positions
+              <ChevronRight size={18} />
+            </motion.a>
+          </div>
+        </motion.div>
+      </div>
+      
       {/* Modal */}
       {selectedMember && (
         <MemberModal 
@@ -283,5 +396,5 @@ const TeamPage = () => {
     </div>
   );
 };
-export default TeamPage;
 
+export default TeamPage;
