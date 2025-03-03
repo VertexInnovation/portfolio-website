@@ -16,7 +16,8 @@ import rahul from '../assets/team/studentHeads/Rahul.jpg';
 import vishnupandian from '../assets/team/studentHeads/Vishnupaandian.jpg';
 import abhinavanagarajan from '../assets/team/studentHeads/Abhinavanagarajan.jpg';
 import ananya from '../assets/team/ananya.jpeg';
-// import viswa from '../assets/team/studentHeads/viswa.jpeg';
+import { BackgroundBeamsWithCollision } from "../components/ui/background-beams-with-collision"; // Import the background component
+
 const TeamPage = () => {
   const [selectedMember, setSelectedMember] = useState<typeof teamMembers[0] | null>(null);
   const [isLoaded, setIsLoaded] = useState(false);
@@ -169,7 +170,7 @@ const TeamPage = () => {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         exit={{ opacity: 0 }}
-        className="fixed inset-0 z-50 flex items-center justify-center p-4 backdrop-blur-md bg-black/60"
+        className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black backdrop-blur-md bg-black/60"
       >
         <motion.div 
           initial={{ scale: 0.9, opacity: 0 }}
@@ -306,94 +307,96 @@ const TeamPage = () => {
   );
   
   return (
-    <div className="min-h-screen bg-[#050816]">
-      {/* Decorative Gradient */}
-      <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute top-0 right-0 w-[500px] h-[500px] rounded-full opacity-30 bg-[radial-gradient(circle,rgba(59,130,246,0.3)_0%,transparent_70%)]"></div>
-        <div className="absolute bottom-0 left-0 w-[600px] h-[600px] rounded-full opacity-20 bg-[radial-gradient(circle,rgba(147,51,234,0.3)_0%,transparent_70%)]"></div>
-      </div>
-      
-      <div className="container relative z-10 px-4 py-24 mx-auto">
-        {/* Header Section */}
-        <motion.div 
-          initial={{ opacity: 0, y: -20 }}
-          animate={{ opacity: isLoaded ? 1 : 0, y: isLoaded ? 0 : -20 }}
-          className="max-w-3xl mx-auto mb-20 text-center"
-        >
-          <motion.div
-            initial={{ opacity: 0, scale: 0.9 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.5 }}
-            className="inline-flex items-center justify-center px-4 py-1.5 mb-6 space-x-2 text-sm font-medium text-blue-300 rounded-full bg-blue-900/20 border border-blue-800/30"
-          >
-            <Users size={16} />
-            <span>Our Leadership</span>
-          </motion.div>
-          
-          <h1 className="mb-6 text-3xl font-bold text-white md:text-5xl lg:text-6xl">
-            <span className="text-transparent bg-gradient-to-r from-white to-blue-300 bg-clip-text">
-              Meet The Minds Behind
-            </span>
-            <br />
-            <span className="text-transparent bg-gradient-to-r from-blue-400 to-purple-500 bg-clip-text">
-              Vertex Innovation
-            </span>
-          </h1>
-          
-          <p className="max-w-2xl mx-auto text-lg text-gray-400 md:text-xl">
-            Our team of visionaries and tech enthusiasts are pushing the boundaries of innovation to create a future driven by technology.
-          </p>
-        </motion.div>
-        
-        {/* Team Grid */}
-        <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5">
-          {teamMembers.map((member, index) => (
-            <TeamMemberCard key={index} member={member} index={index} />
-          ))}
+    <BackgroundBeamsWithCollision> {/* Wrap the content with BackgroundBeamsWithCollision */}
+      <div className="min-h-screen bg-[#050816]">
+        {/* Decorative Gradient */}
+        <div className="absolute inset-0 pointer-events-none">
+          <div className="absolute top-0 right-0 w-[500px] h-[500px] rounded-full opacity-30 bg-[radial-gradient(circle,rgba(59,130,246,0.3)_0%,transparent_70%)]"></div>
+          <div className="absolute bottom-0 left-0 w-[600px] h-[600px] rounded-full opacity-20 bg-[radial-gradient(circle,rgba(147,51,234,0.3)_0%,transparent_70%)]"></div>
         </div>
         
-        {/* Join Team Section */}
-        <motion.div 
-          initial={{ opacity: 0, y: 50 }}
-          animate={{ opacity: isLoaded ? 1 : 0, y: isLoaded ? 0 : 50 }}
-          transition={{ delay: 0.6 }}
-          className="relative mt-32 overflow-hidden rounded-3xl"
-        >
-          <div className="absolute inset-0 bg-gradient-to-br from-blue-900/30 via-indigo-900/30 to-purple-900/30 backdrop-blur-md"></div>
-          <div className="absolute inset-0 bg-[url('path/to/pattern.svg')] opacity-10"></div>
-          
-          <div className="relative px-8 py-16 text-center">
-            <div className="absolute top-0 right-0 w-[300px] h-[300px] -translate-y-1/2 translate-x-1/2 rounded-full opacity-20 bg-[radial-gradient(circle,rgba(59,130,246,0.3)_0%,transparent_70%)]"></div>
-            
-            <h2 className="mb-4 text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-white to-blue-200 md:text-3xl lg:text-4xl">
-              Join Our Innovative Team
-            </h2>
-            
-            <p className="max-w-2xl mx-auto mb-10 text-lg leading-relaxed text-gray-300">
-              We're constantly looking for passionate individuals who are ready to challenge the status quo and build the future of technology. Be part of our exciting journey.
-            </p>
-            
-            <motion.a 
-              href="/careers" 
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.98 }}
-              className="inline-flex items-center gap-2 px-8 py-4 text-lg font-medium text-white transition-all duration-300 rounded-full bg-gradient-to-r from-blue-600 to-indigo-600 hover:shadow-lg hover:shadow-blue-600/30"
+        <div className="container relative z-10 px-4 py-24 mx-auto">
+          {/* Header Section */}
+          <motion.div 
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: isLoaded ? 1 : 0, y: isLoaded ? 0 : -20 }}
+            className="max-w-3xl mx-auto mb-20 text-center"
+          >
+            <motion.div
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.5 }}
+              className="inline-flex items-center justify-center px-4 py-1.5 mb-6 space-x-2 text-sm font-medium text-blue-300 rounded-full bg-blue-900/20 border border-blue-800/30"
             >
-              View Open Positions
-              <ChevronRight size={18} />
-            </motion.a>
+              <Users size={16} />
+              <span>Our Leadership</span>
+            </motion.div>
+            
+            <h1 className="mb-6 text-3xl font-bold text-white md:text-5xl lg:text-6xl">
+              <span className="text-transparent bg-gradient-to-r from-white to-blue-300 bg-clip-text">
+                Meet The Minds Behind
+              </span>
+              <br />
+              <span className="text-transparent bg-gradient-to-r from-blue-400 to-purple-500 bg-clip-text">
+                Vertex Innovation
+              </span>
+            </h1>
+            
+            <p className="max-w-2xl mx-auto text-lg text-gray-400 md:text-xl">
+              Our team of visionaries and tech enthusiasts are pushing the boundaries of innovation to create a future driven by technology.
+            </p>
+          </motion.div>
+          
+          {/* Team Grid */}
+          <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5">
+            {teamMembers.map((member, index) => (
+              <TeamMemberCard key={index} member={member} index={index} />
+            ))}
           </div>
-        </motion.div>
+          
+          {/* Join Team Section */}
+          <motion.div 
+            initial={{ opacity: 0, y: 50 }}
+            animate={{ opacity: isLoaded ? 1 : 0, y: isLoaded ? 0 : 50 }}
+            transition={{ delay: 0.6 }}
+            className="relative mt-32 overflow-hidden rounded-3xl"
+          >
+            <div className="absolute inset-0 bg-gradient-to-br from-blue-900/30 via-indigo-900/30 to-purple-900/30 backdrop-blur-md"></div>
+            <div className="absolute inset-0 bg-[url('path/to/pattern.svg')] opacity-10"></div>
+            
+            <div className="relative px-8 py-16 text-center">
+              <div className="absolute top-0 right-0 w-[300px] h-[300px] -translate-y-1/2 translate-x-1/2 rounded-full opacity-20 bg-[radial-gradient(circle,rgba(59,130,246,0.3)_0%,transparent_70%)]"></div>
+              
+              <h2 className="mb-4 text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-white to-blue-200 md:text-3xl lg:text-4xl">
+                Join Our Innovative Team
+              </h2>
+              
+              <p className="max-w-2xl mx-auto mb-10 text-lg leading-relaxed text-gray-300">
+                We're constantly looking for passionate individuals who are ready to challenge the status quo and build the future of technology. Be part of our exciting journey.
+              </p>
+              
+              <motion.a 
+                href="/careers" 
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.98 }}
+                className="inline-flex items-center gap-2 px-8 py-4 text-lg font-medium text-white transition-all duration-300 rounded-full bg-gradient-to-r from-blue-600 to-indigo-600 hover:shadow-lg hover:shadow-blue-600/30"
+              >
+                View Open Positions
+                <ChevronRight size={18} />
+              </motion.a>
+            </div>
+          </motion.div>
+        </div>
+        
+        {/* Modal */}
+        {selectedMember && (
+          <MemberModal 
+            member={selectedMember} 
+            onClose={() => setSelectedMember(null)} 
+          />
+        )}
       </div>
-      
-      {/* Modal */}
-      {selectedMember && (
-        <MemberModal 
-          member={selectedMember} 
-          onClose={() => setSelectedMember(null)} 
-        />
-      )}
-    </div>
+    </BackgroundBeamsWithCollision> // Closing the wrapper
   );
 };
 

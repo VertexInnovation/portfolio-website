@@ -6,11 +6,10 @@
 /* Custom Styles (if any) */
 /* Add any custom styles here if needed */
 
-/* Example of a custom class */
-.bg-gradient-to-br {
-  background-image: linear-gradient(to bottom right, var(--tw-gradient-from), var(--tw-gradient-to));
+body {
+  font-family: 'Inter', sans-serif;
+  background: #f9fafb;
 }
-
 /* Example of custom animations (if needed) */
 @keyframes fadeInUp {
   from {
@@ -109,15 +108,4 @@
 
 .animate-scroll:hover {
   animation-play-state: paused;
-}
-
-
-
-@layer base {
-  * {
-    @apply border-border outline-ring/50;
-  }
-  body {
-    @apply bg-background text-foreground;
-  }
 }
