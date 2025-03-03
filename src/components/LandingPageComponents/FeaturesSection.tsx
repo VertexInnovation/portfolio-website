@@ -3,7 +3,7 @@ import { FEATURES } from '../data/data';
 
 const FeaturesSection = () => {
   return (
-    <section className="w-full px-0 py-20 text-gray-200 max-h-fit bg-gray-950">
+    <section className="w-full px-0 py-12 text-gray-200 max-h-fit bg-gray-950">
       <div className="mx-auto mb-16 text-center max-w-7xl max-h-fit">
       <h2 className="mb-12 text-4xl font-bold text-center text-transparent bg-gradient-to-br from-white to-gray-400 bg-clip-text">
         Endless Possibilities Await in Vertex

@@ -88,7 +88,7 @@ const TeamPage = () => {
       image: sanchali,
       bio: 'Sanchali is a creative and innovative social media lead who brings fresh ideas and strategies to our team. Her expertise in digital marketing helps drive our online presence.',
       linkedin: 'https://www.linkedin.com/in/sanchali-shastri-661b5334b?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app',
-      instagram: 'https://www.instagram.com/sanc',
+      instagram: 'https://www.instagram.com/_sanchali_shastri_/',
       email: 'sanchalishastri13@gmail.com'
     },
     {
