@@ -155,7 +155,7 @@ function Navbar() {
   }, [isOpen]);
   return (
     <nav
-      className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ${isScrolled ? "bg-transparent shadow-md" : "bg-transparent"}`}
+      className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 bg-transparent backdrop-blur-md ${isScrolled ? "bg-transparent shadow-md" : "bg-transparent"}`}
     >
       <div className="container flex items-center justify-between px-4 py-4 mx-auto max-w-7xl">
         {/* Logo with "Vertex" Text */}
@@ -174,7 +174,7 @@ function Navbar() {
                   <span className="flex items-center py-2 text-white cursor-pointer">
                     {item.label} <ChevronDown size={16} className="ml-1.5" />
                   </span>
-                  <ul className="absolute left-0 hidden mt-1 min-w-[200px] bg-transparent backdrop-blur-md rounded-lg shadow-lg top-full group-hover:block">
+                  <ul className="absolute left-0 hidden mt-1 min-w-[200px]bg-transparent backdrop-blur-md rounded-lg shadow-lg top-full group-hover:block">
                     {item.submenu.map((subItem, idx) => (
                       <li key={idx}>
                         <Link
@@ -280,9 +280,9 @@ function Navbar() {
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
             transition={{ duration: 0.3, ease: "easeInOut" }}
-            className="absolute left-0 right-0 w-full mt-2 overflow-hidden bg-transparent shadow-lg backdrop-blur-md lg:hidden"
+            className="absolute left-0 right-0 w-full mt-2 overflow-hidden bg-transparent rounded-lg shadow-lg backdrop-blur-md lg:hidden"
           >
-            <ul className="flex flex-col p-6 space-y-4">
+            <ul className="flex flex-col p-6 space-y-4 bg-transparent backdrop-blur-md">
               {MENU_ITEMS.map((item, index) => (
                 <li key={index}>
                   {item.submenu ? (
