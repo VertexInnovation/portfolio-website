@@ -4,7 +4,6 @@ import {
   Twitter, 
   Instagram, 
   Linkedin, 
-  Github,
   Mail,
   MapPin,
   Phone,
@@ -120,9 +119,8 @@ const Footer = () => {
 
 const SOCIAL_LINKS = [
   { name: 'Twitter', icon: Twitter, href: '#' },
-  { name: 'Instagram', icon: Instagram, href: '#' },
+  { name: 'Instagram', icon: Instagram, href: 'https://www.instagram.com/vertex_innovate?igsh=MXV3NHFseHpneHU5eA==' },
   { name: 'LinkedIn', icon: Linkedin, href: '#' },
-  { name: 'GitHub', icon: Github, href: '#' },
 ];
 
 const QUICK_LINKS = [
@@ -130,7 +128,7 @@ const QUICK_LINKS = [
   { label: 'Bootcamps', href: 'community' },
   { label: 'Community', href: 'community' },
   { label: 'Projects', href: 'community' },
-  { label: 'Resources', href: 'community' },
+  { label: 'Team', href: 'team' },
 ];
 
 const EVENTS = [

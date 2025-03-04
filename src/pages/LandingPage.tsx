@@ -11,10 +11,10 @@ const LandingPage = () => {
     <div className="min-h-screen bg-gradient-to-br from-blue-50 to-purple-50">
       {/* <HeroSection /> */}
       <Testing />
-      <FeaturesSection />
+      <AboutSection />
       <University />
       <StatsSection />
-      <AboutSection />
+      <FeaturesSection />
       <FAQsSection />
       <NewsletterSection />
     </div>
