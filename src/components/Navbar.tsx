@@ -46,13 +46,13 @@ const MENU_ITEMS: MenuItem[] = [
     label: "Learn",
     isOpen: false,
     submenu: [
-      { label: "Courses", href: "/learn/courses" },
-      { label: "Projects", href: "/learn/projects" },
-      { label: "Resources", href: "/learn/resources" },
+      { label: "Courses", href: "/courses" },
+      { label: "Projects", href: "/projects" },
+      { label: "Resources", href: "/resources" },
     ],
   },
   { label: "Community", href: "/community" },
-  { label: "Team", href: "/team" },
+  { label: "About", href: "/about" },
 ];
 
 function Navbar() {
@@ -276,113 +276,113 @@ function Navbar() {
       <AnimatePresence>
         {isOpen && (
           <motion.div
-            initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: "auto" }}
-            exit={{ opacity: 0, height: 0 }}
-            transition={{ duration: 0.3, ease: "easeInOut" }}
-            className="absolute left-0 right-0 w-full mt-2 overflow-hidden bg-transparent rounded-lg shadow-lg backdrop-blur-md lg:hidden"
+        initial={{ opacity: 0, height: 0 }}
+        animate={{ opacity: 1, height: "auto" }}
+        exit={{ opacity: 0, height: 0 }}
+        transition={{ duration: 0.3, ease: "easeInOut" }}
+        className="absolute left-0 right-0 w-full mt-2 overflow-hidden bg-black/60 backdrop-blur-xl lg:hidden"
           >
-            <ul className="flex flex-col p-6 space-y-4 bg-transparent backdrop-blur-md">
-              {MENU_ITEMS.map((item, index) => (
-                <li key={index}>
-                  {item.submenu ? (
-                    <motion.div
-                      initial={false}
-                      animate={{ height: "auto" }}
-                      className="space-y-3"
-                    >
-                      <button
-                        className="flex items-center justify-between w-full py-2 font-medium text-white hover:text-blue-300"
-                        onClick={() => item.isOpen = !item.isOpen}
-                      >
-                        {item.label}
-                        <ChevronDown
-                          size={16}
-                          className={`transition-transform duration-200 ${item.isOpen ? 'rotate-180' : ''}`} />
-                      </button>
-                      <motion.ul
-                        initial={{ opacity: 0, height: 0 }}
-                        animate={{
-                          opacity: item.isOpen ? 1 : 0,
-                          height: item.isOpen ? "auto" : 0
-                        }}
-                        className="pl-4 space-y-2 overflow-hidden"
-                      >
-                        {item.submenu.map((subItem, idx) => (
-                          <li key={idx}>
-                            <Link
-                              to={subItem.href}
-                              className="block px-3 py-2 text-white transition-colors rounded-lg hover:text-blue-300 hover:bg-white/10"
-                              onClick={() => setIsOpen(false)}
-                            >
-                              {subItem.label}
-                            </Link>
-                          </li>
-                        ))}
-                      </motion.ul>
-                    </motion.div>
-                  ) : (
-                    <Link
-                      to={item.href || '/'}
-                      className="block px-3 py-2 font-medium text-white transition-colors rounded-lg hover:text-blue-300 hover:bg-white/10"
-                      onClick={() => setIsOpen(false)}
-                    >
-                      {item.label}
-                    </Link>
-                  )}
-                </li>
-              ))}
-
-              <motion.div
-                className="pt-4 mt-4 border-t border-white/20"
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ delay: 0.2 }}
+        <ul className="flex flex-col p-6 space-y-4">
+          {MENU_ITEMS.map((item, index) => (
+            <li key={index}>
+          {item.submenu ? (
+            <motion.div
+              initial={false}
+              animate={{ height: "auto" }}
+              className="space-y-3"
+            >
+              <button
+            className="flex items-center justify-between w-full py-2 font-medium text-white hover:text-blue-300"
+            onClick={() => item.isOpen = !item.isOpen}
               >
-                {authState.isLogged && authState.userProfile ? (
-                  <div className="space-y-3">
-                    <Link
-                      to="/profile"
-                      className="flex items-center p-3 space-x-3 text-white rounded-lg hover:text-blue-300 hover:bg-white/10"
-                      onClick={() => setIsOpen(false)}
-                    >
-                      <img
-                        src={authState.userProfile.picture || "https://via.placeholder.com/30"}
-                        alt="User Avatar"
-                        className="object-cover w-8 h-8 rounded-full" />
-                      <span className="font-medium">{authState.userProfile.name}</span>
-                    </Link>
-                    <button
-                      onClick={() => {
-                        logOut();
-                        setIsOpen(false);
-                      }}
-                      className="w-full py-2 font-medium text-red-300 transition-colors rounded-lg hover:bg-red-500/20"
-                    >
-                      Logout
-                    </button>
-                  </div>
-                ) : (
-                  <div className="flex flex-col space-y-3">
-                    <button
-                      onClick={() => login()}
-                      className="w-full py-2 font-medium text-center text-white hover:text-blue-300"
-                    >
-                      Login
-                    </button>
-                    <button
-                      onClick={() => {
-                        navigate("/signup");
-                        setIsOpen(false);
-                      }}
-                      className="w-full py-2 font-medium text-white transition-colors bg-blue-600 rounded-lg hover:bg-blue-700"
-                    >
-                      Sign Up
-                    </button>
-                  </div>
-                )}
-              </motion.div>
-            </ul>
+            {item.label}
+            <ChevronDown
+              size={16}
+              className={`transition-transform duration-200 ${item.isOpen ? 'rotate-180' : ''}`} />
+              </button>
+              <motion.ul
+            initial={{ opacity: 0, height: 0 }}
+            animate={{
+              opacity: item.isOpen ? 1 : 0,
+              height: item.isOpen ? "auto" : 0
+            }}
+            className="pl-4 space-y-2 overflow-hidden"
+              >
+            {item.submenu.map((subItem, idx) => (
+              <li key={idx}>
+                <Link
+              to={subItem.href}
+              className="block px-3 py-2 text-white transition-colors rounded-lg hover:text-blue-300 hover:bg-white/10"
+              onClick={() => setIsOpen(false)}
+                >
+              {subItem.label}
+                </Link>
+              </li>
+            ))}
+              </motion.ul>
+            </motion.div>
+          ) : (
+            <Link
+              to={item.href || '/'}
+              className="block px-3 py-2 font-medium text-white transition-colors rounded-lg hover:text-blue-300 hover:bg-white/10"
+              onClick={() => setIsOpen(false)}
+            >
+              {item.label}
+            </Link>
+          )}
+            </li>
+          ))}
+
+          <motion.div
+            className="pt-4 mt-4 border-t border-white/20"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.2 }}
+          >
+            {authState.isLogged && authState.userProfile ? (
+          <div className="space-y-3">
+            <Link
+              to="/profile"
+              className="flex items-center p-3 space-x-3 text-white rounded-lg hover:text-blue-300 hover:bg-white/10"
+              onClick={() => setIsOpen(false)}
+            >
+              <img
+            src={authState.userProfile.picture || "https://via.placeholder.com/30"}
+            alt="User Avatar"
+            className="object-cover w-8 h-8 rounded-full" />
+              <span className="font-medium">{authState.userProfile.name}</span>
+            </Link>
+            <button
+              onClick={() => {
+            logOut();
+            setIsOpen(false);
+              }}
+              className="w-full py-2 font-medium text-red-300 transition-colors rounded-lg hover:bg-red-500/20"
+            >
+              Logout
+            </button>
+          </div>
+            ) : (
+          <div className="flex flex-col space-y-3">
+            <button
+              onClick={() => login()}
+              className="w-full py-2 font-medium text-center text-white hover:text-blue-300"
+            >
+              Login
+            </button>
+            <button
+              onClick={() => {
+            navigate("/signup");
+            setIsOpen(false);
+              }}
+              className="w-full py-2 font-medium text-white transition-colors bg-blue-600 rounded-lg hover:bg-blue-700"
+            >
+              Sign Up
+            </button>
+          </div>
+            )}
+          </motion.div>
+        </ul>
           </motion.div>
         )}
       </AnimatePresence>

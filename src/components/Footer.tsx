@@ -120,7 +120,7 @@ const Footer = () => {
 const SOCIAL_LINKS = [
   { name: 'Twitter', icon: Twitter, href: '#' },
   { name: 'Instagram', icon: Instagram, href: 'https://www.instagram.com/vertex_innovate?igsh=MXV3NHFseHpneHU5eA==' },
-  { name: 'LinkedIn', icon: Linkedin, href: '#' },
+  { name: 'LinkedIn', icon: Linkedin, href: 'https://www.linkedin.com/company/vertexinnovation/' },
 ];
 
 const QUICK_LINKS = [

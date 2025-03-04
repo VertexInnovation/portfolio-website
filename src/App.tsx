@@ -33,6 +33,7 @@ function App() {
           </header>
           <main className="flex-grow">
             <Routes>
+              <ErrorBoundary>
               <Route path="/" element={<LandingPage />} />
               <Route path="/team" element={<TeamPage />} />
               <Route path="/events" element={<EventsPage />} />
@@ -40,15 +41,14 @@ function App() {
               <Route path="/signup" element={<SignUp />} />
               <Route path="/profile" element={<Profile />} />
               <Route path="/forgot-password" element={<ForgotPassword />} />
-              <Route path="*" element={<h1>404 Not Found</h1>} />
               <Route path="/vertexinnovate" element={<VertexInnovateHack />} />
-
               <Route path="/submissions" element={<Submissions />} />
-
-              <Route path= "/community" element={<Community />} />
+              <Route path="/community" element={<Community />} />
               <Route path="/learn/courses" element={<Courses />} />
               <Route path="/learn/projects" element={<Projects />} />
               <Route path="/learn/resources" element={<Resources />} />
+              <Route path="*" element={<h1>404 Not Found</h1>} />
+              </ErrorBoundary>
             </Routes>
           </main>
           <Footer />
