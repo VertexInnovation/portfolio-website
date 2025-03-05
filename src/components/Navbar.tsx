@@ -4,6 +4,7 @@ import { AnimatePresence } from "framer-motion";
 import { Menu, X, ChevronDown, LogOut, User } from "lucide-react";
 import { Link, useNavigate } from "react-router-dom";
 import { useGoogleLogin } from "@react-oauth/google";
+import VertexLogo from "../assets/Logo/VertexLogo.png";
 
 interface UserProfile {
   name: string;
@@ -159,12 +160,11 @@ function Navbar() {
     >
       <div className="container flex items-center justify-between px-4 py-4 mx-auto max-w-7xl">
         {/* Logo with "Vertex" Text */}
-        <Link to="/" className="text-xl font-bold">
-          <span className="text-transparent transition-all duration-500 ease-in-out bg-gradient-to-r from-blue-600 via-purple-600 to-blue-600 bg-clip-text hover:from-purple-600 hover:via-blue-600 hover:to-purple-600">
-            {' '}Vertex
-          </span>
-        </Link>
-
+          <img 
+            src={VertexLogo} 
+            alt="Vertex Logo"
+            className="w-auto h-10"
+          />
         {/* Desktop Menu */}
         <ul className="items-center hidden space-x-8 lg:flex">
           {MENU_ITEMS.map((item, index) => (
