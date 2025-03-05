@@ -47,13 +47,13 @@ const MENU_ITEMS: MenuItem[] = [
     label: "Learn",
     isOpen: false,
     submenu: [
-      { label: "Courses", href: "/courses" },
-      { label: "Projects", href: "/projects" },
-      { label: "Resources", href: "/resources" },
+      { label: "Courses", href: "/learn/courses" },
+      { label: "Projects", href: "/learn/projects" },
+      { label: "Resources", href: "/learn/resources" },
     ],
   },
   { label: "Community", href: "/community" },
-  { label: "About", href: "/about" },
+  { label: "Team", href: "/team" },
 ];
 
 function Navbar() {

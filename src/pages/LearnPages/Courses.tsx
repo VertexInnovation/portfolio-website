@@ -3,10 +3,10 @@ import ComingSoon from "../../components/ComingSoon";
 
 function Courses() {
   return (
-    <div>
+    <div className="min-h-screen bg-gray-900">
       <Navbar />
-      <div className="flex items-center justify-center h-screen">
-        <ComingSoon pageName="Courses" />
+      <div className="flex items-center justify-center h-screen text-white">
+        <ComingSoon pageName="Resources" />
       </div>
     </div>
   );
