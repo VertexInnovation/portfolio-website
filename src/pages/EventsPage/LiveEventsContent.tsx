@@ -1,9 +1,26 @@
 import React, { useState } from 'react';
+import { motion } from 'framer-motion';
 import EventCard from '../../components/EventCard/EventCard';
 import eventsData from '../../data/EventsData.json';
 
 export const LiveEventsContent: React.FC = () => {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [liveEvents, setLiveEvents] = useState(eventsData.liveEvents);
+
+  const container = {
+    hidden: { opacity: 0 },
+    show: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.1
+      }
+    }
+  };
+
+  const item = {
+    hidden: { opacity: 0, y: 20 },
+    show: { opacity: 1, y: 0 }
+  };
 
   return (
     <div className="events-container">
@@ -13,29 +30,40 @@ export const LiveEventsContent: React.FC = () => {
       </div>
       
       {liveEvents.length === 0 ? (
-        <div className="empty-events">
+        <motion.div 
+          className="empty-events"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.2 }}
+        >
           <div className="empty-state">
             <i className="fas fa-broadcast-tower empty-icon"></i>
             <h2>No Live Events</h2>
             <p>There are currently no live events. Please check back later or explore our upcoming events.</p>
           </div>
-        </div>
+        </motion.div>
       ) : (
-        <div className="events-grid">
+        <motion.div 
+          className="events-grid"
+          variants={container}
+          initial="hidden"
+          animate="show"
+        >
           {liveEvents.map(event => (
-            <EventCard
-              key={event.id}
-              id={event.id}
-              title={event.title}
-              date={event.date}
-              location={event.location}
-              description={event.description}
-              imageUrl={event.imageUrl}
-              actionLink={event.registrationLink}
-              actionText="Join Now"
-            />
+            <motion.div key={event.id} variants={item}>
+              <EventCard
+                id={event.id}
+                title={event.title}
+                date={event.date}
+                location={event.location}
+                description={event.description}
+                imageUrl={event.imageUrl}
+                actionLink={event.registrationLink}
+                actionText="Register Now"
+              />
+            </motion.div>
           ))}
-        </div>
+        </motion.div>
       )}
     </div>
   );

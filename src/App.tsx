@@ -17,6 +17,7 @@ import Projects from "./pages/LearnPages/Projects";
 import Resources from "./pages/LearnPages/Resources";
 import { GoogleOAuthProvider } from '@react-oauth/google';
 
+
 function App() {
   const clientId = '727346499975-g4j5a4h9chc0o0f48ir1fbhd6b4thu75.apps.googleusercontent.com'; 
 
@@ -41,7 +42,6 @@ function App() {
               <Route path="/events/live" element={<EventsPage />} />
               <Route path="/events/upcoming" element={<EventsPage />} />
               <Route path="/events/past" element={<EventsPage />} />
-              
               
               {/* Authentication Pages */}
               <Route path="/signup" element={<SignUp />} />
