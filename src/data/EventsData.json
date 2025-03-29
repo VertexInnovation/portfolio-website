@@ -1,0 +1,36 @@
+
+{
+  "liveEvents": [
+    {
+      "id": "live-1",
+      "title": "Tech Conference 2025",
+      "date": "March 29-30, 2025",
+      "location": "San Francisco, CA",
+      "description": "Join us for the latest in technology trends and innovations.",
+      "imageUrl": "/images/events/tech-conf-2025.jpg",
+      "registrationLink": "https://example.com/register/tech-conf-2025"
+    }
+  ],
+  "upcomingEvents": [
+    {
+      "id": "upcoming-1",
+      "title": "AI Summit",
+      "date": "April 15-17, 2025",
+      "location": "New York, NY",
+      "description": "Explore the future of artificial intelligence and machine learning.",
+      "imageUrl": "/images/events/ai-summit.jpg",
+      "registrationLink": "https://example.com/register/ai-summit"
+    }
+  ],
+  "pastEvents": [
+    {
+      "id": "past-1",
+      "title": "Vertex Innovate 2025 - Global Hackathon",
+      "date": "February 15, 2025",
+      "location": "Online",
+      "description": "A 48-hour global hackathon featuring AI/ML, Cybersecurity, Sustainability, EdTech, FinTech & Open Innovation tracks. Open to all students!",
+      "imageUrl": "../assets/vertexHack.jpg"
+      
+    }
+  ]
+}
