@@ -13,7 +13,8 @@ type EventCardProps = {
   actionLink?: string;
   actionText?: string;
   isPast?: boolean;
-  hideButtons?: boolean; // New prop to hide buttons
+  isLive?: boolean;
+  hideButtons?: boolean;
 };
 
 const EventCard: React.FC<EventCardProps> = ({
@@ -26,20 +27,31 @@ const EventCard: React.FC<EventCardProps> = ({
   actionLink,
   actionText = "Register Now",
   isPast = false,
-  hideButtons = false, // Default is to show buttons
+  isLive = false,
+  hideButtons = false,
 }) => {
   return (
-    <div className={`event-card ${isPast ? 'past-event' : ''}`}>
+    <div className={`event-card ${isPast ? 'past-event' : ''} ${isLive ? 'live-event' : ''}`}>
       <div className="event-card-image">
         <img src={imageUrl} alt={title} />
-        {!isPast && (
+        {isLive && (
           <motion.div 
-            className={`event-badge ${isPast ? '' : (actionText === 'Register Now' ? 'live' : 'upcoming')}`}
+            className="event-badge live"
             initial={{ scale: 0.8, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
             transition={{ duration: 0.3 }}
           >
-            {isPast ? 'PAST' : (actionText === 'Register Now' ? 'LIVE' : 'UPCOMING')}
+            LIVE
+          </motion.div>
+        )}
+        {!isPast && !isLive && (
+          <motion.div 
+            className="event-badge upcoming"
+            initial={{ scale: 0.8, opacity: 0 }}
+            animate={{ scale: 1, opacity: 1 }}
+            transition={{ duration: 0.3 }}
+          >
+            UPCOMING
           </motion.div>
         )}
       </div>
@@ -52,6 +64,7 @@ const EventCard: React.FC<EventCardProps> = ({
           ) : (
             title
           )}
+          {isLive && <span className="ml-2 live-indicator-dot"></span>}
         </h3>
         <div className="event-details">
           <p className="event-date">
@@ -70,7 +83,6 @@ const EventCard: React.FC<EventCardProps> = ({
         </div>
         <p className="event-description">{description}</p>
         
-        {/* Only render buttons if hideButtons is false */}
         {!hideButtons && (
           <div className="event-actions">
             {id && (

@@ -68,12 +68,6 @@
   background-color: rgba(255, 255, 255, 0.3);
 }
 
-.live-indicator {
-  background-color: #ef4444;
-  box-shadow: 0 0 8px #ef4444;
-  animation: pulse 1.5s infinite;
-}
-
 .upcoming-indicator {
   background-color: #10b981;
   box-shadow: 0 0 5px #10b981;
@@ -103,6 +97,12 @@
   border-radius: 20px;
   backdrop-filter: blur(10px);
   border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.events-container h2 {
+  position: relative;
+  padding-left: 0.5rem;
+  border-left: 3px solid #3b82f6;
 }
 
 .events-header {
@@ -258,6 +258,47 @@
 .event-details-button:hover {
   background-color: rgba(59, 130, 246, 0.1);
   box-shadow: 0 0 10px rgba(59, 130, 246, 0.3);
+}
+
+/* Live event highlighting */
+.live-event {
+  border: 2px solid rgba(16, 185, 129, 0.6);
+  box-shadow: 0 8px 30px rgba(16, 185, 129, 0.3);
+}
+
+.live-event:hover {
+  box-shadow: 0 12px 40px rgba(16, 185, 129, 0.4);
+}
+
+.live-indicator-dot {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-color: #10b981;
+  box-shadow: 0 0 8px #10b981;
+  animation: pulse 1.5s infinite;
+  vertical-align: middle;
+}
+
+.live-dot {
+  display: inline-block;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background-color: #10b981;
+  box-shadow: 0 0 10px #10b981;
+  animation: pulse 1.5s infinite;
+}
+
+.event-badge.live {
+  background-color: #ef4444;
+  box-shadow: 0 0 8px rgba(239, 68, 68, 0.7);
+}
+
+.event-badge.upcoming {
+  background-color: #3b82f6;
+  box-shadow: 0 0 5px rgba(59, 130, 246, 0.7);
 }
 
 /* Past Event Styling */

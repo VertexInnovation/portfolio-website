@@ -1,42 +1,44 @@
 {
-  "liveEvents": [
+  "upcomingEvents": [
     {
-      "id": "live-1",
+      "id": "spectrum-25",
       "title": "SPECTRUM 25",
       "date": "April 11-12, 2025",
       "location": "MG Auditorium, VIT Chennai",
       "description": "Join us for SPECTRUM 25, a two-day event filled with inspiring talks, hands-on workshops, and networking opportunities with industry leaders.",
       "imageUrl": "https://res.cloudinary.com/dvude7m7p/image/upload/v1743260755/Vertex/Events/xn65d1td3ivfvvumr5p1.jpg",
-      "registrationLink": "https://www.spectrum25.tech/"
+      "registrationLink": "https://www.spectrum25.tech/",
+      "live": true
     },
     {
-      "id": "live-2",
+      "id": "innospark-25",
       "title": "InnoSpark'25",
       "date": "April 20, 2025",
       "location": "Little Popsicles Pre-School, Chennai",
       "description": "Tamil Nadu's First-Ever School CreatiThon! Join this Workshop + Creative Hackathon for Grades 7-12 and unleash your imagination. Innovate, Create & Compete!",
-      "imageUrl": "https://res.cloudinary.com/dvude7m7p/image/upload/v1743262383/Vertex/Events/lokwudzckyhc2q8je3ce.png",
-      "registrationLink": "https://forms.gle/5yAgcMcmpNEqxWmx5"
-    }
-  ],
-  "upcomingEvents": [
+      "imageUrl": "https://res.cloudinary.com/dvude7m7p/image/upload/v1743273514/Vertex/Events/misjj8wisgyffxzjikcc.jpg",
+      "registrationLink": "https://forms.gle/5yAgcMcmpNEqxWmx5",
+      "live": true
+    },
     {
-      "id": "upcoming-1",
+      "id": "ml-workshop",
       "title": "Introduction to Machine Learning Workshop",
       "date": "April 15, 2025",
       "location": "Online",
       "description": "Learn the fundamentals of machine learning in this beginner-friendly workshop. No prior ML experience required.",
       "imageUrl": "/images/events/ml-workshop.jpg",
-      "registrationLink": "https://example.com/register/ml-workshop"
+      "registrationLink": "https://example.com/register/ml-workshop",
+      "live": false
     },
     {
-      "id": "upcoming-2",
+      "id": "web3-bootcamp",
       "title": "Web3 Developer Bootcamp",
       "date": "May 5-12, 2025",
       "location": "Hybrid (In-person & Online)",
       "description": "A comprehensive bootcamp for developers looking to break into Web3, blockchain development, and DApps.",
       "imageUrl": "/images/events/web3-bootcamp.jpg",
-      "registrationLink": "https://example.com/register/web3-bootcamp"
+      "registrationLink": "https://example.com/register/web3-bootcamp",
+      "live": false
     }
   ],
   "pastEvents": [

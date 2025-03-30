@@ -3,30 +3,27 @@ import { useNavigate, useLocation } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Canvas } from '@react-three/fiber';
 import { Stars } from '@react-three/drei';
-import LiveEventsContent from './LiveEventsContent';
 import UpcomingEventsContent from './UpcomingEventsContent';
 import PastEventsContent from './PastEventsContent';
 import './EventsPage.css';
 
-type EventsTab = 'live' | 'upcoming' | 'past';
+type EventsTab = 'upcoming' | 'past';
 
 export const EventsPage: React.FC = () => {
   const navigate = useNavigate();
   const location = useLocation();
-  const [activeTab, setActiveTab] = useState<EventsTab>('live');
+  const [activeTab, setActiveTab] = useState<EventsTab>('upcoming');
   const [isLoading, setIsLoading] = useState(true);
 
   // Set the active tab based on the current route when component mounts
   useEffect(() => {
-    if (location.pathname.includes('/events/live')) {
-      setActiveTab('live');
-    } else if (location.pathname.includes('/events/upcoming')) {
+    if (location.pathname.includes('/events/upcoming')) {
       setActiveTab('upcoming');
     } else if (location.pathname.includes('/events/past')) {
       setActiveTab('past');
     } else if (location.pathname === '/events') {
-      // Default to live events when on the main events page
-      setActiveTab('live');
+      // Default to upcoming events when on the main events page
+      setActiveTab('upcoming');
     }
     
     // Simulate content loading
@@ -76,15 +73,6 @@ export const EventsPage: React.FC = () => {
         >
           <div className="events-tabs">
             <button 
-              className={`events-tab ${activeTab === 'live' ? 'active' : ''}`}
-              onClick={() => handleTabChange('live')}
-            >
-              <div className="flex items-center justify-center w-full">
-                <span className={`tab-indicator ${activeTab === 'live' ? 'live-indicator' : ''}`}></span>
-                <span>Live Events</span>
-              </div>
-            </button>
-            <button 
               className={`events-tab ${activeTab === 'upcoming' ? 'active' : ''}`}
               onClick={() => handleTabChange('upcoming')}
             >
@@ -128,7 +116,6 @@ export const EventsPage: React.FC = () => {
               transition={{ duration: 0.4 }}
               className="events-content"
             >
-              {activeTab === 'live' && <LiveEventsContent />}
               {activeTab === 'upcoming' && <UpcomingEventsContent />}
               {activeTab === 'past' && <PastEventsContent />}
             </motion.div>

@@ -25,7 +25,7 @@ export const UpcomingEventsContent: React.FC = () => {
     <div className="events-container">
       <div className="events-header">
         <h1>Upcoming Events</h1>
-        <p>Register now for these exciting upcoming events!</p>
+        <p>Don't miss out on our exciting events!</p>
       </div>
       
       {upcomingEvents.length === 0 ? (
@@ -42,27 +42,76 @@ export const UpcomingEventsContent: React.FC = () => {
           </div>
         </motion.div>
       ) : (
-        <motion.div 
-          className="events-grid"
-          variants={container}
-          initial="hidden"
-          animate="show"
-        >
-          {upcomingEvents.map(event => (
-            <motion.div key={event.id} variants={item}>
-              <EventCard
-                id={event.id}
-                title={event.title}
-                date={event.date}
-                location={event.location}
-                description={event.description}
-                imageUrl={event.imageUrl}
-                actionLink={event.registrationLink}
-                actionText="Register Now"
-              />
-            </motion.div>
-          ))}
-        </motion.div>
+        <>
+          {/* Live Events Section */}
+          {upcomingEvents.some(event => event.live) && (
+            <div className="mb-10">
+              <h2 className="mb-5 text-2xl font-semibold text-white">
+                <span className="inline-flex items-center">
+                  <span className="mr-2 live-dot"></span>
+                  Happening Now
+                </span>
+              </h2>
+              <motion.div 
+                className="events-grid"
+                variants={container}
+                initial="hidden"
+                animate="show"
+              >
+                {upcomingEvents
+                  .filter(event => event.live)
+                  .map(event => (
+                    <motion.div key={event.id} variants={item}>
+                      <EventCard
+                        id={event.id}
+                        title={event.title}
+                        date={event.date}
+                        location={event.location}
+                        description={event.description}
+                        imageUrl={event.imageUrl}
+                        actionLink={event.registrationLink}
+                        actionText="Join Now"
+                        isLive={true}
+                      />
+                    </motion.div>
+                  ))}
+              </motion.div>
+            </div>
+          )}
+
+          {/* Regular Upcoming Events */}
+          {upcomingEvents.some(event => !event.live) && (
+            <div>
+              {upcomingEvents.some(event => event.live) && (
+                <h2 className="mb-5 text-2xl font-semibold text-white">Coming Soon</h2>
+              )}
+              <motion.div 
+                className="events-grid"
+                variants={container}
+                initial="hidden"
+                animate="show"
+              >
+                {upcomingEvents
+                  .filter(event => !event.live)
+                  .map(event => (
+                    <motion.div key={event.id} variants={item}>
+                      <EventCard
+                        id={event.id}
+                        title={event.title}
+                        date={event.date}
+                        location={event.location}
+                        description={event.description}
+                        imageUrl={event.imageUrl}
+                        actionLink={event.registrationLink}
+                        actionText="Register Now"
+                        isLive={false}
+                      />
+                    </motion.div>
+                  ))}
+              </motion.div>
+            </div>
+          )}
+        </>
       )}
     </div>
   );

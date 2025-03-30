@@ -39,7 +39,6 @@ function App() {
               
               {/* Events Pages - All handled by EventsPage component */}
               <Route path="/events" element={<EventsPage />} />
-              <Route path="/events/live" element={<EventsPage />} />
               <Route path="/events/upcoming" element={<EventsPage />} />
               <Route path="/events/past" element={<EventsPage />} />
               
