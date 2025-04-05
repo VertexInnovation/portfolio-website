@@ -19,7 +19,6 @@ import { GoogleOAuthProvider } from '@react-oauth/google';
 
 
 function App() {
-  // Make sure this matches the client ID in your Google Cloud Console
   const clientId = '727346499975-g4j5a4h9chc0o0f48ir1fbhd6b4thu75.apps.googleusercontent.com'; 
 
   return (
