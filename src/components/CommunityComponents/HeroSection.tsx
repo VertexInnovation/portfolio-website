@@ -16,6 +16,11 @@ import Andrew from '../../assets/team/studentHeads/Andrew.png';
 import Subadevan from '../../assets/team/studentHeads/subadevan.jpg';
 import sanchali from '../../assets/team/studentHeads/sanchali.jpg';
 import Ananya from '../../assets/team/ananya.jpeg';
+import sohamGupta from "../../assets/team/collegeHeads/SohamGupta.jpg";
+import Iniya from "../../assets/team/collegeHeads/Iniya.jpeg";
+import Akshitha from "../../assets/team/collegeHeads/Akshitha.jpeg";
+import Vikashini from "../../assets/team/collegeHeads/Vikasini.jpeg";
+import Pravalikka from "../../assets/team/collegeHeads/pravalikka.jpeg";
 const HeroSection = () => {
   interface Row {
     photos: string[];
@@ -28,7 +33,7 @@ const HeroSection = () => {
   ]);
 
   useEffect(() => {
-    const allPhotos = [vishnu, giri, Swayam, Aashik, Ananya, alwin, karunya, harini, Smitha, Ramana, Monish, Abinav, Andrew, Subadevan, sanchali];
+    const allPhotos = [vishnu, giri, Swayam, Aashik, Ananya, alwin, karunya, harini, Smitha, Ramana, Monish, Abinav, Andrew, Subadevan, sanchali, sohamGupta, Iniya, Akshitha, Vikashini, Pravalikka];
     
     const shuffleArray = (array: string[]) => {
       const shuffled = [...array];

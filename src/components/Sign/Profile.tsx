@@ -3,6 +3,8 @@ import { motion, useMotionTemplate, useMotionValue, animate } from 'framer-motio
 import { Canvas } from "@react-three/fiber";
 import { Stars } from "@react-three/drei";
 import { useMediaQuery } from 'react-responsive';
+import { Link } from 'react-router-dom';
+import { Upload, ExternalLink } from 'lucide-react';
 
 const STORAGE_KEY = "vertex_auth";
 
@@ -37,6 +39,7 @@ const Profile = () => {
   const [authState, setAuthState] = useState<AuthState>(getStoredAuth());
   const color = useMotionValue("#13FFAA");
   const isMobile = useMediaQuery({ maxWidth: 768 });
+  const [showSpectrumInfo, setShowSpectrumInfo] = useState(false);
 
   useEffect(() => {
     animate(color, "#13FFAA", {
@@ -116,18 +119,65 @@ const Profile = () => {
               {userProfile.name}
             </motion.h1>
             
-            <p className="max-w-full mb-6 text-sm text-gray-300 break-words md:mb-8 sm:text-base md:text-lg">
+            <p className="max-w-full mb-4 text-sm text-gray-300 break-words sm:text-base md:text-lg">
               {userProfile.email}
             </p>
-            
-            <motion.button
-              className="px-4 py-2 text-sm font-medium text-white transition-opacity rounded-full sm:px-6 bg-gradient-to-r from-emerald-500 to-teal-500 hover:opacity-90 md:text-base"
-              onClick={handleLogout}
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
+
+            {/* Spectrum Event Submission Portal Button */}
+            {/* <motion.div 
+              className="w-full mb-6"
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.3 }}
             >
-              Logout
-            </motion.button>
+              <div className="p-4 mb-4 border rounded-lg border-blue-500/30 bg-blue-900/20">
+                <div className="flex items-start">
+                  <div className="flex-shrink-0 p-2 mt-1 rounded-full bg-blue-500/20">
+                    <Upload className="w-5 h-5 text-blue-400" />
+                  </div>
+                  <div className="ml-3">
+                    <h3 className="text-sm font-medium text-blue-300">SPECTRUM'25 Participants</h3>
+                    <div className="mt-2 text-sm text-gray-300">
+                      Submit your project files and presentation for the SPECTRUM'25 event through our dedicated submission portal.
+                      <p className="mt-1 text-xs text-gray-400">
+                        Ensure your submission includes all required files as mentioned in the event guidelines.
+                        Deadline: April 15, 2025
+                      </p>
+                    </div>
+                    <div className="mt-3">
+                      <Link 
+                        to="/submissions" 
+                        className="inline-flex items-center gap-2 px-4 py-2 text-sm font-medium text-black transition-all duration-300 rounded-md bg-gradient-to-r from-blue-400 to-purple-400 hover:from-blue-500 hover:to-purple-500"
+                      >
+                        Go to Submission Portal
+                        <ExternalLink size={14} />
+                      </Link>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </motion.div> */}
+            
+            <div className="flex gap-4">
+              <motion.button
+                className="px-4 py-2 text-sm font-medium text-white transition-opacity rounded-full sm:px-6 bg-gradient-to-r from-emerald-500 to-teal-500 hover:opacity-90 md:text-base"
+                onClick={handleLogout}
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+              >
+                Logout
+              </motion.button>
+              
+              <Link to="/">
+                <motion.button
+                  className="px-4 py-2 text-sm font-medium transition-opacity border rounded-full border-gray-600/60 sm:px-6 hover:bg-white/5 md:text-base"
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                >
+                  Home
+                </motion.button>
+              </Link>
+            </div>
           </div>
         </motion.div>
       </div>

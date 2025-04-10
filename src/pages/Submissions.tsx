@@ -4,10 +4,10 @@ import FormfacadeEmbed from "@formfacade/embed-react";
 
 const Submissions: React.FC = () => {
   return (
-    <div className="bg-black min-h-screen text-white">
+    <div className="min-h-screen text-white bg-black">
       <Navbar />
       <div className="flex flex-col items-center justify-start pt-24">
-        <div className="w-full max-w-4xl bg-gray-900 p-6 rounded-lg shadow-lg">
+        <div className="w-full max-w-4xl p-6 bg-gray-900 rounded-lg shadow-lg">
           <div className="h-[1600px] overflow-visible"> {/* Increased height further */}
 <FormfacadeEmbed
 
