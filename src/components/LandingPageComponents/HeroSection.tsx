@@ -188,11 +188,11 @@ const HeroSection = () => {
             transition={{ delay: 0.4, duration: 0.8 }}
             className="flex flex-wrap justify-center gap-4"
           >
-            <button className="flex items-center gap-2 px-8 py-4 text-lg font-semibold text-white transition-all duration-300 transform bg-blue-600 group rounded-xl hover:bg-blue-700 hover:scale-105 hover:shadow-lg"
+            <motion.button className="flex items-center gap-2 px-8 py-4 text-lg font-semibold text-white transition-all duration-300 transform bg-blue-600 group rounded-xl hover:bg-blue-700 hover:scale-105 hover:shadow-lg"
               onClick={() => {window.open('https://www.instagram.com/vertex_innovate/', '_blank')}}>
               <Rocket className="w-6 h-6 transition-transform group-hover:rotate-12" />
               Join Us Now
-            </button>
+            </motion.button>
           </motion.div>
         </motion.div>
       </div>
