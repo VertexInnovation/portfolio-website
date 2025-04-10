@@ -6,7 +6,6 @@ import TeamPage from './pages/TeamPage';
 import Footer from './components/Footer';
 import EventsPage from './pages/EventsPage/EventsPage';
 import Community from './pages/Community';
-
 import SignUp from './components/Sign/SignUp';
 import ForgotPassword from './components/Sign/ForgotPassword';
 import Profile from './components/Sign/Profile';
@@ -16,13 +15,16 @@ import Courses from "./pages/LearnPages/Courses";
 import Projects from "./pages/LearnPages/Projects";
 import Resources from "./pages/LearnPages/Resources";
 import { GoogleOAuthProvider } from '@react-oauth/google';
-
+import ProtectedRoute from './components/ProtectedRoute';
+import { authConfig } from './config/auth';
 
 function App() {
-  const clientId = '727346499975-g4j5a4h9chc0o0f48ir1fbhd6b4thu75.apps.googleusercontent.com'; 
-
   return (
-    <GoogleOAuthProvider clientId={clientId}>
+    <GoogleOAuthProvider 
+      clientId={authConfig.googleClientId}
+      onScriptLoadSuccess={() => console.log('Google OAuth script loaded successfully')}
+      onScriptLoadError={(error) => console.error('Google OAuth script failed to load:', error)}
+    >
       <Router>
         <div className="flex flex-col min-h-screen">
           <header className="top-0 w-full">
@@ -37,14 +39,21 @@ function App() {
               <Route path="/team" element={<TeamPage />} />
               <Route path="/community" element={<Community />} />
               
-              {/* Events Pages - All handled by EventsPage component */}
+              {/* Events Pages */}
               <Route path="/events" element={<EventsPage />} />
               <Route path="/events/upcoming" element={<EventsPage />} />
               <Route path="/events/past" element={<EventsPage />} />
               
               {/* Authentication Pages */}
               <Route path="/signup" element={<SignUp />} />
-              <Route path="/profile" element={<Profile />} />
+              <Route 
+                path="/profile" 
+                element={
+                  <ProtectedRoute>
+                    <Profile />
+                  </ProtectedRoute>
+                }
+              />
               <Route path="/forgot-password" element={<ForgotPassword />} />
               
               {/* Learn Pages */}
@@ -52,8 +61,15 @@ function App() {
               <Route path="/learn/projects" element={<Projects />} />
               <Route path="/learn/resources" element={<Resources />} />
               
-              {/* Other Pages */}
-              <Route path="/submissions" element={<Submissions />} />
+              {/* Protected Pages */}
+              <Route 
+                path="/submissions" 
+                element={
+                  <ProtectedRoute>
+                    <Submissions />
+                  </ProtectedRoute>
+                }
+              />
               
               {/* 404 Page */}
               <Route path="*" element={<h1>404 Not Found</h1>} />

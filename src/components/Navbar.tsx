@@ -86,6 +86,11 @@ function Navbar() {
             },
           }
         );
+        
+        if (!response.ok) {
+          throw new Error(`Failed to fetch user info: ${response.status}`);
+        }
+        
         const userInfo = await response.json();
         const expiresAt = Date.now() + TOKEN_EXPIRY_DAYS * 24 * 60 * 60 * 1000;
         updateAuthState({
@@ -94,15 +99,19 @@ function Navbar() {
           token: tokenResponse.access_token,
           expiresAt,
         });
+        
+        // Optionally redirect to profile page after successful login
+        navigate('/profile');
       } catch (error) {
         console.error("Failed to fetch user profile:", error);
         logOut();
       }
     },
-    onError: (error) => {
-      console.error("Login Failed:", error);
-      logOut();
+    onError: (errorResponse) => {
+      console.error("Login Failed:", errorResponse);
+      alert("Login failed. Please try again later.");
     },
+    flow: 'implicit', // Use implicit flow to avoid popup issues
   });
 
   const updateAuthState = (newState: AuthState) => {

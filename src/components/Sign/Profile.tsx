@@ -39,7 +39,6 @@ const Profile = () => {
   const [authState, setAuthState] = useState<AuthState>(getStoredAuth());
   const color = useMotionValue("#13FFAA");
   const isMobile = useMediaQuery({ maxWidth: 768 });
-  const [showSpectrumInfo, setShowSpectrumInfo] = useState(false);
 
   useEffect(() => {
     animate(color, "#13FFAA", {
@@ -124,39 +123,35 @@ const Profile = () => {
             </p>
 
             {/* Spectrum Event Submission Portal Button */}
-            {/* <motion.div 
+            <motion.div 
               className="w-full mb-6"
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.3 }}
             >
               <div className="p-4 mb-4 border rounded-lg border-blue-500/30 bg-blue-900/20">
-                <div className="flex items-start">
-                  <div className="flex-shrink-0 p-2 mt-1 rounded-full bg-blue-500/20">
+                <div className="flex items-center">
+                  <div className="flex-shrink-0 p-2 rounded-full bg-blue-500/20">
                     <Upload className="w-5 h-5 text-blue-400" />
                   </div>
                   <div className="ml-3">
                     <h3 className="text-sm font-medium text-blue-300">SPECTRUM'25 Participants</h3>
-                    <div className="mt-2 text-sm text-gray-300">
-                      Submit your project files and presentation for the SPECTRUM'25 event through our dedicated submission portal.
-                      <p className="mt-1 text-xs text-gray-400">
-                        Ensure your submission includes all required files as mentioned in the event guidelines.
-                        Deadline: April 15, 2025
-                      </p>
-                    </div>
-                    <div className="mt-3">
-                      <Link 
-                        to="/submissions" 
-                        className="inline-flex items-center gap-2 px-4 py-2 text-sm font-medium text-black transition-all duration-300 rounded-md bg-gradient-to-r from-blue-400 to-purple-400 hover:from-blue-500 hover:to-purple-500"
-                      >
-                        Go to Submission Portal
-                        <ExternalLink size={14} />
-                      </Link>
-                    </div>
+                    <p className="mt-1 text-sm text-gray-300">
+                      Submit your project files and presentation for the SPECTRUM'25 event
+                    </p>
                   </div>
                 </div>
+                <div className="mt-3">
+                  <Link 
+                    to="/submissions" 
+                    className="inline-flex items-center justify-center w-full gap-2 px-4 py-2 text-sm font-medium text-black transition-all duration-300 rounded-md bg-gradient-to-r from-blue-400 to-purple-400 hover:from-blue-500 hover:to-purple-500"
+                  >
+                    Go to Submission Portal
+                    <ExternalLink size={14} />
+                  </Link>
+                </div>
               </div>
-            </motion.div> */}
+            </motion.div>
             
             <div className="flex gap-4">
               <motion.button
