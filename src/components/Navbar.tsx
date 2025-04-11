@@ -43,15 +43,15 @@ interface MenuItem {
 const MENU_ITEMS: MenuItem[] = [
   { label: "Home", href: "/" },
   { label: "Events", href: "/events" },
-  {
-    label: "Learn",
-    isOpen: false,
-    submenu: [
-      { label: "Courses", href: "/learn/courses" },
-      { label: "Projects", href: "/learn/projects" },
-      { label: "Resources", href: "/learn/resources" },
-    ],
-  },
+  // {
+  //   label: "Learn",
+  //   isOpen: false,
+  //   submenu: [
+  //     { label: "Courses", href: "/learn/courses" },
+  //     { label: "Projects", href: "/learn/projects" },
+  //     { label: "Resources", href: "/learn/resources" },
+  //   ],
+  // },
   { label: "Community", href: "/community" },
   { label: "Team", href: "/team" },
 ];
